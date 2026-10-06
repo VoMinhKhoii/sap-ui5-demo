@@ -1,0 +1,53 @@
+/* Workshop shell + gallery styles. Students don't need to touch this file. */
+.wsPage .sapMPageEnableScrolling {
+  padding-bottom: 2rem;
+}
+
+.wsPageIntro {
+  padding: 1.5rem 1rem 0.5rem;
+  max-width: 64rem;
+}
+
+.wsSectionTitle {
+  padding: 0 1rem;
+}
+
+.wsTiles {
+  padding: 0 1rem;
+}
+
+.wsCategoryTabs {
+  padding: 0 0.5rem;
+}
+
+.wsSamples {
+  padding: 1rem;
+}
+
+.wsSampleCard {
+  margin-bottom: 1rem;
+}
+
+.wsPreview {
+  display: block;
+  margin: 0 1rem;
+  padding: 1rem;
+  border: 1px dashed var(--sapGroup_ContentBorderColor);
+  border-radius: 0.75rem;
+  background: var(--sapBackgroundColor);
+  overflow: hidden;
+}
+
+.wsCode {
+  display: block;
+  margin: 0 1rem;
+}
+
+.wsDocs {
+  padding: 0.5rem 1rem 1rem;
+}
+
+/* Cards stretch to the full width of their grid cell. */
+.sapUiRespGrid .sapFCard {
+  width: 100%;
+}

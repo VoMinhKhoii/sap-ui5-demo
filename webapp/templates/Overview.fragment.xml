@@ -1,0 +1,85 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- TEMPLATE "Overview": KPI row, two charts side by side, a full-width table. -->
+<VBox width="100%">
+  <layout:Grid content="{/kpis}" defaultSpan="XL3 L3 M6 S12" hSpacing="1" vSpacing="1" containerQuery="true">
+    <f:Card width="100%">
+      <f:header>
+        <card:NumericHeader title="{title}" subtitle="{subtitle}" number="{ path: 'value', formatter: '.formatter.compactNumber' }" unitOfMeasurement="{unit}" trend="{trend}" state="{state}" details="{ parts: ['target', 'unit'], formatter: '.formatter.target' }" press=".onKpiPress" />
+      </f:header>
+    </f:Card>
+  </layout:Grid>
+
+  <layout:Grid defaultSpan="XL12 L12 M12 S12" hSpacing="1" vSpacing="1" containerQuery="true">
+    <f:Card width="100%">
+      <f:layoutData><layout:GridData span="XL8 L8 M12 S12" /></f:layoutData>
+      <f:header><card:Header title="{/meta/trend/title}" subtitle="{/meta/trend/subtitle}" iconSrc="sap-icon://line-chart" /></f:header>
+      <f:content>
+        <viz:VizFrame vizType="line" width="100%" height="20rem" uiConfig="{applicationSet:'fiori'}" selectData=".onChartSelect">
+          <viz:dataset>
+            <viz.data:FlattenedDataset data="{/trend}">
+              <viz.data:dimensions><viz.data:DimensionDefinition name="Month" value="{month}" /></viz.data:dimensions>
+              <viz.data:measures>
+                <viz.data:MeasureDefinition name="Actual" value="{actual}" />
+                <viz.data:MeasureDefinition name="Plan" value="{plan}" />
+              </viz.data:measures>
+            </viz.data:FlattenedDataset>
+          </viz:dataset>
+          <viz:feeds>
+            <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Actual,Plan" />
+            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
+          </viz:feeds>
+        </viz:VizFrame>
+      </f:content>
+    </f:Card>
+
+    <f:Card width="100%">
+      <f:layoutData><layout:GridData span="XL4 L4 M12 S12" /></f:layoutData>
+      <f:header><card:Header title="{/meta/breakdown/title}" subtitle="{/meta/breakdown/unit}" iconSrc="sap-icon://donut-chart" /></f:header>
+      <f:content>
+        <viz:VizFrame vizType="donut" width="100%" height="20rem" uiConfig="{applicationSet:'fiori'}" selectData=".onChartSelect">
+          <viz:dataset>
+            <viz.data:FlattenedDataset data="{/breakdown}">
+              <viz.data:dimensions><viz.data:DimensionDefinition name="Name" value="{name}" /></viz.data:dimensions>
+              <viz.data:measures><viz.data:MeasureDefinition name="Value" value="{value}" /></viz.data:measures>
+            </viz.data:FlattenedDataset>
+          </viz:dataset>
+          <viz:feeds>
+            <viz.feeds:FeedItem uid="size" type="Measure" values="Value" />
+            <viz.feeds:FeedItem uid="color" type="Dimension" values="Name" />
+          </viz:feeds>
+        </viz:VizFrame>
+      </f:content>
+    </f:Card>
+
+    <f:Card width="100%">
+      <f:header><card:Header title="{/meta/items/title}" subtitle="{/meta/items/subtitle}" iconSrc="sap-icon://table-view" /></f:header>
+      <f:content>
+        <Table items="{/items}" autoPopinMode="true">
+          <columns>
+            <Column><Text text="{/meta/items/columns/title}" /></Column>
+            <Column><Text text="{/meta/items/columns/owner}" /></Column>
+            <Column><Text text="{/meta/items/columns/date}" /></Column>
+            <Column hAlign="End"><Text text="{/meta/items/columns/amount}" /></Column>
+            <Column width="10rem"><Text text="{/meta/items/columns/progress}" /></Column>
+            <Column><Text text="{/meta/items/columns/status}" /></Column>
+          </columns>
+          <items>
+            <ColumnListItem type="Navigation" press=".onItemPress" highlight="{state}">
+              <cells>
+                <ObjectIdentifier title="{title}" text="{subtitle}" />
+                <Text text="{owner}" />
+                <Text text="{ path: 'date', formatter: '.formatter.date' }" />
+                <ObjectNumber number="{ parts: ['amount', 'currency'], formatter: '.formatter.currency' }" />
+                <ProgressIndicator percentValue="{progress}" displayValue="{progress}%" state="{state}" />
+                <ObjectStatus text="{status}" state="{state}" inverted="true" />
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </f:content>
+    </f:Card>
+  </layout:Grid>
+</VBox>
+</core:FragmentDefinition>

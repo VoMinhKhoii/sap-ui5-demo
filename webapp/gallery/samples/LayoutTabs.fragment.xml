@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Tabs: show different views of the data without leaving the page. -->
+<IconTabBar expandable="false" headerBackgroundDesign="Transparent">
+  <items>
+    <IconTabFilter text="Overview" icon="sap-icon://bar-chart" key="overview">
+      <Text text="Charts go here" />
+    </IconTabFilter>
+    <IconTabFilter text="Details" icon="sap-icon://table-view" key="details" count="{= ${/items}.length }">
+      <Text text="A table goes here" />
+    </IconTabFilter>
+    <IconTabFilter text="Alerts" icon="sap-icon://alert" key="alerts" iconColor="Critical" count="{= ${/alerts}.length }">
+      <Text text="Message strips go here" />
+    </IconTabFilter>
+  </items>
+</IconTabBar>
+</core:FragmentDefinition>

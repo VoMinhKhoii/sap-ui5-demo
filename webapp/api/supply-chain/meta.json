@@ -1,0 +1,35 @@
+{
+  "id": "supply-chain",
+  "title": "Supply Chain & Warehouse",
+  "company": "Northwind Motion GmbH",
+  "icon": "sap-icon://shipping-status",
+  "description": "Northwind Motion builds e-bikes and e-scooters in 4 European plants. Battery cells come from Asia, frames from Portugal. Summer 2026 was rough: a key battery supplier slipped and warehouses filled up with half-finished bikes.",
+  "question": "Help the COO answer: are we going to be able to ship the Christmas season, and where exactly is the bottleneck?",
+  "currency": "EUR",
+  "trend": {
+    "title": "On-time supplier delivery",
+    "subtitle": "Share of PO lines delivered on time, last 12 months",
+    "unit": "%",
+    "actualLabel": "On-time %",
+    "planLabel": "Target"
+  },
+  "breakdown": {
+    "title": "Inventory value by plant",
+    "subtitle": "Current stock value vs. plant target",
+    "unit": "EUR k"
+  },
+  "items": {
+    "title": "Open purchase orders",
+    "subtitle": "Inbound orders still being delivered",
+    "columns": {
+      "id": "PO number",
+      "title": "Material",
+      "subtitle": "Supplier",
+      "owner": "Buyer",
+      "date": "Due date",
+      "amount": "PO value",
+      "progress": "Delivered",
+      "status": "Status"
+    }
+  }
+}

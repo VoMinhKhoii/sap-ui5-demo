@@ -1,0 +1,32 @@
+<mvc:View
+  controllerName="workshop.dashboard.controller.ApiExplorer"
+  xmlns="sap.m"
+  xmlns:code="sap.ui.codeeditor"
+  xmlns:core="sap.ui.core"
+  xmlns:layout="sap.ui.layout"
+  xmlns:mvc="sap.ui.core.mvc"
+>
+  <Page showHeader="false" class="wsPage">
+    <VBox class="wsPageIntro">
+      <Title text="API Explorer" level="H1" titleStyle="H2" />
+      <Text text="The workshop API is plain REST: GET a URL, receive JSON. Your app already calls all endpoints of the selected scenario and puts the result into the default model, so \{/kpis\} in XML is exactly the kpis.json response below." class="sapUiTinyMarginTop" />
+    </VBox>
+    <layout:Grid defaultSpan="XL4 L4 M12 S12" hSpacing="1" vSpacing="1" containerQuery="true" class="sapUiSmallMarginBeginEnd">
+      <List id="endpointList" mode="SingleSelectMaster" items="{explorer>/endpoints}" selectionChange=".onEndpointSelect" headerText="Endpoints">
+        <StandardListItem title="{explorer>path}" description="{explorer>description}" info="{explorer>returns}" wrapping="true" />
+      </List>
+      <VBox width="100%">
+        <layoutData><layout:GridData span="XL8 L8 M12 S12" /></layoutData>
+        <OverflowToolbar style="Clear">
+          <ObjectStatus text="GET" state="Success" inverted="true" class="sapUiTinyMarginEnd" />
+          <Link text="{explorer>/url}" href="{explorer>/url}" target="_blank" />
+          <ToolbarSpacer />
+          <Text text="Bind with: {explorer>/binding}" />
+        </OverflowToolbar>
+        <code:CodeEditor type="json" value="{explorer>/response}" editable="false" height="34rem" width="100%" />
+        <MessageStrip type="Information" showIcon="true" class="sapUiSmallMarginTop"
+          text="Tip: arrays (kpis, trend, breakdown, items, alerts) are bound with items=&quot;\{/kpis\}&quot; or data=&quot;\{/trend\}&quot;. Single values with a full path, e.g. text=&quot;\{/kpis/0/title\}&quot;." />
+      </VBox>
+    </layout:Grid>
+  </Page>
+</mvc:View>

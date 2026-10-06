@@ -1,0 +1,10 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Comparison micro chart: compact ranking bars (/breakdown). -->
+<mc:ComparisonMicroChart data="{/breakdown}" size="Responsive" height="12rem" width="100%" shrinkable="true">
+  <mc:data>
+    <mc:ComparisonMicroChartData title="{name}" value="{value}" color="{state}" />
+  </mc:data>
+</mc:ComparisonMicroChart>
+</core:FragmentDefinition>

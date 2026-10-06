@@ -1,0 +1,51 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- TEMPLATE "Exception cockpit": what is going wrong, and where. Alerts first, numbers second. -->
+<layout:Grid defaultSpan="XL6 L6 M12 S12" hSpacing="1" vSpacing="1" containerQuery="true">
+  <f:Card width="100%">
+    <f:layoutData><layout:GridData span="XL5 L5 M12 S12" /></f:layoutData>
+    <f:header><card:Header title="Needs attention" subtitle="{/meta/title}" iconSrc="sap-icon://alert" statusText="{= ${/alerts}.length } alerts" /></f:header>
+    <f:content>
+      <List items="{/alerts}" showSeparators="Inner" width="100%">
+        <!-- ui5lint-disable-next-line no-deprecated-api -->
+        <NotificationListItem title="{title}" description="{description}" datetime="{ path: 'date', formatter: '.formatter.date' }" priority="{ path: 'type', formatter: '.formatter.priority' }" showCloseButton="false" />
+      </List>
+    </f:content>
+  </f:Card>
+
+  <VBox width="100%">
+    <layoutData><layout:GridData span="XL7 L7 M12 S12" /></layoutData>
+    <f:Card width="100%" class="sapUiSmallMarginBottom">
+      <f:header><card:Header title="KPIs vs. target" iconSrc="sap-icon://target-group" /></f:header>
+      <f:content>
+        <List items="{/kpis}" showSeparators="Inner" width="100%">
+          <CustomListItem type="Active" press=".onKpiPress">
+            <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBeginEnd sapUiTinyMarginTopBottom">
+              <VBox>
+                <Text text="{title}" />
+                <ObjectNumber number="{ path: 'value', formatter: '.formatter.compactNumber' }" unit="{unit}" state="{ path: 'state', formatter: '.formatter.valueState' }" emphasized="true" />
+              </VBox>
+              <mc:BulletMicroChart size="M" targetValue="{target}" showTargetValue="false" width="11rem">
+                <mc:actual><mc:BulletMicroChartData value="{value}" color="{state}" /></mc:actual>
+              </mc:BulletMicroChart>
+            </HBox>
+          </CustomListItem>
+        </List>
+      </f:content>
+    </f:Card>
+
+    <f:Card width="100%">
+      <f:header><card:Header title="{/meta/breakdown/title}" subtitle="{/meta/breakdown/subtitle}" iconSrc="sap-icon://pie-chart" /></f:header>
+      <f:content>
+        <HBox items="{/breakdown}" wrap="Wrap" justifyContent="SpaceAround" width="100%" class="sapUiSmallMargin">
+          <VBox alignItems="Center" width="7rem" class="sapUiSmallMarginBottom">
+            <mc:RadialMicroChart percentage="{share}" valueColor="{state}" size="S" />
+            <Text text="{name}" class="sapUiTinyMarginTop" textAlign="Center" />
+          </VBox>
+        </HBox>
+      </f:content>
+    </f:Card>
+  </VBox>
+</layout:Grid>
+</core:FragmentDefinition>

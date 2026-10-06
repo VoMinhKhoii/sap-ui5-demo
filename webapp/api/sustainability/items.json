@@ -1,0 +1,93 @@
+[
+  {
+    "id": "ESG-2026-01",
+    "title": "Rooftop solar 2.1 MWp",
+    "subtitle": "Hamburg",
+    "owner": "Mia Schulz",
+    "date": "2026-06-30",
+    "amount": 1850000,
+    "currency": "EUR",
+    "quantity": 1,
+    "progress": 100,
+    "status": "Live",
+    "state": "Success"
+  },
+  {
+    "id": "ESG-2026-02",
+    "title": "Replace gas paint-shop oven",
+    "subtitle": "Leipzig",
+    "owner": "Paul Richter",
+    "date": "2026-09-30",
+    "amount": 2400000,
+    "currency": "EUR",
+    "quantity": 1,
+    "progress": 45,
+    "status": "Delayed",
+    "state": "Error"
+  },
+  {
+    "id": "ESG-2026-03",
+    "title": "Green power purchase agreement",
+    "subtitle": "Brno",
+    "owner": "Petra Dvořák",
+    "date": "2026-11-01",
+    "amount": 0,
+    "currency": "EUR",
+    "quantity": 1,
+    "progress": 80,
+    "status": "On track",
+    "state": "Information"
+  },
+  {
+    "id": "ESG-2026-04",
+    "title": "Heat recovery on compressors",
+    "subtitle": "Porto",
+    "owner": "Rui Costa",
+    "date": "2026-12-15",
+    "amount": 320000,
+    "currency": "EUR",
+    "quantity": 1,
+    "progress": 60,
+    "status": "On track",
+    "state": "Information"
+  },
+  {
+    "id": "ESG-2026-05",
+    "title": "Electric forklift fleet",
+    "subtitle": "Valencia DC",
+    "owner": "Elena Ruiz",
+    "date": "2026-10-31",
+    "amount": 540000,
+    "currency": "EUR",
+    "quantity": 24,
+    "progress": 25,
+    "status": "At risk",
+    "state": "Warning"
+  },
+  {
+    "id": "ESG-2026-06",
+    "title": "Battery cell recycling loop",
+    "subtitle": "Hamburg",
+    "owner": "Mia Schulz",
+    "date": "2027-03-31",
+    "amount": 1200000,
+    "currency": "EUR",
+    "quantity": 1,
+    "progress": 15,
+    "status": "On track",
+    "state": "Information"
+  },
+  {
+    "id": "ESG-2026-07",
+    "title": "LED lighting retrofit",
+    "subtitle": "Leipzig",
+    "owner": "Paul Richter",
+    "date": "2026-08-31",
+    "amount": 210000,
+    "currency": "EUR",
+    "quantity": 1,
+    "progress": 100,
+    "status": "Live",
+    "state": "Success"
+  }
+]

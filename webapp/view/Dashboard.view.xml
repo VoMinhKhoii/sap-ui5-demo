@@ -1,0 +1,120 @@
+<!--
+  ╔══════════════════════════════════════════════════════════════════════╗
+  ║  YOUR DASHBOARD. This is the only file you need to edit.            ║
+  ║                                                                      ║
+  ║  1. Open the Component Gallery in the app, click "Copy XML".         ║
+  ║  2. Paste between a pair of 🧩 markers below.                        ║
+  ║  3. Save and refresh the browser (F5).                               ║
+  ║                                                                      ║
+  ║  Data: {/meta} {/kpis} {/trend} {/breakdown} {/items} {/alerts}      ║
+  ║  (see the API Explorer). Something broke? Press F12 → Console.       ║
+  ╚══════════════════════════════════════════════════════════════════════╝
+-->
+<mvc:View
+  controllerName="workshop.dashboard.controller.Dashboard"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:f="sap.f"
+  xmlns:card="sap.f.cards"
+  xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart"
+  xmlns:viz="sap.viz.ui5.controls"
+  xmlns:viz.data="sap.viz.ui5.data"
+  xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+  displayBlock="true"
+>
+  <f:DynamicPage id="dashboardPage" headerExpanded="true" showFooter="false">
+
+    <!-- Page title: change the texts to tell your story -->
+    <f:title>
+      <f:DynamicPageTitle>
+        <f:heading>
+          <Title text="{/meta/title} Dashboard" level="H1" />
+        </f:heading>
+        <f:expandedContent>
+          <Text text="{/meta/company}" />
+        </f:expandedContent>
+        <f:actions>
+          <Button text="Refresh" icon="sap-icon://refresh" type="Transparent" press=".onRefresh" />
+        </f:actions>
+      </f:DynamicPageTitle>
+    </f:title>
+
+    <!-- Collapsible header: a good place for filters or the business question -->
+    <f:header>
+      <f:DynamicPageHeader pinnable="true">
+        <!-- 🧩 HEADER START (Gallery → Filters or Layout → Story header) -->
+        <Text text="{/meta/question}" />
+        <!-- 🧩 HEADER END -->
+      </f:DynamicPageHeader>
+    </f:header>
+
+    <f:content>
+      <VBox width="100%">
+
+        <!-- Delete this strip once you have added your first block -->
+        <MessageStrip
+          text="Your dashboard is empty. Open the Component Gallery, copy a block and paste it into webapp/view/Dashboard.view.xml."
+          type="Information" showIcon="true" class="sapUiSmallMarginBottom" />
+
+        <!-- 🧩 KPIs START (Gallery → KPIs) -->
+
+        <!-- 🧩 KPIs END -->
+
+        <layout:Grid defaultSpan="XL12 L12 M12 S12" hSpacing="1" vSpacing="1" containerQuery="true" class="sapUiSmallMarginTop">
+
+          <!-- Card A: wide (8 of 12 columns). Good for a chart over time. -->
+          <f:Card width="100%">
+            <f:layoutData><layout:GridData span="XL8 L8 M12 S12" /></f:layoutData>
+            <f:header>
+              <card:Header title="Card A: rename me" subtitle="e.g. {/meta/trend/title}" iconSrc="sap-icon://line-chart" />
+            </f:header>
+            <f:content>
+              <VBox width="100%" class="sapUiSmallMargin">
+                <!-- 🧩 CARD A START (Gallery → Charts) -->
+                <Text text="Paste a chart here" />
+                <!-- 🧩 CARD A END -->
+              </VBox>
+            </f:content>
+          </f:Card>
+
+          <!-- Card B: narrow (4 of 12 columns). Good for a breakdown or alerts. -->
+          <f:Card width="100%">
+            <f:layoutData><layout:GridData span="XL4 L4 M12 S12" /></f:layoutData>
+            <f:header>
+              <card:Header title="Card B: rename me" subtitle="e.g. {/meta/breakdown/title}" iconSrc="sap-icon://donut-chart" />
+            </f:header>
+            <f:content>
+              <VBox width="100%" class="sapUiSmallMargin">
+                <!-- 🧩 CARD B START (Gallery → Micro charts / Status & alerts) -->
+                <Text text="Paste a micro chart or alerts here" />
+                <!-- 🧩 CARD B END -->
+              </VBox>
+            </f:content>
+          </f:Card>
+
+          <!-- Card C: full width. Good for the detail table. -->
+          <f:Card width="100%">
+            <f:header>
+              <card:Header title="Card C: rename me" subtitle="e.g. {/meta/items/title}" iconSrc="sap-icon://table-view" />
+            </f:header>
+            <f:content>
+              <VBox width="100%" class="sapUiSmallMargin">
+                <!-- 🧩 CARD C START (Gallery → Tables & lists) -->
+                <Text text="Paste a table here" />
+                <!-- 🧩 CARD C END -->
+              </VBox>
+            </f:content>
+          </f:Card>
+
+          <!-- Need more? Copy a whole <f:Card> ... </f:Card> block, or paste a Page template here. -->
+          <!-- 🧩 MORE START (Gallery → Page templates) -->
+
+          <!-- 🧩 MORE END -->
+
+        </layout:Grid>
+      </VBox>
+    </f:content>
+  </f:DynamicPage>
+</mvc:View>

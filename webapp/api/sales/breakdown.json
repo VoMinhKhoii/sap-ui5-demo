@@ -1,0 +1,44 @@
+[
+  {
+    "name": "DACH",
+    "value": 19800,
+    "target": 19500,
+    "state": "Good",
+    "share": 40.7
+  },
+  {
+    "name": "Benelux",
+    "value": 9400,
+    "target": 9000,
+    "state": "Good",
+    "share": 19.3
+  },
+  {
+    "name": "Nordics",
+    "value": 7300,
+    "target": 7500,
+    "state": "Critical",
+    "share": 15
+  },
+  {
+    "name": "France",
+    "value": 6900,
+    "target": 8200,
+    "state": "Error",
+    "share": 14.2
+  },
+  {
+    "name": "Iberia",
+    "value": 3400,
+    "target": 3800,
+    "state": "Critical",
+    "share": 7
+  },
+  {
+    "name": "UK & Ireland",
+    "value": 1800,
+    "target": 2000,
+    "state": "Critical",
+    "share": 3.7
+  }
+]

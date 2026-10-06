@@ -1,0 +1,10 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Column micro chart: 12-month trend in a tiny space (/trend). -->
+<mc:ColumnMicroChart columns="{/trend}" size="Responsive" height="8rem" width="100%" leftBottomLabel="{/trend/0/month}" rightBottomLabel="{/trend/11/month}">
+  <mc:columns>
+    <mc:ColumnMicroChartData value="{actual}" label="{month}" color="{= ${actual} >= ${plan} ? 'Good' : 'Critical' }" />
+  </mc:columns>
+</mc:ColumnMicroChart>
+</core:FragmentDefinition>

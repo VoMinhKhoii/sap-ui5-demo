@@ -1,0 +1,145 @@
+<!-- Reference solution for facilitators: one possible answer, built only from Gallery blocks. -->
+<mvc:View
+  controllerName="workshop.dashboard.controller.Solution"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:f="sap.f"
+  xmlns:card="sap.f.cards"
+  xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart"
+  xmlns:viz="sap.viz.ui5.controls"
+  xmlns:viz.data="sap.viz.ui5.data"
+  xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+  displayBlock="true"
+>
+  <f:DynamicPage id="solutionPage" headerExpanded="true" showFooter="false">
+    <f:title>
+      <f:DynamicPageTitle>
+        <f:heading><Title text="{/meta/title}" level="H1" /></f:heading>
+        <f:expandedContent><Text text="{/meta/company} · Reference solution" /></f:expandedContent>
+        <f:snappedContent><Text text="{/meta/question}" /></f:snappedContent>
+        <f:actions>
+          <Button text="Share" icon="sap-icon://share-2" type="Transparent" press=".onActionPress" />
+          <Button text="Export" icon="sap-icon://excel-attachment" type="Transparent" press=".onActionPress" />
+        </f:actions>
+      </f:DynamicPageTitle>
+    </f:title>
+    <f:header>
+      <f:DynamicPageHeader pinnable="true">
+        <VBox>
+          <Text text="{/meta/question}" />
+          <MessageStrip text="{/alerts/0/title}: {/alerts/0/description}" type="{/alerts/0/type}" showIcon="true" class="sapUiSmallMarginTop" />
+        </VBox>
+      </f:DynamicPageHeader>
+    </f:header>
+    <f:content>
+      <VBox width="100%">
+        <layout:Grid content="{/kpis}" defaultSpan="XL3 L3 M6 S12" hSpacing="1" vSpacing="1" containerQuery="true">
+          <f:Card width="100%">
+            <f:header>
+              <card:NumericHeader
+                title="{title}" subtitle="{subtitle}" iconSrc="{icon}"
+                number="{ path: 'value', formatter: '.formatter.compactNumber' }" unitOfMeasurement="{unit}"
+                trend="{trend}" state="{state}" press=".onKpiPress">
+                <card:sideIndicators>
+                  <card:NumericSideIndicator title="Target" number="{ path: 'target', formatter: '.formatter.compactNumber' }" unit="{unit}" />
+                  <card:NumericSideIndicator title="Change" number="{ path: 'deltaPercent', formatter: '.formatter.delta' }" />
+                </card:sideIndicators>
+              </card:NumericHeader>
+            </f:header>
+            <f:content>
+              <mc:LineMicroChart points="{ path: 'history', templateShareable: false }" size="Responsive" height="3.5rem" width="100%" color="{state}" showPoints="true"
+                leftBottomLabel="{history/0/period}" rightBottomLabel="{history/5/period}" class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom">
+                <mc:points><mc:LineMicroChartPoint x="{x}" y="{value}" /></mc:points>
+              </mc:LineMicroChart>
+            </f:content>
+          </f:Card>
+        </layout:Grid>
+
+        <layout:Grid defaultSpan="XL12 L12 M12 S12" hSpacing="1" vSpacing="1" containerQuery="true" class="sapUiSmallMarginTop">
+          <f:Card width="100%">
+            <f:layoutData><layout:GridData span="XL8 L8 M12 S12" /></f:layoutData>
+            <f:header><card:Header title="{/meta/trend/title}" subtitle="{/meta/trend/subtitle}" iconSrc="sap-icon://line-chart" /></f:header>
+            <f:content>
+              <viz:VizFrame vizType="combination" width="100%" height="22rem" uiConfig="{applicationSet:'fiori'}" selectData=".onChartSelect">
+                <viz:dataset>
+                  <viz.data:FlattenedDataset data="{/trend}">
+                    <viz.data:dimensions><viz.data:DimensionDefinition name="Month" value="{month}" /></viz.data:dimensions>
+                    <viz.data:measures>
+                      <viz.data:MeasureDefinition name="Actual" value="{actual}" />
+                      <viz.data:MeasureDefinition name="Plan" value="{plan}" />
+                    </viz.data:measures>
+                  </viz.data:FlattenedDataset>
+                </viz:dataset>
+                <viz:feeds>
+                  <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Actual,Plan" />
+                  <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
+                </viz:feeds>
+              </viz:VizFrame>
+            </f:content>
+          </f:Card>
+
+          <f:Card width="100%" height="100%">
+            <f:layoutData><layout:GridData span="XL4 L4 M12 S12" /></f:layoutData>
+            <f:header><card:Header title="Needs attention" subtitle="Sorted by severity" iconSrc="sap-icon://alert" statusText="{= ${/alerts}.length } alerts" /></f:header>
+            <f:content>
+              <List items="{/alerts}" showSeparators="Inner" width="100%">
+                <!-- ui5lint-disable-next-line no-deprecated-api -->
+                <NotificationListItem title="{title}" description="{description}" datetime="{ path: 'date', formatter: '.formatter.date' }" priority="{ path: 'type', formatter: '.formatter.priority' }" showCloseButton="false" truncate="true" />
+              </List>
+            </f:content>
+          </f:Card>
+
+          <f:Card width="100%">
+            <f:layoutData><layout:GridData span="XL5 L5 M12 S12" /></f:layoutData>
+            <f:header><card:Header title="{/meta/breakdown/title}" subtitle="{/meta/breakdown/subtitle}" iconSrc="sap-icon://horizontal-bullet-chart" /></f:header>
+            <f:content>
+              <viz:VizFrame vizType="bullet" width="100%" height="22rem" uiConfig="{applicationSet:'fiori'}" selectData=".onChartSelect">
+                <viz:dataset>
+                  <viz.data:FlattenedDataset data="{/breakdown}">
+                    <viz.data:dimensions><viz.data:DimensionDefinition name="Name" value="{name}" /></viz.data:dimensions>
+                    <viz.data:measures>
+                      <viz.data:MeasureDefinition name="Actual" value="{value}" />
+                      <viz.data:MeasureDefinition name="Target" value="{target}" />
+                    </viz.data:measures>
+                  </viz.data:FlattenedDataset>
+                </viz:dataset>
+                <viz:feeds>
+                  <viz.feeds:FeedItem uid="actualValues" type="Measure" values="Actual" />
+                  <viz.feeds:FeedItem uid="targetValues" type="Measure" values="Target" />
+                  <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Name" />
+                </viz:feeds>
+              </viz:VizFrame>
+            </f:content>
+          </f:Card>
+
+          <f:Card width="100%">
+            <f:layoutData><layout:GridData span="XL7 L7 M12 S12" /></f:layoutData>
+            <f:header><card:Header title="{/meta/items/title}" subtitle="{/meta/items/subtitle}" iconSrc="sap-icon://table-view" /></f:header>
+            <f:content>
+              <Table items="{ path: '/items', sorter: { path: 'state', descending: false } }" autoPopinMode="true">
+                <columns>
+                  <Column><Text text="{/meta/items/columns/title}" /></Column>
+                  <Column hAlign="End"><Text text="{/meta/items/columns/amount}" /></Column>
+                  <Column width="9rem"><Text text="{/meta/items/columns/progress}" /></Column>
+                  <Column><Text text="{/meta/items/columns/status}" /></Column>
+                </columns>
+                <items>
+                  <ColumnListItem type="Navigation" press=".onItemPress" highlight="{state}">
+                    <cells>
+                      <ObjectIdentifier title="{title}" text="{subtitle} · {owner}" />
+                      <ObjectNumber number="{ parts: ['amount', 'currency'], formatter: '.formatter.currency' }" />
+                      <ProgressIndicator percentValue="{progress}" displayValue="{progress}%" state="{state}" />
+                      <ObjectStatus text="{status}" state="{state}" inverted="true" />
+                    </cells>
+                  </ColumnListItem>
+                </items>
+              </Table>
+            </f:content>
+          </f:Card>
+        </layout:Grid>
+      </VBox>
+    </f:content>
+  </f:DynamicPage>
+</mvc:View>

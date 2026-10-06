@@ -1,0 +1,11 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Radial (ring) charts: share of each plant/region in % (/breakdown). -->
+<HBox items="{/breakdown}" wrap="Wrap">
+  <VBox alignItems="Center" width="8rem" class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+    <mc:RadialMicroChart percentage="{share}" valueColor="{state}" size="M" />
+    <Text text="{name}" class="sapUiTinyMarginTop" />
+  </VBox>
+</HBox>
+</core:FragmentDefinition>

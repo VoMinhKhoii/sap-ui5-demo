@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Hamburg",
+    "value": 3600,
+    "target": 3800,
+    "state": "Good",
+    "share": 28.8
+  },
+  {
+    "name": "Leipzig",
+    "value": 4900,
+    "target": 3700,
+    "state": "Error",
+    "share": 39.3
+  },
+  {
+    "name": "Brno",
+    "value": 2400,
+    "target": 2400,
+    "state": "Good",
+    "share": 19.2
+  },
+  {
+    "name": "Porto",
+    "value": 1100,
+    "target": 1200,
+    "state": "Good",
+    "share": 8.8
+  },
+  {
+    "name": "Valencia DC",
+    "value": 480,
+    "target": 400,
+    "state": "Critical",
+    "share": 3.8
+  }
+]

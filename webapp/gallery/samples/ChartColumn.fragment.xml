@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Column chart: this year vs. last year per month (/trend). -->
+<viz:VizFrame vizType="column" width="100%" height="20rem" uiConfig="{applicationSet:'fiori'}" selectData=".onChartSelect">
+  <viz:dataset>
+    <viz.data:FlattenedDataset data="{/trend}">
+      <viz.data:dimensions>
+        <viz.data:DimensionDefinition name="Month" value="{month}" />
+      </viz.data:dimensions>
+      <viz.data:measures>
+        <viz.data:MeasureDefinition name="This year" value="{actual}" />
+        <viz.data:MeasureDefinition name="Last year" value="{previousYear}" />
+      </viz.data:measures>
+    </viz.data:FlattenedDataset>
+  </viz:dataset>
+  <viz:feeds>
+    <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="This year,Last year" />
+    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
+  </viz:feeds>
+</viz:VizFrame>
+</core:FragmentDefinition>

@@ -1,0 +1,25 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Small table with an inline bullet chart per row (/breakdown). -->
+<Table items="{/breakdown}" headerText="{/meta/breakdown/title}">
+  <columns>
+    <Column><Text text="Name" /></Column>
+    <Column hAlign="End"><Text text="Value" /></Column>
+    <Column hAlign="End"><Text text="Share" /></Column>
+    <Column width="12rem"><Text text="vs. target" /></Column>
+  </columns>
+  <items>
+    <ColumnListItem>
+      <cells>
+        <Text text="{name}" />
+        <ObjectNumber number="{value}" unit="{/meta/breakdown/unit}" state="{ path: 'state', formatter: '.formatter.valueState' }" />
+        <Text text="{share}%" />
+        <mc:BulletMicroChart size="S" targetValue="{target}" showValueMarker="false">
+          <mc:actual><mc:BulletMicroChartData value="{value}" color="{state}" /></mc:actual>
+        </mc:BulletMicroChart>
+      </cells>
+    </ColumnListItem>
+  </items>
+</Table>
+</core:FragmentDefinition>

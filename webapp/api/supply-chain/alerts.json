@@ -1,0 +1,26 @@
+[
+  {
+    "type": "Error",
+    "title": "Battery supply at risk",
+    "description": "Shenzhen Cell Tech confirmed only 35% of PO 4500017321. Production line 2 in Hamburg stops in 9 days without new cells.",
+    "date": "2026-10-05"
+  },
+  {
+    "type": "Warning",
+    "title": "Brno warehouse over capacity",
+    "description": "Brno holds EUR 3.9M of stock vs. a EUR 2.8M target, mostly unfinished scooters waiting for decks.",
+    "date": "2026-10-04"
+  },
+  {
+    "type": "Warning",
+    "title": "7 materials out of stock",
+    "description": "Stock-outs doubled since August. Top item: battery management board (2,500 pcs open).",
+    "date": "2026-10-03"
+  },
+  {
+    "type": "Success",
+    "title": "Brakes delivered early",
+    "description": "Alpine Components delivered all 2,100 brake sets 3 days ahead of schedule.",
+    "date": "2026-10-01"
+  }
+]

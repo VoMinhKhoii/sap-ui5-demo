@@ -1,0 +1,182 @@
+[
+  {
+    "id": "inventoryValue",
+    "title": "Inventory Value",
+    "subtitle": "All plants, today",
+    "value": 18400000,
+    "unit": "EUR",
+    "target": 16000000,
+    "deltaPercent": 6.2,
+    "trend": "Up",
+    "state": "Critical",
+    "icon": "sap-icon://product",
+    "higherIsBetter": false,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 15.1
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 15.6
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 16.3
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 17.2
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 17.9
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 18.4
+      }
+    ]
+  },
+  {
+    "id": "onTimeDelivery",
+    "title": "On-time Delivery",
+    "subtitle": "Supplier PO lines, Sep 26",
+    "value": 92.3,
+    "unit": "%",
+    "target": 95,
+    "deltaPercent": 2.8,
+    "trend": "Up",
+    "state": "Critical",
+    "icon": "sap-icon://shipping-status",
+    "higherIsBetter": true,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 94.2
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 91.7
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 86.4
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 84.9
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 89.8
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 92.3
+      }
+    ]
+  },
+  {
+    "id": "warehouseUtilization",
+    "title": "Warehouse Utilization",
+    "subtitle": "Average across 5 sites",
+    "value": 87,
+    "unit": "%",
+    "target": 85,
+    "deltaPercent": 4.1,
+    "trend": "Up",
+    "state": "Critical",
+    "icon": "sap-icon://building",
+    "higherIsBetter": false,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 78
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 80
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 82
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 84
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 85
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 87
+      }
+    ]
+  },
+  {
+    "id": "stockOuts",
+    "title": "Stock-outs",
+    "subtitle": "Materials with zero stock",
+    "value": 7,
+    "unit": "materials",
+    "target": 0,
+    "deltaPercent": 40,
+    "trend": "Up",
+    "state": "Error",
+    "icon": "sap-icon://alert",
+    "higherIsBetter": false,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 2
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 3
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 6
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 9
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 5
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 7
+      }
+    ]
+  }
+]

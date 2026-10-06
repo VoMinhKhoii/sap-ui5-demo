@@ -1,0 +1,35 @@
+{
+  "id": "sustainability",
+  "title": "Sustainability & Carbon",
+  "company": "Northwind Motion GmbH",
+  "icon": "sap-icon://e-care",
+  "description": "Northwind Motion committed to cutting CO2e emissions 50% by 2030 (vs. 2023). Every plant reports energy, emissions and waste monthly. Investors now ask for this data next to the financials.",
+  "question": "Help the Chief Sustainability Officer answer: are we on track for the 2030 target, and which plant or initiative needs attention?",
+  "currency": "EUR",
+  "trend": {
+    "title": "Monthly CO2e emissions",
+    "subtitle": "Scope 1 + 2, tonnes, actual vs. reduction path",
+    "unit": "t CO2e",
+    "actualLabel": "Emissions",
+    "planLabel": "Reduction path"
+  },
+  "breakdown": {
+    "title": "Emissions by plant",
+    "subtitle": "Fiscal year to date vs. plant budget, tonnes CO2e",
+    "unit": "t CO2e"
+  },
+  "items": {
+    "title": "Decarbonization initiatives",
+    "subtitle": "Projects funded in the 2026 sustainability budget",
+    "columns": {
+      "id": "Project",
+      "title": "Initiative",
+      "subtitle": "Plant",
+      "owner": "Owner",
+      "date": "Go-live",
+      "amount": "Budget",
+      "progress": "Progress",
+      "status": "Status"
+    }
+  }
+}

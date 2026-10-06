@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Object list: a richer list for a narrow column (/items). -->
+<List items="{/items}" headerText="{/meta/items/title}">
+  <ObjectListItem
+    title="{title}"
+    number="{ parts: ['amount', 'currency'], formatter: '.formatter.currency' }"
+    type="Active"
+    press=".onItemPress"
+    highlight="{state}">
+    <firstStatus>
+      <ObjectStatus text="{status}" state="{state}" />
+    </firstStatus>
+    <attributes>
+      <ObjectAttribute text="{subtitle}" />
+      <ObjectAttribute title="{/meta/items/columns/date}" text="{ path: 'date', formatter: '.formatter.date' }" />
+    </attributes>
+  </ObjectListItem>
+</List>
+</core:FragmentDefinition>

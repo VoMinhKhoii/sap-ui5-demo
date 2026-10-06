@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- A card is the Fiori "box" around anything: put a chart, table or list inside <f:content>. -->
+<f:Card width="100%">
+  <f:header>
+    <card:Header title="{/meta/trend/title}" subtitle="{/meta/trend/subtitle}" iconSrc="sap-icon://line-chart" />
+  </f:header>
+  <f:content>
+    <VBox width="100%" class="sapUiSmallMargin">
+      <Text text="Put any control here: a chart, a table, a list ..." />
+    </VBox>
+  </f:content>
+</f:Card>
+</core:FragmentDefinition>

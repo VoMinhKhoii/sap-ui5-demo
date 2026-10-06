@@ -1,0 +1,26 @@
+[
+  {
+    "type": "Error",
+    "title": "Leipzig 32% over emission budget",
+    "description": "The gas-fired paint oven replacement slipped by 6 months. Leipzig alone explains the whole group overshoot.",
+    "date": "2026-10-05"
+  },
+  {
+    "type": "Warning",
+    "title": "Renewable share below 75% target",
+    "description": "Brno still buys grey electricity until the power purchase agreement starts in November.",
+    "date": "2026-10-03"
+  },
+  {
+    "type": "Warning",
+    "title": "Forklift delivery at risk",
+    "description": "Only 6 of 24 electric forklifts delivered to Valencia DC. Diesel units still in use.",
+    "date": "2026-10-02"
+  },
+  {
+    "type": "Success",
+    "title": "Hamburg solar plant live",
+    "description": "The 2.1 MWp rooftop installation covers 18% of Hamburg's electricity since July.",
+    "date": "2026-07-01"
+  }
+]

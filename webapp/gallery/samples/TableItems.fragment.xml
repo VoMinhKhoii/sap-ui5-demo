@@ -1,0 +1,27 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Responsive table of business records (/items). Column titles come from /meta/items/columns. -->
+<Table id="itemsTable" items="{/items}" headerText="{/meta/items/title}" autoPopinMode="true" growing="true" growingThreshold="5" sticky="ColumnHeaders">
+  <columns>
+    <Column><Text text="{/meta/items/columns/title}" /></Column>
+    <Column><Text text="{/meta/items/columns/owner}" /></Column>
+    <Column><Text text="{/meta/items/columns/date}" /></Column>
+    <Column hAlign="End"><Text text="{/meta/items/columns/amount}" /></Column>
+    <Column width="10rem"><Text text="{/meta/items/columns/progress}" /></Column>
+    <Column><Text text="{/meta/items/columns/status}" /></Column>
+  </columns>
+  <items>
+    <ColumnListItem type="Navigation" press=".onItemPress" highlight="{state}">
+      <cells>
+        <ObjectIdentifier title="{title}" text="{subtitle}" />
+        <Text text="{owner}" />
+        <Text text="{ path: 'date', formatter: '.formatter.date' }" />
+        <ObjectNumber number="{ parts: ['amount', 'currency'], formatter: '.formatter.currency' }" />
+        <ProgressIndicator percentValue="{progress}" displayValue="{progress}%" state="{state}" />
+        <ObjectStatus text="{status}" state="{state}" inverted="true" />
+      </cells>
+    </ColumnListItem>
+  </items>
+</Table>
+</core:FragmentDefinition>

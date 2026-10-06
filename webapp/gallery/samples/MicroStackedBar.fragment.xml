@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- One stacked bar showing how the total splits up (/breakdown). -->
+<VBox width="100%">
+  <mc:StackedBarMicroChart bars="{/breakdown}" size="Responsive" height="3rem" width="100%">
+    <mc:bars>
+      <mc:StackedBarMicroChartBar value="{value}" displayValue="{name}" />
+    </mc:bars>
+  </mc:StackedBarMicroChart>
+  <List items="{/breakdown}" showSeparators="None">
+    <StandardListItem title="{name}" info="{share}%" infoState="{ path: 'state', formatter: '.formatter.valueState' }" />
+  </List>
+</VBox>
+</core:FragmentDefinition>

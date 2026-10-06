@@ -1,0 +1,74 @@
+[
+  {
+    "month": "Oct 25",
+    "actual": 1120,
+    "plan": 1080,
+    "previousYear": 1250
+  },
+  {
+    "month": "Nov 25",
+    "actual": 1180,
+    "plan": 1070,
+    "previousYear": 1290
+  },
+  {
+    "month": "Dec 25",
+    "actual": 1260,
+    "plan": 1060,
+    "previousYear": 1360
+  },
+  {
+    "month": "Jan 26",
+    "actual": 1240,
+    "plan": 1050,
+    "previousYear": 1340
+  },
+  {
+    "month": "Feb 26",
+    "actual": 1150,
+    "plan": 1040,
+    "previousYear": 1260
+  },
+  {
+    "month": "Mar 26",
+    "actual": 1060,
+    "plan": 1030,
+    "previousYear": 1170
+  },
+  {
+    "month": "Apr 26",
+    "actual": 980,
+    "plan": 1020,
+    "previousYear": 1090
+  },
+  {
+    "month": "May 26",
+    "actual": 1010,
+    "plan": 1010,
+    "previousYear": 1080
+  },
+  {
+    "month": "Jun 26",
+    "actual": 1040,
+    "plan": 1000,
+    "previousYear": 1100
+  },
+  {
+    "month": "Jul 26",
+    "actual": 1150,
+    "plan": 990,
+    "previousYear": 1120
+  },
+  {
+    "month": "Aug 26",
+    "actual": 1120,
+    "plan": 980,
+    "previousYear": 1110
+  },
+  {
+    "month": "Sep 26",
+    "actual": 990,
+    "plan": 970,
+    "previousYear": 1090
+  }
+]

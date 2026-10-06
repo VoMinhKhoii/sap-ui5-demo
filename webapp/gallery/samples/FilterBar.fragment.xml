@@ -1,0 +1,30 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- A simple filter row. Wire the events to your own controller functions. -->
+<layout:Grid defaultSpan="XL3 L3 M6 S12" hSpacing="1" vSpacing="0.5">
+  <VBox>
+    <Label text="Period" />
+    <DateRangeSelection width="100%" displayFormat="MMM yyyy" />
+  </VBox>
+  <VBox>
+    <Label text="Plant / Region" />
+    <MultiComboBox width="100%" items="{/breakdown}" placeholder="All">
+      <core:Item key="{name}" text="{name}" />
+    </MultiComboBox>
+  </VBox>
+  <VBox>
+    <Label text="Status" />
+    <SegmentedButton selectedKey="all" selectionChange=".onStatusFilter" width="100%">
+      <items>
+        <SegmentedButtonItem key="all" text="All" />
+        <SegmentedButtonItem key="Error" text="Critical" />
+        <SegmentedButtonItem key="Success" text="OK" />
+      </items>
+    </SegmentedButton>
+  </VBox>
+  <HBox alignItems="End" justifyContent="End" height="100%">
+    <Button text="Go" type="Emphasized" press=".onActionPress" />
+  </HBox>
+</layout:Grid>
+</core:FragmentDefinition>

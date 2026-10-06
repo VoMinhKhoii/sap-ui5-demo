@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Status texts, numbers and labels. Fiori states: None, Success, Warning, Error, Information. -->
+<HBox wrap="Wrap" alignItems="Center">
+  <ObjectStatus text="Delivered" state="Success" icon="sap-icon://sys-enter-2" class="sapUiSmallMarginEnd" />
+  <ObjectStatus text="In transit" state="Information" icon="sap-icon://shipping-status" class="sapUiSmallMarginEnd" />
+  <ObjectStatus text="At risk" state="Warning" icon="sap-icon://alert" class="sapUiSmallMarginEnd" />
+  <ObjectStatus text="Delayed" state="Error" icon="sap-icon://error" class="sapUiSmallMarginEnd" />
+  <ObjectStatus text="Inverted" state="Error" inverted="true" class="sapUiSmallMarginEnd" />
+  <ObjectNumber number="{ path: '/kpis/0/value', formatter: '.formatter.compactNumber' }" unit="{/kpis/0/unit}" state="Error" emphasized="true" class="sapUiSmallMarginEnd" />
+  <GenericTag text="{/kpis/1/title}" status="{ path: '/kpis/1/state', formatter: '.formatter.valueState' }" design="StatusIconHidden" class="sapUiSmallMarginEnd">
+    <ObjectNumber number="{/kpis/1/value}" unit="{/kpis/1/unit}" emphasized="false" state="{ path: '/kpis/1/state', formatter: '.formatter.valueState' }" />
+  </GenericTag>
+</HBox>
+</core:FragmentDefinition>

@@ -1,0 +1,12 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Launchpad-style tiles with one big number each. Good for a compact KPI strip. -->
+<HBox items="{/kpis}" wrap="Wrap">
+  <GenericTile header="{title}" subheader="{subtitle}" press=".onKpiPress" class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+    <TileContent unit="{unit}" footer="{ parts: ['target', 'unit'], formatter: '.formatter.target' }">
+      <NumericContent value="{ path: 'value', formatter: '.formatter.compactNumber' }" formatterValue="true" valueColor="{state}" indicator="{trend}" icon="{icon}" withMargin="false" />
+    </TileContent>
+  </GenericTile>
+</HBox>
+</core:FragmentDefinition>

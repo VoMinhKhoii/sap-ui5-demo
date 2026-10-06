@@ -1,0 +1,26 @@
+[
+  {
+    "type": "Error",
+    "title": "EUR 612k overdue at CityRide Fleet",
+    "description": "Invoice 1800031 is 38 days overdue. CityRide is our biggest customer in France.",
+    "date": "2026-10-05"
+  },
+  {
+    "type": "Error",
+    "title": "Order blocked by credit check",
+    "description": "Nordic Pedal AB exceeded its credit limit by EUR 84k. Order SO-90014553 cannot ship.",
+    "date": "2026-10-04"
+  },
+  {
+    "type": "Warning",
+    "title": "France 16% below plan",
+    "description": "France is EUR 1.3M behind plan for the fiscal year. Pipeline for Q1 is thin.",
+    "date": "2026-10-02"
+  },
+  {
+    "type": "Success",
+    "title": "Gross margin above target",
+    "description": "Margin is 31.4% vs. 30% target thanks to higher share of premium Trail bikes.",
+    "date": "2026-10-01"
+  }
+]

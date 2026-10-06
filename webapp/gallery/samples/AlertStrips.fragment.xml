@@ -1,0 +1,8 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Message strips: one coloured banner per alert (/alerts). -->
+<VBox items="{/alerts}">
+  <MessageStrip text="{title}: {description}" type="{type}" showIcon="true" showCloseButton="true" class="sapUiTinyMarginBottom" />
+</VBox>
+</core:FragmentDefinition>

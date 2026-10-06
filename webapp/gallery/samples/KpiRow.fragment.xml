@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- All KPIs at once: the grid repeats the card for every entry in /kpis. -->
+<layout:Grid content="{/kpis}" defaultSpan="XL3 L3 M6 S12" hSpacing="1" vSpacing="1" containerQuery="true">
+  <f:Card width="100%">
+    <f:header>
+      <card:NumericHeader
+        title="{title}"
+        subtitle="{subtitle}"
+        number="{ path: 'value', formatter: '.formatter.compactNumber' }"
+        unitOfMeasurement="{unit}"
+        trend="{trend}"
+        state="{state}"
+        details="{ parts: ['target', 'unit'], formatter: '.formatter.target' }"
+        press=".onKpiPress" />
+    </f:header>
+  </f:Card>
+</layout:Grid>
+</core:FragmentDefinition>

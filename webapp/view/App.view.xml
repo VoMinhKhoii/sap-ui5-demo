@@ -1,0 +1,52 @@
+<mvc:View
+  controllerName="workshop.dashboard.controller.App"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:tnt="sap.tnt"
+  displayBlock="true"
+  height="100%"
+>
+  <tnt:ToolPage id="toolPage" sideExpanded="true">
+    <tnt:header>
+      <tnt:ToolHeader>
+        <Button icon="sap-icon://menu2" type="Transparent" press=".onToggleSideNav" tooltip="Toggle navigation">
+          <layoutData><OverflowToolbarLayoutData priority="NeverOverflow" /></layoutData>
+        </Button>
+        <Avatar initials="NM" displaySize="XS" backgroundColor="Accent6" />
+        <Title text="Northwind Motion" level="H1" wrapping="false">
+          <layoutData><OverflowToolbarLayoutData priority="Disappear" /></layoutData>
+        </Title>
+        <Text text="UI5 Dashboard Workshop" wrapping="false">
+          <layoutData><OverflowToolbarLayoutData priority="Disappear" /></layoutData>
+        </Text>
+        <ToolbarSpacer />
+        <Label text="Scenario" labelFor="scenarioSelect" />
+        <Select id="scenarioSelect" selectedKey="{app>/scenario}" items="{app>/scenarios}" change=".onScenarioChange" width="16rem">
+          <core:ListItem key="{app>id}" text="{app>title}" icon="{app>icon}" />
+          <layoutData><OverflowToolbarLayoutData priority="NeverOverflow" /></layoutData>
+        </Select>
+        <Button text="Figma UI Kit" icon="sap-icon://palette" type="Transparent" press=".onOpenFigma" tooltip="SAP S/4HANA Web UI Kit (Figma community)" />
+        <Button text="UI5 Docs" icon="sap-icon://learning-assistant" type="Transparent" press=".onOpenDocs" />
+      </tnt:ToolHeader>
+    </tnt:header>
+    <tnt:sideContent>
+      <tnt:SideNavigation id="sideNav" selectedKey="home" itemSelect=".onNavSelect">
+        <tnt:NavigationList>
+          <tnt:NavigationListItem key="home" text="Start here" icon="sap-icon://home" />
+          <tnt:NavigationListItem key="gallery" text="Component Gallery" icon="sap-icon://grid" />
+          <tnt:NavigationListItem key="api" text="API Explorer" icon="sap-icon://source-code" />
+          <tnt:NavigationListItem key="dashboard" text="My Dashboard" icon="sap-icon://business-objects-experience" />
+        </tnt:NavigationList>
+        <tnt:fixedItem>
+          <tnt:NavigationList>
+            <tnt:NavigationListItem key="solution" text="Reference Solution" icon="sap-icon://hint" />
+          </tnt:NavigationList>
+        </tnt:fixedItem>
+      </tnt:SideNavigation>
+    </tnt:sideContent>
+    <tnt:mainContents>
+      <App id="app" busy="{app>/busy}" busyIndicatorDelay="300" />
+    </tnt:mainContents>
+  </tnt:ToolPage>
+</mvc:View>

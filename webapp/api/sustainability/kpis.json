@@ -1,0 +1,182 @@
+[
+  {
+    "id": "co2Ytd",
+    "title": "CO2e Emissions YTD",
+    "subtitle": "Scope 1 + 2, tonnes",
+    "value": 12480,
+    "unit": "t",
+    "target": 11500,
+    "deltaPercent": -6.8,
+    "trend": "Down",
+    "state": "Critical",
+    "icon": "sap-icon://e-care",
+    "higherIsBetter": false,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 1080
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 1010
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 1040
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 1150
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 1120
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 990
+      }
+    ]
+  },
+  {
+    "id": "renewableShare",
+    "title": "Renewable Energy",
+    "subtitle": "Share of electricity",
+    "value": 68,
+    "unit": "%",
+    "target": 75,
+    "deltaPercent": 5,
+    "trend": "Up",
+    "state": "Critical",
+    "icon": "sap-icon://weather-proofing",
+    "higherIsBetter": true,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 61
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 63
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 64
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 66
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 67
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 68
+      }
+    ]
+  },
+  {
+    "id": "wasteRecycled",
+    "title": "Waste Recycled",
+    "subtitle": "Share of production waste",
+    "value": 91,
+    "unit": "%",
+    "target": 90,
+    "deltaPercent": 1.1,
+    "trend": "Up",
+    "state": "Good",
+    "icon": "sap-icon://journey-change",
+    "higherIsBetter": true,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 88
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 89
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 90
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 90
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 91
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 91
+      }
+    ]
+  },
+  {
+    "id": "energyIntensity",
+    "title": "Energy Intensity",
+    "subtitle": "MWh per 100 vehicles built",
+    "value": 14.2,
+    "unit": "MWh",
+    "target": 15,
+    "deltaPercent": -3.4,
+    "trend": "Down",
+    "state": "Good",
+    "icon": "sap-icon://energy-saving-lightbulb",
+    "higherIsBetter": false,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 15.6
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 15.1
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 14.9
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 14.6
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 14.4
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 14.2
+      }
+    ]
+  }
+]

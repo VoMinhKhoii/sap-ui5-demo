@@ -1,0 +1,75 @@
+<mvc:View
+  controllerName="workshop.dashboard.controller.Home"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:f="sap.f"
+  xmlns:card="sap.f.cards"
+  xmlns:layout="sap.ui.layout"
+  xmlns:mvc="sap.ui.core.mvc"
+>
+  <Page showHeader="false" class="wsPage">
+    <VBox class="wsPageIntro">
+      <Title text="Build a Fiori dashboard in 45 minutes" level="H1" titleStyle="H1" />
+      <Text text="You are on the IT team of {/meta/company}, a European e-bike and e-scooter maker running on SAP. Management wants a dashboard. Pick a scenario at the top right, read the business question, and design the screen that answers it." class="sapUiSmallMarginTop" />
+    </VBox>
+
+    <layout:Grid defaultSpan="XL4 L4 M12 S12" hSpacing="1" vSpacing="1" containerQuery="true" class="sapUiSmallMarginBeginEnd">
+      <f:Card width="100%">
+        <f:layoutData><layout:GridData span="XL8 L8 M12 S12" /></f:layoutData>
+        <f:header><card:Header title="Your scenario: {/meta/title}" subtitle="{/meta/company}" iconSrc="{/meta/icon}" /></f:header>
+        <f:content>
+          <VBox class="sapUiSmallMargin">
+            <Text text="{/meta/description}" />
+            <MessageStrip text="{/meta/question}" type="Information" showIcon="true" customIcon="sap-icon://question-mark" class="sapUiSmallMarginTop" />
+          </VBox>
+        </f:content>
+      </f:Card>
+
+      <f:Card width="100%">
+        <f:header><card:Header title="The challenge" subtitle="45 minutes, teams of 2-3" iconSrc="sap-icon://competitor" /></f:header>
+        <f:content>
+          <List showSeparators="None" width="100%">
+            <StandardListItem title="1. Understand the data" description="API Explorer: what is in kpis, trend, breakdown, items, alerts?" icon="sap-icon://source-code" type="Active" press=".onGoApi" />
+            <StandardListItem title="2. Sketch it" description="What should the manager see first? What is just detail?" icon="sap-icon://draw-rectangle" />
+            <StandardListItem title="3. Build it" description="Copy blocks from the Gallery into Dashboard.view.xml" icon="sap-icon://grid" type="Active" press=".onGoGallery" />
+            <StandardListItem title="4. Pitch it" description="2 minutes: what is the story your dashboard tells?" icon="sap-icon://microphone" />
+          </List>
+        </f:content>
+      </f:Card>
+    </layout:Grid>
+
+    <Title text="Where to go" level="H2" class="sapUiMediumMarginTop sapUiSmallMarginBottom wsSectionTitle" />
+    <HBox wrap="Wrap" class="wsTiles">
+      <GenericTile header="Component Gallery" subheader="28 blocks + 3 page templates" press=".onGoGallery" class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+        <TileContent footer="Start here"><ImageContent src="sap-icon://grid" /></TileContent>
+      </GenericTile>
+      <GenericTile header="API Explorer" subheader="See the JSON behind the dashboard" press=".onGoApi" class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+        <TileContent footer="6 endpoints"><ImageContent src="sap-icon://source-code" /></TileContent>
+      </GenericTile>
+      <GenericTile header="My Dashboard" subheader="Your workspace" press=".onGoDashboard" class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+        <TileContent footer="Dashboard.view.xml"><ImageContent src="sap-icon://business-objects-experience" /></TileContent>
+      </GenericTile>
+      <GenericTile header="Live KPIs" subheader="{/kpis/0/title}" press=".onGoDashboard" class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+        <TileContent unit="{/kpis/0/unit}" footer="{/kpis/0/subtitle}">
+          <NumericContent value="{ path: '/kpis/0/value', formatter: '.formatter.compactNumber' }" formatterValue="true" valueColor="{/kpis/0/state}" indicator="{/kpis/0/trend}" withMargin="false" />
+        </TileContent>
+      </GenericTile>
+    </HBox>
+
+    <Title text="How UI5 XML works (30-second version)" level="H2" class="sapUiMediumMarginTop sapUiSmallMarginBottom wsSectionTitle" />
+    <layout:Grid defaultSpan="XL4 L4 M12 S12" hSpacing="1" vSpacing="1" containerQuery="true" class="sapUiSmallMarginBeginEnd sapUiMediumMarginBottom">
+      <f:Card width="100%">
+        <f:header><card:Header title="Tags are controls" subtitle="Like HTML, but each tag is a UI5 component" iconSrc="sap-icon://tag" /></f:header>
+        <f:content><Text text="&lt;Button text=&quot;Save&quot; /&gt; is sap.m.Button. A prefix picks the library: &lt;f:Card&gt; is sap.f.Card, &lt;mc:RadialMicroChart&gt; is from sap.suite.ui.microchart. All prefixes you need are already declared in Dashboard.view.xml." class="sapUiSmallMargin" /></f:content>
+      </f:Card>
+      <f:Card width="100%">
+        <f:header><card:Header title="\{curly braces\} are data" subtitle="Data binding to the API" iconSrc="sap-icon://chain-link" /></f:header>
+        <f:content><Text text="text=&quot;\{/meta/title\}&quot; reads one value. items=&quot;\{/kpis\}&quot; repeats the child for each entry, and inside it \{title\} means the title of the current KPI. No loops, no innerHTML." class="sapUiSmallMargin" /></f:content>
+      </f:Card>
+      <f:Card width="100%">
+        <f:header><card:Header title="Logic lives in the controller" subtitle="Formatters and event handlers" iconSrc="sap-icon://syntax" /></f:header>
+        <f:content><Text text="press=&quot;.onKpiPress&quot; calls a function in the controller. \{ path: 'value', formatter: '.formatter.compactNumber' \} turns 18400000 into 18.4M. Quick logic: \{= $\{actual\} &gt;= $\{plan\} ? 'Good' : 'Error' \}." class="sapUiSmallMargin" /></f:content>
+      </f:Card>
+    </layout:Grid>
+  </Page>
+</mvc:View>

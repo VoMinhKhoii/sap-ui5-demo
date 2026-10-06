@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>Northwind Motion · UI5 Dashboard Workshop</title>
+  <script
+    id="sap-ui-bootstrap"
+    src="resources/sap-ui-core.js"
+    data-sap-ui-theme="sap_horizon"
+    data-sap-ui-async="true"
+    data-sap-ui-compat-version="edge"
+    data-sap-ui-resource-roots='{ "workshop.dashboard": "./" }'
+    data-sap-ui-on-init="module:sap/ui/core/ComponentSupport"
+  ></script>
+  <style>html, body, body > div { height: 100%; margin: 0; }</style>
+</head>
+<body class="sapUiBody" id="content">
+  <div
+    data-sap-ui-component
+    data-name="workshop.dashboard"
+    data-id="container"
+    data-settings='{ "id": "workshop" }'
+    data-height="100%"
+  ></div>
+</body>
+</html>

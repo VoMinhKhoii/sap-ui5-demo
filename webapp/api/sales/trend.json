@@ -1,0 +1,74 @@
+[
+  {
+    "month": "Oct 25",
+    "actual": 2900,
+    "plan": 3000,
+    "previousYear": 2600
+  },
+  {
+    "month": "Nov 25",
+    "actual": 3400,
+    "plan": 3300,
+    "previousYear": 3000
+  },
+  {
+    "month": "Dec 25",
+    "actual": 4100,
+    "plan": 4000,
+    "previousYear": 3700
+  },
+  {
+    "month": "Jan 26",
+    "actual": 2600,
+    "plan": 2800,
+    "previousYear": 2400
+  },
+  {
+    "month": "Feb 26",
+    "actual": 2800,
+    "plan": 3000,
+    "previousYear": 2500
+  },
+  {
+    "month": "Mar 26",
+    "actual": 3700,
+    "plan": 3900,
+    "previousYear": 3300
+  },
+  {
+    "month": "Apr 26",
+    "actual": 5100,
+    "plan": 5200,
+    "previousYear": 4600
+  },
+  {
+    "month": "May 26",
+    "actual": 5900,
+    "plan": 6000,
+    "previousYear": 5300
+  },
+  {
+    "month": "Jun 26",
+    "actual": 6400,
+    "plan": 6500,
+    "previousYear": 5800
+  },
+  {
+    "month": "Jul 26",
+    "actual": 6000,
+    "plan": 6300,
+    "previousYear": 5600
+  },
+  {
+    "month": "Aug 26",
+    "actual": 4800,
+    "plan": 5300,
+    "previousYear": 4500
+  },
+  {
+    "month": "Sep 26",
+    "actual": 4200,
+    "plan": 4700,
+    "previousYear": 3900
+  }
+]

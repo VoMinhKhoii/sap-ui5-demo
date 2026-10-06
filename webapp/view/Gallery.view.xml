@@ -1,0 +1,26 @@
+<mvc:View
+  controllerName="workshop.dashboard.controller.Gallery"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc"
+>
+  <Page id="galleryPage" showHeader="false" class="wsPage">
+    <VBox class="wsPageIntro">
+      <Title text="Component Gallery" level="H1" titleStyle="H2" />
+      <Text text="Every block below is live and uses the API data of the scenario selected at the top. Click Copy, paste it into webapp/view/Dashboard.view.xml between the 🧩 markers, save and refresh the browser." class="sapUiTinyMarginTop" />
+    </VBox>
+    <IconTabHeader
+      id="categoryTabs"
+      items="{gallery>/categories}"
+      select=".onCategorySelect"
+      backgroundDesign="Transparent"
+      mode="Inline"
+      class="wsCategoryTabs">
+      <items>
+        <IconTabFilter key="{gallery>key}" text="{gallery>title}" icon="{gallery>icon}" />
+      </items>
+    </IconTabHeader>
+    <MessageStrip id="categoryIntro" text="" showIcon="true" type="Information" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop" />
+    <VBox id="sampleContainer" class="wsSamples" />
+  </Page>
+</mvc:View>

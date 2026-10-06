@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Story header: tell the user what this dashboard is about (/meta). -->
+<VBox class="sapUiSmallMargin">
+  <Title text="{/meta/title}" level="H2" titleStyle="H2" />
+  <Text text="{/meta/question}" class="sapUiTinyMarginTop" />
+  <HBox class="sapUiSmallMarginTop">
+    <ObjectStatus text="{= ${/alerts}.length } alerts need attention" state="Error" icon="sap-icon://error" class="sapUiSmallMarginEnd" />
+    <ObjectStatus text="Data as of Oct 2026" state="None" icon="sap-icon://date-time" />
+  </HBox>
+</VBox>
+</core:FragmentDefinition>

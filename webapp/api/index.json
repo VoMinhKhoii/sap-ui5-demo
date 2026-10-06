@@ -1,0 +1,59 @@
+{
+  "company": "Northwind Motion GmbH",
+  "baseUrl": "/api",
+  "scenarios": [
+    {
+      "id": "supply-chain",
+      "title": "Supply Chain & Warehouse",
+      "icon": "sap-icon://shipping-status",
+      "description": "Northwind Motion builds e-bikes and e-scooters in 4 European plants. Battery cells come from Asia, frames from Portugal. Summer 2026 was rough: a key battery supplier slipped and warehouses filled up with half-finished bikes.",
+      "question": "Help the COO answer: are we going to be able to ship the Christmas season, and where exactly is the bottleneck?"
+    },
+    {
+      "id": "sales",
+      "title": "Sales & Order-to-Cash",
+      "icon": "sap-icon://sales-order",
+      "description": "Northwind Motion sells e-bikes and scooters to dealers and fleet customers across Europe. Revenue is seasonal (spring and summer peak) and a few large fleet deals make or break the year.",
+      "question": "Help the Head of Sales answer: will we hit the annual plan, which regions are lagging, and who owes us money?"
+    },
+    {
+      "id": "sustainability",
+      "title": "Sustainability & Carbon",
+      "icon": "sap-icon://e-care",
+      "description": "Northwind Motion committed to cutting CO2e emissions 50% by 2030 (vs. 2023). Every plant reports energy, emissions and waste monthly. Investors now ask for this data next to the financials.",
+      "question": "Help the Chief Sustainability Officer answer: are we on track for the 2030 target, and which plant or initiative needs attention?"
+    }
+  ],
+  "endpoints": [
+    {
+      "path": "/api/{scenario}/meta.json",
+      "returns": "Object",
+      "description": "Titles, labels and the business question for the scenario."
+    },
+    {
+      "path": "/api/{scenario}/kpis.json",
+      "returns": "Array",
+      "description": "4 headline numbers: value, unit, target, trend (Up/Down), state (Good/Critical/Error/Neutral) and a 6-month history."
+    },
+    {
+      "path": "/api/{scenario}/trend.json",
+      "returns": "Array",
+      "description": "12 months: month, actual, plan, previousYear."
+    },
+    {
+      "path": "/api/{scenario}/breakdown.json",
+      "returns": "Array",
+      "description": "One row per plant/region: name, value, target, share (%), state."
+    },
+    {
+      "path": "/api/{scenario}/items.json",
+      "returns": "Array",
+      "description": "Business records for a table: id, title, subtitle, owner, date, amount, currency, quantity, progress (0-100), status, state."
+    },
+    {
+      "path": "/api/{scenario}/alerts.json",
+      "returns": "Array",
+      "description": "Things that need attention: type (Error/Warning/Information/Success), title, description, date."
+    }
+  ]
+}

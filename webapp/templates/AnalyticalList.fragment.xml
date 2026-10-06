@@ -1,0 +1,85 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- TEMPLATE "Analytical list": filters on top, one big chart, then the detail table. -->
+<VBox width="100%">
+  <f:Card width="100%" class="sapUiSmallMarginBottom">
+    <f:content>
+      <layout:Grid defaultSpan="XL3 L3 M6 S12" hSpacing="1" vSpacing="0.5" class="sapUiSmallMargin" width="100%">
+        <VBox><Label text="Period" /><DateRangeSelection width="100%" displayFormat="MMM yyyy" /></VBox>
+        <VBox>
+          <Label text="Plant / Region" />
+          <MultiComboBox width="100%" items="{/breakdown}" placeholder="All"><core:Item key="{name}" text="{name}" /></MultiComboBox>
+        </VBox>
+        <VBox>
+          <Label text="Status" />
+          <SegmentedButton selectedKey="all" width="100%" selectionChange=".onStatusFilter">
+            <items>
+              <SegmentedButtonItem key="all" text="All" />
+              <SegmentedButtonItem key="Error" text="Critical" />
+              <SegmentedButtonItem key="Success" text="OK" />
+            </items>
+          </SegmentedButton>
+        </VBox>
+        <HBox alignItems="End" justifyContent="End" height="100%"><Button text="Go" type="Emphasized" press=".onActionPress" /></HBox>
+      </layout:Grid>
+    </f:content>
+  </f:Card>
+
+  <f:Card width="100%" class="sapUiSmallMarginBottom">
+    <f:header>
+      <card:NumericHeader title="{/meta/trend/title}" subtitle="{/meta/trend/subtitle}" number="{ path: '/trend/11/actual', formatter: '.formatter.compactNumber' }" unitOfMeasurement="{/meta/trend/unit}" details="latest month" />
+    </f:header>
+    <f:content>
+      <viz:VizFrame vizType="combination" width="100%" height="22rem" uiConfig="{applicationSet:'fiori'}" selectData=".onChartSelect">
+        <viz:dataset>
+          <viz.data:FlattenedDataset data="{/trend}">
+            <viz.data:dimensions><viz.data:DimensionDefinition name="Month" value="{month}" /></viz.data:dimensions>
+            <viz.data:measures>
+              <viz.data:MeasureDefinition name="Actual" value="{actual}" />
+              <viz.data:MeasureDefinition name="Plan" value="{plan}" />
+            </viz.data:measures>
+          </viz.data:FlattenedDataset>
+        </viz:dataset>
+        <viz:feeds>
+          <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Actual,Plan" />
+          <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
+        </viz:feeds>
+      </viz:VizFrame>
+    </f:content>
+  </f:Card>
+
+  <f:Card width="100%">
+    <f:content>
+      <Table items="{/items}" autoPopinMode="true" growing="true" growingThreshold="5">
+        <headerToolbar>
+          <OverflowToolbar>
+            <Title text="{/meta/items/title} ({= ${/items}.length })" level="H3" />
+            <ToolbarSpacer />
+            <SearchField width="14rem" search=".onActionPress" />
+            <Button icon="sap-icon://excel-attachment" type="Transparent" tooltip="Export" press=".onActionPress" />
+          </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+          <Column><Text text="{/meta/items/columns/id}" /></Column>
+          <Column><Text text="{/meta/items/columns/title}" /></Column>
+          <Column><Text text="{/meta/items/columns/date}" /></Column>
+          <Column hAlign="End"><Text text="{/meta/items/columns/amount}" /></Column>
+          <Column><Text text="{/meta/items/columns/status}" /></Column>
+        </columns>
+        <items>
+          <ColumnListItem type="Navigation" press=".onItemPress" highlight="{state}">
+            <cells>
+              <Text text="{id}" />
+              <ObjectIdentifier title="{title}" text="{subtitle}" />
+              <Text text="{ path: 'date', formatter: '.formatter.date' }" />
+              <ObjectNumber number="{ parts: ['amount', 'currency'], formatter: '.formatter.currency' }" />
+              <ObjectStatus text="{status}" state="{state}" inverted="true" />
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </f:content>
+  </f:Card>
+</VBox>
+</core:FragmentDefinition>

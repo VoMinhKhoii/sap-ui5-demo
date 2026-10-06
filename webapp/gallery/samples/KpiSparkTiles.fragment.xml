@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- Tiles with a mini line chart of the last 6 months (kpi.history). -->
+<HBox items="{/kpis}" wrap="Wrap">
+  <GenericTile header="{title}" subheader="{ path: 'value', formatter: '.formatter.compactNumber' }" press=".onKpiPress" class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+    <TileContent footer="Last 6 months" unit="{unit}">
+      <mc:LineMicroChart points="{ path: 'history', templateShareable: false }" size="Responsive" color="{state}" showPoints="true" leftBottomLabel="{history/0/period}" rightBottomLabel="{history/5/period}">
+        <mc:points>
+          <mc:LineMicroChartPoint x="{x}" y="{value}" />
+        </mc:points>
+      </mc:LineMicroChart>
+    </TileContent>
+  </GenericTile>
+</HBox>
+</core:FragmentDefinition>

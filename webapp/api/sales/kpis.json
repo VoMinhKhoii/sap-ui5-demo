@@ -1,0 +1,182 @@
+[
+  {
+    "id": "revenueYtd",
+    "title": "Revenue YTD",
+    "subtitle": "Fiscal year Oct 25 - Sep 26",
+    "value": 48600000,
+    "unit": "EUR",
+    "target": 50000000,
+    "deltaPercent": 8.4,
+    "trend": "Up",
+    "state": "Critical",
+    "icon": "sap-icon://lead",
+    "higherIsBetter": true,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 5.1
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 5.9
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 6.4
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 6
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 4.8
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 4.2
+      }
+    ]
+  },
+  {
+    "id": "openOrders",
+    "title": "Open Orders",
+    "subtitle": "Not yet delivered",
+    "value": 1284,
+    "unit": "orders",
+    "target": 1200,
+    "deltaPercent": 3.5,
+    "trend": "Up",
+    "state": "Neutral",
+    "icon": "sap-icon://sales-order",
+    "higherIsBetter": true,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 1102
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 1180
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 1251
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 1310
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 1240
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 1284
+      }
+    ]
+  },
+  {
+    "id": "dso",
+    "title": "Days Sales Outstanding",
+    "subtitle": "How long customers take to pay",
+    "value": 47,
+    "unit": "days",
+    "target": 40,
+    "deltaPercent": 9.3,
+    "trend": "Up",
+    "state": "Error",
+    "icon": "sap-icon://customer-financial-fact-sheet",
+    "higherIsBetter": false,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 39
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 40
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 42
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 43
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 45
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 47
+      }
+    ]
+  },
+  {
+    "id": "grossMargin",
+    "title": "Gross Margin",
+    "subtitle": "Fiscal year to date",
+    "value": 31.4,
+    "unit": "%",
+    "target": 30,
+    "deltaPercent": 1.2,
+    "trend": "Up",
+    "state": "Good",
+    "icon": "sap-icon://loan",
+    "higherIsBetter": true,
+    "history": [
+      {
+        "x": 0,
+        "period": "Apr 26",
+        "value": 29.8
+      },
+      {
+        "x": 1,
+        "period": "May 26",
+        "value": 30.4
+      },
+      {
+        "x": 2,
+        "period": "Jun 26",
+        "value": 31
+      },
+      {
+        "x": 3,
+        "period": "Jul 26",
+        "value": 31.6
+      },
+      {
+        "x": 4,
+        "period": "Aug 26",
+        "value": 31.2
+      },
+      {
+        "x": 5,
+        "period": "Sep 26",
+        "value": 31.4
+      }
+    ]
+  }
+]

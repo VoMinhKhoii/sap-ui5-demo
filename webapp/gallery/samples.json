@@ -1,0 +1,83 @@
+{
+  "categories": [
+    {
+      "key": "layout", "title": "Layout", "icon": "sap-icon://grid",
+      "intro": "Boxes and grids that hold everything else. Start every dashboard with a Grid of Cards.",
+      "samples": [
+        { "id": "LayoutCard", "title": "Card", "description": "The Fiori container. Header on top, any control inside <f:content>.", "data": "/meta", "controls": ["sap.f.Card", "sap.f.cards.Header"] },
+        { "id": "LayoutGrid", "title": "Responsive grid", "description": "12-column grid. Each child gets a span per screen size (XL/L/M/S).", "data": "-", "controls": ["sap.ui.layout.Grid", "sap.ui.layout.GridData"] },
+        { "id": "LayoutTabs", "title": "Tabs", "description": "Split a busy dashboard into views. Counts come from expression binding.", "data": "/items, /alerts", "controls": ["sap.m.IconTabBar", "sap.m.IconTabFilter"] },
+        { "id": "LayoutHeader", "title": "Story header", "description": "Tell the viewer what question this dashboard answers.", "data": "/meta, /alerts", "controls": ["sap.m.Title", "sap.m.ObjectStatus"] }
+      ]
+    },
+    {
+      "key": "kpis", "title": "KPIs", "icon": "sap-icon://kpi-corporate-performance",
+      "intro": "The 3-second answer. Big number, unit, target and a colour that says good or bad.",
+      "samples": [
+        { "id": "KpiCard", "title": "KPI card (single)", "description": "Numeric header card bound to ONE KPI with binding=\"{/kpis/0}\".", "data": "/kpis/0", "controls": ["sap.f.cards.NumericHeader", "sap.f.cards.NumericSideIndicator"] },
+        { "id": "KpiRow", "title": "KPI card row (all)", "description": "Same card, repeated for every KPI by binding the grid content to /kpis.", "data": "/kpis", "controls": ["sap.f.cards.NumericHeader", "sap.ui.layout.Grid"] },
+        { "id": "KpiTiles", "title": "KPI tiles", "description": "Launchpad tiles with a coloured number and trend arrow.", "data": "/kpis", "controls": ["sap.m.GenericTile", "sap.m.NumericContent"] },
+        { "id": "KpiSparkTiles", "title": "Tiles with sparkline", "description": "Each KPI with its last 6 months as a mini line chart.", "data": "/kpis/*/history", "controls": ["sap.m.GenericTile", "sap.suite.ui.microchart.LineMicroChart"] }
+      ]
+    },
+    {
+      "key": "charts", "title": "Charts", "icon": "sap-icon://line-chart",
+      "intro": "Full-size charts (sap.viz). Dimensions = the labels, measures = the numbers, feeds = which goes on which axis.",
+      "samples": [
+        { "id": "ChartLine", "title": "Line: actual vs. plan", "description": "Best for a trend over time.", "data": "/trend", "controls": ["sap.viz.ui5.controls.VizFrame"] },
+        { "id": "ChartColumn", "title": "Column: this year vs. last year", "description": "Compare two series month by month.", "data": "/trend", "controls": ["sap.viz.ui5.controls.VizFrame"] },
+        { "id": "ChartCombo", "title": "Combination: columns + line", "description": "Actual as bars, plan as a line on top.", "data": "/trend", "controls": ["sap.viz.ui5.controls.VizFrame"] },
+        { "id": "ChartBar", "title": "Bar: value vs. target", "description": "Compare categories (plants, regions). Long labels fit better horizontally.", "data": "/breakdown", "controls": ["sap.viz.ui5.controls.VizFrame"] },
+        { "id": "ChartBullet", "title": "Bullet: actual vs. target marker", "description": "One bar per category with its target as a marker.", "data": "/breakdown", "controls": ["sap.viz.ui5.controls.VizFrame"] },
+        { "id": "ChartDonut", "title": "Donut: share of total", "description": "Parts of a whole. Use with 6 slices or fewer.", "data": "/breakdown", "controls": ["sap.viz.ui5.controls.VizFrame"] }
+      ]
+    },
+    {
+      "key": "micro", "title": "Micro charts", "icon": "sap-icon://area-chart",
+      "intro": "Tiny charts that fit in a tile, a list row or a table cell.",
+      "samples": [
+        { "id": "MicroRadial", "title": "Radial", "description": "A single percentage as a ring.", "data": "/breakdown", "controls": ["sap.suite.ui.microchart.RadialMicroChart"] },
+        { "id": "MicroBullet", "title": "Bullet in a list", "description": "Actual vs. target for every KPI.", "data": "/kpis", "controls": ["sap.suite.ui.microchart.BulletMicroChart"] },
+        { "id": "MicroComparison", "title": "Comparison", "description": "A compact ranking of categories.", "data": "/breakdown", "controls": ["sap.suite.ui.microchart.ComparisonMicroChart"] },
+        { "id": "MicroStackedBar", "title": "Stacked bar", "description": "How a total is split, in one line.", "data": "/breakdown", "controls": ["sap.suite.ui.microchart.StackedBarMicroChart"] },
+        { "id": "MicroColumn", "title": "Column trend", "description": "12 months in a small space. Colour computed with expression binding (actual >= plan).", "data": "/trend", "controls": ["sap.suite.ui.microchart.ColumnMicroChart"] }
+      ]
+    },
+    {
+      "key": "tables", "title": "Tables & lists", "icon": "sap-icon://table-view",
+      "intro": "The details behind the numbers. Use highlight and ObjectStatus so problems jump out.",
+      "samples": [
+        { "id": "TableItems", "title": "Responsive table", "description": "Row highlight, progress bar, status and formatted money. Columns pop in on small screens.", "data": "/items, /meta/items", "controls": ["sap.m.Table", "sap.m.ObjectIdentifier", "sap.m.ProgressIndicator", "sap.m.ObjectStatus"] },
+        { "id": "ListObjects", "title": "Object list", "description": "A compact list for a narrow column.", "data": "/items", "controls": ["sap.m.ObjectListItem"] },
+        { "id": "TableBreakdown", "title": "Table with micro chart", "description": "A chart inside every row.", "data": "/breakdown", "controls": ["sap.m.Table", "sap.suite.ui.microchart.BulletMicroChart"] }
+      ]
+    },
+    {
+      "key": "status", "title": "Status & alerts", "icon": "sap-icon://alert",
+      "intro": "Tell the user what needs action. Fiori colours: Success (green), Warning (orange), Error (red), Information (blue).",
+      "samples": [
+        { "id": "AlertStrips", "title": "Message strips", "description": "Banners for alerts.", "data": "/alerts", "controls": ["sap.m.MessageStrip"] },
+        { "id": "AlertNotifications", "title": "Notification list", "description": "An inbox of things to look at, with priority.", "data": "/alerts", "controls": ["sap.m.NotificationListItem"] },
+        { "id": "StatusObjects", "title": "Status building blocks", "description": "ObjectStatus, ObjectNumber and GenericTag.", "data": "/kpis", "controls": ["sap.m.ObjectStatus", "sap.m.ObjectNumber", "sap.m.GenericTag"] },
+        { "id": "StatusProgress", "title": "Progress bars", "description": "Completion per record.", "data": "/items", "controls": ["sap.m.ProgressIndicator"] }
+      ]
+    },
+    {
+      "key": "filters", "title": "Filters", "icon": "sap-icon://filter",
+      "intro": "Let the user slice the data. These are UI only: wire the events to your own controller code if you have time.",
+      "samples": [
+        { "id": "FilterBar", "title": "Filter row", "description": "Date range, multi-select and a segmented button.", "data": "/breakdown", "controls": ["sap.m.DateRangeSelection", "sap.m.MultiComboBox", "sap.m.SegmentedButton"] },
+        { "id": "FilterSearch", "title": "Toolbar with search", "description": "Put it on top of a table or card.", "data": "/meta", "controls": ["sap.m.OverflowToolbar", "sap.m.SearchField"] }
+      ]
+    },
+    {
+      "key": "templates", "title": "Page templates", "icon": "sap-icon://business-objects-experience",
+      "intro": "Whole dashboards. Paste one into the slot in Dashboard.view.xml, then make it yours.",
+      "samples": [
+        { "id": "Overview", "template": true, "title": "Overview", "description": "KPI row, trend + share charts, detail table. The classic.", "data": "everything", "controls": ["sap.f.Card", "sap.viz.ui5.controls.VizFrame", "sap.m.Table"] },
+        { "id": "AnalyticalList", "template": true, "title": "Analytical list", "description": "Filters, one big chart, detail table. For exploring a single measure.", "data": "/trend, /items", "controls": ["sap.viz.ui5.controls.VizFrame", "sap.m.Table"] },
+        { "id": "ExceptionCockpit", "template": true, "title": "Exception cockpit", "description": "Alerts first, then KPIs against target. For people who must act today.", "data": "/alerts, /kpis, /breakdown", "controls": ["sap.m.NotificationListItem", "sap.suite.ui.microchart.BulletMicroChart", "sap.suite.ui.microchart.RadialMicroChart"] }
+      ]
+    }
+  ]
+}
