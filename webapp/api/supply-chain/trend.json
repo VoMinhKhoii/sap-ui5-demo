@@ -1,73 +1,73 @@
 [
   {
     "month": "Oct 25",
-    "actual": 94.1,
+    "actual": 96.3,
     "plan": 95,
     "previousYear": 93
   },
   {
     "month": "Nov 25",
-    "actual": 95.3,
+    "actual": 100,
     "plan": 95,
     "previousYear": 93.8
   },
   {
     "month": "Dec 25",
-    "actual": 92.8,
+    "actual": 96,
     "plan": 95,
     "previousYear": 91.2
   },
   {
     "month": "Jan 26",
-    "actual": 93.5,
+    "actual": 96.2,
     "plan": 95,
     "previousYear": 92.4
   },
   {
     "month": "Feb 26",
-    "actual": 94.9,
+    "actual": 96.3,
     "plan": 95,
     "previousYear": 93.1
   },
   {
     "month": "Mar 26",
-    "actual": 95.6,
+    "actual": 96.2,
     "plan": 95,
     "previousYear": 94
   },
   {
     "month": "Apr 26",
-    "actual": 94.2,
+    "actual": 88,
     "plan": 95,
     "previousYear": 94.5
   },
   {
     "month": "May 26",
-    "actual": 91.7,
+    "actual": 87.5,
     "plan": 95,
     "previousYear": 94.8
   },
   {
     "month": "Jun 26",
-    "actual": 86.4,
+    "actual": 72,
     "plan": 95,
     "previousYear": 93.9
   },
   {
     "month": "Jul 26",
-    "actual": 84.9,
+    "actual": 70,
     "plan": 95,
     "previousYear": 93.2
   },
   {
     "month": "Aug 26",
-    "actual": 89.8,
+    "actual": 80,
     "plan": 95,
     "previousYear": 94.1
   },
   {
     "month": "Sep 26",
-    "actual": 92.3,
+    "actual": 88.9,
     "plan": 95,
     "previousYear": 94.6
   }

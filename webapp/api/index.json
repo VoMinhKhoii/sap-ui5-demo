@@ -6,7 +6,7 @@
       "id": "supply-chain",
       "title": "Supply Chain & Warehouse",
       "icon": "sap-icon://shipping-status",
-      "description": "Northwind Motion builds e-bikes and e-scooters in 4 European plants. Battery cells come from Asia, frames from Portugal. Summer 2026 was rough: a key battery supplier slipped and warehouses filled up with half-finished bikes.",
+      "description": "Northwind Motion builds e-bikes and e-scooters in 4 European plants. Battery packs come from Asia, frames from Portugal. Summer 2026 was rough: a key battery supplier slipped and warehouses filled up with half-finished scooters.",
       "question": "Help the COO answer: are we going to be able to ship the Christmas season, and where exactly is the bottleneck?"
     },
     {
@@ -33,7 +33,7 @@
     {
       "path": "/api/{scenario}/kpis.json",
       "returns": "Array",
-      "description": "4 headline numbers: value, unit, target, trend (Up/Down), state (Good/Critical/Error/Neutral) and a 6-month history."
+      "description": "4 headline numbers: value, unit, target, deltaPercent (change over the last 6 months), trend (Up/Down), state (Good/Critical/Error/Neutral) and a 6-month history."
     },
     {
       "path": "/api/{scenario}/trend.json",

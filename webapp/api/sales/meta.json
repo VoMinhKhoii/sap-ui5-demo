@@ -1,26 +1,26 @@
 {
   "id": "sales",
-  "title": "Sales & Order-to-Cash",
   "company": "Northwind Motion GmbH",
+  "currency": "EUR",
+  "title": "Sales & Order-to-Cash",
   "icon": "sap-icon://sales-order",
   "description": "Northwind Motion sells e-bikes and scooters to dealers and fleet customers across Europe. Revenue is seasonal (spring and summer peak) and a few large fleet deals make or break the year.",
   "question": "Help the Head of Sales answer: will we hit the annual plan, which regions are lagging, and who owes us money?",
-  "currency": "EUR",
   "trend": {
     "title": "Monthly revenue",
-    "subtitle": "Actual vs. plan, EUR thousand",
+    "subtitle": "Billed revenue vs. plan, EUR thousand",
     "unit": "EUR k",
     "actualLabel": "Revenue",
     "planLabel": "Plan"
   },
   "breakdown": {
     "title": "Revenue by region",
-    "subtitle": "Fiscal year to date vs. regional plan",
+    "subtitle": "Fiscal year vs. regional plan, EUR thousand",
     "unit": "EUR k"
   },
   "items": {
     "title": "Open sales orders",
-    "subtitle": "Largest orders not yet fully delivered or paid",
+    "subtitle": "Orders that need attention or are not yet delivered",
     "columns": {
       "id": "Order",
       "title": "Customer",
@@ -28,7 +28,7 @@
       "owner": "Sales rep",
       "date": "Delivery date",
       "amount": "Net value",
-      "progress": "Fulfilled",
+      "progress": "Delivered",
       "status": "Status"
     }
   }

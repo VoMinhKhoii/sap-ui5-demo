@@ -17,12 +17,12 @@
         <Title text="Northwind Motion" level="H1" wrapping="false">
           <layoutData><OverflowToolbarLayoutData priority="Disappear" /></layoutData>
         </Title>
-        <Text text="UI5 Dashboard Workshop" wrapping="false">
+        <Text text="UI5 Dashboard Workshop · fictional data" wrapping="false">
           <layoutData><OverflowToolbarLayoutData priority="Disappear" /></layoutData>
         </Text>
         <ToolbarSpacer />
-        <Label text="Scenario" labelFor="scenarioSelect" />
-        <Select id="scenarioSelect" selectedKey="{app>/scenario}" items="{app>/scenarios}" change=".onScenarioChange" width="16rem">
+        <Label text="Scenario" labelFor="scenarioSelect" visible="{app>/multiScenario}" />
+        <Select id="scenarioSelect" selectedKey="{app>/scenario}" items="{app>/scenarios}" change=".onScenarioChange" width="16rem" visible="{app>/multiScenario}">
           <core:ListItem key="{app>id}" text="{app>title}" icon="{app>icon}" />
           <layoutData><OverflowToolbarLayoutData priority="NeverOverflow" /></layoutData>
         </Select>
@@ -36,7 +36,8 @@
           <tnt:NavigationListItem key="home" text="Start here" icon="sap-icon://home" />
           <tnt:NavigationListItem key="gallery" text="Component Gallery" icon="sap-icon://grid" />
           <tnt:NavigationListItem key="api" text="API Explorer" icon="sap-icon://source-code" />
-          <tnt:NavigationListItem key="dashboard" text="My Dashboard" icon="sap-icon://business-objects-experience" />
+          <tnt:NavigationListItem key="playground" text="Query Playground" icon="sap-icon://simulate" />
+          <tnt:NavigationListItem key="workspace" text="Open my app" icon="sap-icon://action" selectable="false" href="workspace/index.html" target="_blank" />
         </tnt:NavigationList>
         <tnt:fixedItem>
           <tnt:NavigationList>

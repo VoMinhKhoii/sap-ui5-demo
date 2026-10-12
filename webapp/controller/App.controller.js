@@ -23,7 +23,11 @@ sap.ui.define([
     },
 
     onNavSelect: function (event) {
-      this.navTo(event.getParameter("item").getKey());
+      const key = event.getParameter("item").getKey();
+      // "Open my app" is a plain link to workspace/index.html (new tab), not a route.
+      if (this.getRouter().getRoute(key)) {
+        this.navTo(key);
+      }
     },
 
     onToggleSideNav: function () {

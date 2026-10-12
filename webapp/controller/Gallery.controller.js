@@ -1,7 +1,6 @@
 sap.ui.define([
   "./BaseController",
   "sap/ui/model/json/JSONModel",
-  "sap/m/MessageToast",
   "sap/m/VBox",
   "sap/m/HBox",
   "sap/m/Title",
@@ -12,10 +11,12 @@ sap.ui.define([
   "sap/m/OverflowToolbar",
   "sap/m/ToolbarSpacer",
   "sap/m/ObjectStatus",
+  "sap/m/Page",
+  "sap/m/MessageStrip",
   "sap/f/Card",
   "sap/f/cards/Header"
-], function (BaseController, JSONModel, MessageToast, VBox, HBox, Title, Text, Button, Link, Label,
-  OverflowToolbar, ToolbarSpacer, ObjectStatus, Card, CardHeader) {
+], function (BaseController, JSONModel, VBox, HBox, Title, Text, Button, Link, Label,
+  OverflowToolbar, ToolbarSpacer, ObjectStatus, Page, MessageStrip, Card, CardHeader) {
   "use strict";
 
   const DOCS = "https://ui5.sap.com/#/api/";
@@ -58,9 +59,11 @@ sap.ui.define([
 
     /** One gallery entry: live preview, copy button, code, data + docs info. */
     _createSampleCard: function (sample) {
-      const fragmentName = (sample.template ? "workshop.dashboard.templates." : "workshop.dashboard.gallery.samples.") + sample.id;
-      const preview = new VBox({ renderType: "Bare" }).addStyleClass("wsPreview");
-      const codeBox = new VBox({ visible: !sample.template, renderType: "Bare" }).addStyleClass("wsCode");
+      const folder = sample.template ? "workshop.dashboard.templates." : sample.shell ? "workshop.dashboard.gallery.shells." : "workshop.dashboard.gallery.samples.";
+      const fragmentName = folder + sample.id;
+      const preview = new VBox({ renderType: "Bare" }).addStyleClass("wsPreview").toggleStyleClass("wsPreviewShell", !!sample.shell);
+      const codeBox = new VBox({ visible: !sample.template && !sample.shell, renderType: "Bare" }).addStyleClass("wsCode");
+      const copyHint = sample.target || "Paste it into a 🧩 slot of a page in webapp/workspace/view/, save, press F5 in your app.";
       const state = { code: "" };
 
       const docsBox = new HBox({ wrap: "Wrap", alignItems: "Center" });
@@ -75,7 +78,7 @@ sap.ui.define([
           new ObjectStatus({ title: "Data" }).setText(sample.data).applySettings({ icon: "sap-icon://database", state: "Information" }),
           new ToolbarSpacer(),
           new Button({
-            text: sample.template ? "Show code" : "Hide code",
+            text: codeBox.getVisible() ? "Hide code" : "Show code",
             type: "Transparent",
             icon: "sap-icon://source-code",
             press: function (event) {
@@ -87,7 +90,7 @@ sap.ui.define([
             text: "Copy XML",
             type: "Emphasized",
             icon: "sap-icon://copy",
-            press: function () { this._copy(state.code); }.bind(this)
+            press: function () { this.copyText(state.code, "Copied! " + copyHint); }.bind(this)
           })
         ]
       });
@@ -104,6 +107,9 @@ sap.ui.define([
         controls.forEach(function (c) {
           preview.addItem(c);
           this.styleCharts(c);
+          if (sample.shell) {
+            this._addPagePlaceholder(c);
+          }
         }, this);
       }.bind(this)).catch(function (error) {
         preview.addItem(new Text({ text: "Could not render: " + error.message }));
@@ -117,6 +123,15 @@ sap.ui.define([
       });
 
       return card;
+    },
+
+    /** Preview only: shows where the pages go inside an app shell (the copied code keeps an empty App). */
+    _addPagePlaceholder: function (shell) {
+      shell.findAggregatedObjects(true, function (c) { return c.isA("sap.m.App"); }).forEach(function (app) {
+        app.addPage(new Page({ showHeader: false, content: [
+          new MessageStrip({ text: "Your pages (Page1, Page2, Page3) appear here.", showIcon: true }).addStyleClass("sapUiSmallMargin")
+        ] }));
+      });
     },
 
     /** Reads the fragment file and strips the <core:FragmentDefinition> wrapper so it can be pasted into a view. */
@@ -145,23 +160,6 @@ sap.ui.define([
           }).setValue(code));
         });
       });
-    },
-
-    _copy: function (text) {
-      const done = function () {
-        MessageToast.show("Copied! Paste it into webapp/view/Dashboard.view.xml between the 🧩 markers.");
-      };
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(done);
-        return;
-      }
-      const area = document.createElement("textarea");
-      area.value = text;
-      document.body.appendChild(area);
-      area.select();
-      document.execCommand("copy");
-      document.body.removeChild(area);
-      done();
     }
   });
 });

@@ -1,0 +1,60 @@
+{
+  "@odata.context": "$metadata#A_Plant",
+  "value": [
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "CityName": "Hamburg",
+      "Country": "DE",
+      "PlantCategoryText": "Production plant",
+      "MainProducts": "E-bikes Urban and Trail",
+      "StockTargetValue": 6000000,
+      "CO2eBudgetTonnes": 3800,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "CityName": "Leipzig",
+      "Country": "DE",
+      "PlantCategoryText": "Production plant",
+      "MainProducts": "Cargo e-bikes, frame paint shop",
+      "StockTargetValue": 5000000,
+      "CO2eBudgetTonnes": 3700,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "CityName": "Brno",
+      "Country": "CZ",
+      "PlantCategoryText": "Production plant",
+      "MainProducts": "E-scooters",
+      "StockTargetValue": 2800000,
+      "CO2eBudgetTonnes": 2400,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "CityName": "Porto",
+      "Country": "PT",
+      "PlantCategoryText": "Production plant",
+      "MainProducts": "Wheels and components",
+      "StockTargetValue": 2400000,
+      "CO2eBudgetTonnes": 1200,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "CityName": "Valencia",
+      "Country": "ES",
+      "PlantCategoryText": "Distribution center",
+      "MainProducts": "Distribution and spare parts",
+      "StockTargetValue": 1300000,
+      "CO2eBudgetTonnes": 400,
+      "Currency": "EUR"
+    }
+  ]
+}

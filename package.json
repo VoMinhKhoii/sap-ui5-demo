@@ -2,12 +2,14 @@
   "name": "ui5-dashboard-workshop",
   "version": "1.0.0",
   "private": true,
-  "description": "SAPUI5 / Fiori dashboard workshop kit: component gallery, mock ERP API and starter app",
+  "description": "SAPUI5 / Fiori workshop kit: business cases, S/4HANA-style mock ERP data, query playground, component gallery and a starter app",
   "scripts": {
     "start": "ui5 serve --port 8080 --open index.html",
     "build": "ui5 build --clean-dest",
+    "build:static": "node tools/build-static.js",
     "lint": "ui5lint",
     "verify": "npm run lint && npm run build",
+    "test": "node tools/test-q.js",
     "generate-api": "node tools/generate-api.js"
   },
   "devDependencies": {

@@ -1,14 +1,14 @@
 [
   {
     "type": "Error",
-    "title": "EUR 612k overdue at CityRide Fleet",
-    "description": "Invoice 1800031 is 38 days overdue. CityRide is our biggest customer in France.",
+    "title": "EUR 612k overdue at Kiloverde Fleet SAS",
+    "description": "Invoice 90000428 is 38 days overdue. Kiloverde is our biggest customer in France and has not placed an order since June.",
     "date": "2026-10-05"
   },
   {
     "type": "Error",
     "title": "Order blocked by credit check",
-    "description": "Nordic Pedal AB exceeded its credit limit by EUR 84k. Order SO-90014553 cannot ship.",
+    "description": "Fjordtrail AB is EUR 84k over its credit limit. Order 5000595 cannot ship.",
     "date": "2026-10-04"
   },
   {
@@ -20,7 +20,7 @@
   {
     "type": "Success",
     "title": "Gross margin above target",
-    "description": "Margin is 31.4% vs. 30% target thanks to higher share of premium Trail bikes.",
+    "description": "Margin is 30.3% vs. 30% target, helped by a higher share of premium Trail bikes.",
     "date": "2026-10-01"
   }
 ]

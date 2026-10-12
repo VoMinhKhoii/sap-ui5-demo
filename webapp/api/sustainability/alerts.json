@@ -2,13 +2,13 @@
   {
     "type": "Error",
     "title": "Leipzig 32% over emission budget",
-    "description": "The gas-fired paint oven replacement slipped by 6 months. Leipzig alone explains the whole group overshoot.",
+    "description": "The gas-fired paint oven was due to be replaced in April and slipped to December. Leipzig alone explains the whole group overshoot.",
     "date": "2026-10-05"
   },
   {
     "type": "Warning",
     "title": "Renewable share below 75% target",
-    "description": "Brno still buys grey electricity until the power purchase agreement starts in November.",
+    "description": "Group share is 68.6%. Brno still buys grey electricity until its power purchase agreement starts in November.",
     "date": "2026-10-03"
   },
   {
@@ -20,7 +20,7 @@
   {
     "type": "Success",
     "title": "Hamburg solar plant live",
-    "description": "The 2.1 MWp rooftop installation covers 18% of Hamburg's electricity since July.",
+    "description": "The 2.1 MWp rooftop installation has been running since July and lifted Hamburg's renewable share to 88%.",
     "date": "2026-07-01"
   }
 ]

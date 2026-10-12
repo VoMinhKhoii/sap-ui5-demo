@@ -1,0 +1,30 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:tnt="sap.tnt">
+<!-- App shell: header bar + tabs across the top, full width for your pages. Each tab's key opens a page (page1, page2, page3). Keep App id="app". -->
+<tnt:ToolPage id="toolPage">
+  <tnt:header>
+    <tnt:ToolHeader>
+      <Avatar initials="NM" displaySize="XS" backgroundColor="Accent6" />
+      <Title text="My app: rename me" level="H1" wrapping="false" />
+      <ToolbarSpacer />
+      <Text text="{/case/client}" wrapping="false" />
+    </tnt:ToolHeader>
+  </tnt:header>
+  <tnt:subHeader>
+    <tnt:ToolHeader>
+      <IconTabHeader id="nav" selectedKey="page1" select=".onNavSelect" mode="Inline" backgroundDesign="Transparent">
+        <items>
+          <IconTabFilter key="page1" text="The answer" />
+          <IconTabFilter key="page2" text="Page 2" />
+          <IconTabFilter key="page3" text="Page 3" />
+        </items>
+        <layoutData><OverflowToolbarLayoutData priority="NeverOverflow" shrinkable="true" /></layoutData>
+      </IconTabHeader>
+    </tnt:ToolHeader>
+  </tnt:subHeader>
+  <tnt:mainContents>
+    <App id="app" />
+  </tnt:mainContents>
+</tnt:ToolPage>
+</core:FragmentDefinition>

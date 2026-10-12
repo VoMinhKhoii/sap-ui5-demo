@@ -28,7 +28,7 @@ Text goes into an **attribute** (`text="..."`), not between tags.
 <Button>                     <!-- no prefix = sap.m -->
 ```
 
-`Dashboard.view.xml` already declares all of these at the top. Keep them there.
+Your page files in `webapp/workspace/view/` already declare all of these at the top. Keep them there.
 
 ## 3. Lowercase tags are slots (aggregations)
 
@@ -109,16 +109,21 @@ The API's `state` fields already use these values. Convert between the two with
 
 The `values` in the feeds must match the `name` of a dimension or measure **exactly**.
 
-## 9. Layout: the 12-column grid
+## 9. Layout: rows of cards
 
 ```xml
-<layout:Grid defaultSpan="XL6 L6 M12 S12" hSpacing="1" vSpacing="1">
-  <f:Card> <f:layoutData><layout:GridData span="XL8 L8 M12 S12" /></f:layoutData> ... </f:Card>
-  <f:Card> <f:layoutData><layout:GridData span="XL4 L4 M12 S12" /></f:layoutData> ... </f:Card>
-</layout:Grid>
+<HBox class="wsRow" renderType="Bare">   <!-- one row -->
+  <f:Card class="wsWide"> ... </f:Card>  <!-- twice as wide as the others -->
+  <f:Card> ... </f:Card>
+  <f:Card> ... </f:Card>                  <!-- cards share the row: 2/4 + 1/4 + 1/4 -->
+</HBox>
+<HBox class="wsRow" renderType="Bare">   <!-- next row -->
+  <f:Card> ... </f:Card>                  <!-- alone = full width -->
+</HBox>
 ```
 
-`L8` means 8 of 12 columns on a large screen. Use `S12` so phones get full width.
+Need exact widths? The 12-column `layout:Grid` (Gallery → Layout → Responsive grid) gives each card a
+`span` per screen size, e.g. `span="XL8 L8 M12 S12"` = 8 of 12 columns on large screens.
 
 ## 10. Event handlers you can use right away
 
@@ -129,6 +134,46 @@ The `values` in the feeds must match the `name` of a dimension or measure **exac
 | `.onChartSelect` | a VizFrame `selectData` |
 | `.onActionPress` | any `Button press` |
 | `.onStatusFilter` | a `SegmentedButton selectionChange` |
+| `.onNavSelect` | a `SideNavigation itemSelect` or `IconTabHeader select`: opens the page named by the item's `key` |
+| `.onShowDetail` / `.onCloseDetail` | a list in the List → detail layout |
 
-To write your own, add a function in `webapp/controller/Dashboard.controller.js`. There's an
+To write your own, add a function in `webapp/workspace/controller/Page.controller.js`. There's an
 example at the bottom of that file.
+
+## 11. Your data: `data.js` and `q()`
+
+`webapp/workspace/data.js` turns the raw ERP tables into exactly the rows your chart needs. Every
+entry becomes a path:
+
+```js
+return {
+  revenueByRegion: q("A_BillingDocument")     // start from an ERP table
+    .join("A_Customer")                        // add the customer's fields (key found automatically)
+    .groupBy("SalesRegion")                    // one row per region
+    .sum("TotalNetAmount")                     // → { name, value, count, share }
+    .sortBy("value", "desc"),
+};
+```
+
+```xml
+<viz.data:FlattenedDataset data="{/revenueByRegion}">   <!-- {name} and {value} inside -->
+```
+
+| Step | Does |
+| --- | --- |
+| `.where("Country", "FR")` · `.where("NetAmount", ">", 1000)` · `.where(r => …)` | keep matching rows |
+| `.join("A_Product")` | add fields of a related table (one → one) |
+| `.include("A_SalesOrder", "orders")` | add related rows as a list (one → many), bind `items="{orders}"` |
+| `.compute("Margin", r => r.NetAmount - r.Cost)` | add a calculated field |
+| `.groupBy("Plant")` | one row per value: `{ name, value, count, share }` |
+| `.byMonth("SalesOrderDate")` | one row per month: `{ month: "Jun 26", period: "2026-06", value }` |
+| `.sum("X")` `.avg` `.min` `.max` `.count()` `.percent("IsOk")` `.ratio("A", "B")` | the number (the first one is called `value`) |
+| `.sum("Budget", "target")` | a second number with its own name |
+| `.sum("CO2", "Leipzig", r => r.PlantName === "Leipzig")` | sum only some rows: one series per condition |
+| `.merge(q(…).groupBy(…).sum(…), "plan")` | add the value of another query, matched by name or month |
+| `.withState()` / `.withState(false)` | `state` (Good/Critical/Error) from `value` vs. `target`, higher/lower is better |
+| `.sortBy("value", "desc").top(5)` · `.first()` | sort, cut, or keep one row as an object (`{/q/Field}`) |
+
+Without `groupBy`/`byMonth`, `sum`/`count`/… give **one number**: bind it as `{/myNumber}`.
+Try everything in the **Query Playground** first. It shows the result as a chart and copies both
+the `data.js` line and the matching XML.

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>My App · Northwind Motion</title>
+  <script
+    id="sap-ui-bootstrap"
+    src="../resources/sap-ui-core.js"
+    data-sap-ui-theme="sap_horizon"
+    data-sap-ui-async="true"
+    data-sap-ui-compat-version="edge"
+    data-sap-ui-resource-roots='{ "workshop.dashboard": "../" }'
+    data-sap-ui-xx-component-preload="off"
+    data-sap-ui-on-init="module:sap/ui/core/ComponentSupport"
+  ></script>
+  <style>
+    html, body, .wsRoot { height: 100%; margin: 0; }
+    .wsFictional { position: fixed; right: 0.5rem; bottom: 0.25rem; z-index: 10; font: 0.7rem/1.4 sans-serif; color: #556b82; background: rgba(255, 255, 255, 0.85); padding: 0 0.4rem; border-radius: 0.25rem; pointer-events: none; }
+  </style>
+</head>
+<body class="sapUiBody" id="content">
+  <div class="wsRoot"
+    data-sap-ui-component
+    data-name="workshop.dashboard.workspace"
+    data-id="container"
+    data-settings='{ "id": "workspace" }'
+    data-height="100%"
+  ></div>
+  <div class="wsFictional">Fictional data · Northwind Motion is not a real company</div>
+</body>
+</html>

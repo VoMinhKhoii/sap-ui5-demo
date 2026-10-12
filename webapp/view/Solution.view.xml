@@ -1,9 +1,11 @@
-<!-- Reference solution for facilitators: one possible answer, built only from Gallery blocks. -->
+<!-- Reference solution for facilitators: one answer page per sustainability case, built only with what students have:
+     the queries in webapp/solution/queries.js (same format as workspace/data.js), gallery blocks and rows of cards. -->
 <mvc:View
   controllerName="workshop.dashboard.controller.Solution"
   xmlns="sap.m"
   xmlns:core="sap.ui.core"
   xmlns:mvc="sap.ui.core.mvc"
+  xmlns:code="sap.ui.codeeditor"
   xmlns:f="sap.f"
   xmlns:card="sap.f.cards"
   xmlns:layout="sap.ui.layout"
@@ -13,133 +15,199 @@
   xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
   displayBlock="true"
 >
-  <f:DynamicPage id="solutionPage" headerExpanded="true" showFooter="false">
-    <f:title>
-      <f:DynamicPageTitle>
-        <f:heading><Title text="{/meta/title}" level="H1" /></f:heading>
-        <f:expandedContent><Text text="{/meta/company} · Reference solution" /></f:expandedContent>
-        <f:snappedContent><Text text="{/meta/question}" /></f:snappedContent>
-        <f:actions>
-          <Button text="Share" icon="sap-icon://share-2" type="Transparent" press=".onActionPress" />
-          <Button text="Export" icon="sap-icon://excel-attachment" type="Transparent" press=".onActionPress" />
-        </f:actions>
-      </f:DynamicPageTitle>
-    </f:title>
-    <f:header>
-      <f:DynamicPageHeader pinnable="true">
-        <VBox>
-          <Text text="{/meta/question}" />
-          <MessageStrip text="{/alerts/0/title}: {/alerts/0/description}" type="{/alerts/0/type}" showIcon="true" class="sapUiSmallMarginTop" />
-        </VBox>
-      </f:DynamicPageHeader>
-    </f:header>
-    <f:content>
-      <VBox width="100%">
-        <layout:Grid content="{/kpis}" defaultSpan="XL3 L3 M6 S12" hSpacing="1" vSpacing="1" containerQuery="true">
-          <f:Card width="100%">
-            <f:header>
-              <card:NumericHeader
-                title="{title}" subtitle="{subtitle}" iconSrc="{icon}"
-                number="{ path: 'value', formatter: '.formatter.compactNumber' }" unitOfMeasurement="{unit}"
-                trend="{trend}" state="{state}" press=".onKpiPress">
-                <card:sideIndicators>
-                  <card:NumericSideIndicator title="Target" number="{ path: 'target', formatter: '.formatter.compactNumber' }" unit="{unit}" />
-                  <card:NumericSideIndicator title="Change" number="{ path: 'deltaPercent', formatter: '.formatter.delta' }" />
-                </card:sideIndicators>
-              </card:NumericHeader>
-            </f:header>
-            <f:content>
-              <mc:LineMicroChart points="{ path: 'history', templateShareable: false }" size="Responsive" height="3.5rem" width="100%" color="{state}" showPoints="true"
-                leftBottomLabel="{history/0/period}" rightBottomLabel="{history/5/period}" class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom">
-                <mc:points><mc:LineMicroChartPoint x="{x}" y="{value}" /></mc:points>
-              </mc:LineMicroChart>
-            </f:content>
-          </f:Card>
-        </layout:Grid>
+  <Page showHeader="false" class="wsPage">
+    <VBox class="wsPageIntro">
+      <Title text="Reference solution" level="H1" titleStyle="H2" />
+      <Text text="For facilitators: one possible answer page per case. Everything here is built with the same tools the teams have: q() queries (webapp/solution/queries.js), gallery blocks and rows of cards." class="sapUiTinyMarginTop" />
+      <MessageStrip id="solutionError" type="Warning" showIcon="true" visible="false" class="sapUiSmallMarginTop"
+        text="The reference solution uses the sustainability tables. Switch the sustainability scenario on in webapp/config.json." />
+    </VBox>
 
-        <layout:Grid defaultSpan="XL12 L12 M12 S12" hSpacing="1" vSpacing="1" containerQuery="true" class="sapUiSmallMarginTop">
-          <f:Card width="100%">
-            <f:layoutData><layout:GridData span="XL8 L8 M12 S12" /></f:layoutData>
-            <f:header><card:Header title="{/meta/trend/title}" subtitle="{/meta/trend/subtitle}" iconSrc="sap-icon://line-chart" /></f:header>
-            <f:content>
-              <viz:VizFrame vizType="combination" width="100%" height="22rem" uiConfig="{applicationSet:'fiori'}" selectData=".onChartSelect">
-                <viz:dataset>
-                  <viz.data:FlattenedDataset data="{/trend}">
-                    <viz.data:dimensions><viz.data:DimensionDefinition name="Month" value="{month}" /></viz.data:dimensions>
-                    <viz.data:measures>
-                      <viz.data:MeasureDefinition name="Actual" value="{actual}" />
-                      <viz.data:MeasureDefinition name="Plan" value="{plan}" />
-                    </viz.data:measures>
-                  </viz.data:FlattenedDataset>
-                </viz:dataset>
-                <viz:feeds>
-                  <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Actual,Plan" />
-                  <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
-                </viz:feeds>
-              </viz:VizFrame>
-            </f:content>
-          </f:Card>
+    <IconTabBar expandable="false" headerMode="Inline" headerBackgroundDesign="Transparent" backgroundDesign="Transparent" applyContentPadding="false" class="wsSolutionTabs">
+      <items>
 
-          <f:Card width="100%" height="100%">
-            <f:layoutData><layout:GridData span="XL4 L4 M12 S12" /></f:layoutData>
-            <f:header><card:Header title="Needs attention" subtitle="Sorted by severity" iconSrc="sap-icon://alert" statusText="{= ${/alerts}.length } alerts" /></f:header>
-            <f:content>
-              <List items="{/alerts}" showSeparators="Inner" width="100%">
-                <!-- ui5lint-disable-next-line no-deprecated-api -->
-                <NotificationListItem title="{title}" description="{description}" datetime="{ path: 'date', formatter: '.formatter.date' }" priority="{ path: 'type', formatter: '.formatter.priority' }" showCloseButton="false" truncate="true" />
-              </List>
-            </f:content>
-          </f:Card>
+        <!-- ================= Case 1: The recycling claim ================= -->
+        <IconTabFilter text="1. The recycling claim" key="recycling">
+          <VBox class="wsSolution">
+            <Title text="No. Leipzig recycles only { path: '/recyclingLeipzig', formatter: '.formatter.compactNumber' }% of its waste. The other four plants are above 90%." level="H2" wrapping="true" />
+            <Text text="The group average ({ path: '/recyclingGroup', formatter: '.formatter.compactNumber' }%) hides it. The sentence in the annual report is not true as written." class="sapUiTinyMarginTop" />
+            <HBox class="wsRow" renderType="Bare">
+              <f:Card class="wsWide">
+                <f:header><card:Header title="Recycling rate per plant" subtitle="Bar = rate, marker = the 90% claim" iconSrc="sap-icon://horizontal-bullet-chart" /></f:header>
+                <f:content>
+                  <viz:VizFrame vizType="bullet" width="100%" height="18rem" uiConfig="{applicationSet:'fiori'}">
+                    <viz:dataset>
+                      <viz.data:FlattenedDataset data="{/recyclingByPlant}">
+                        <viz.data:dimensions><viz.data:DimensionDefinition name="Plant" value="{name}" /></viz.data:dimensions>
+                        <viz.data:measures>
+                          <viz.data:MeasureDefinition name="Recycled %" value="{value}" />
+                          <viz.data:MeasureDefinition name="Claim %" value="{target}" />
+                        </viz.data:measures>
+                      </viz.data:FlattenedDataset>
+                    </viz:dataset>
+                    <viz:feeds>
+                      <viz.feeds:FeedItem uid="actualValues" type="Measure" values="Recycled %" />
+                      <viz.feeds:FeedItem uid="targetValues" type="Measure" values="Claim %" />
+                      <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Plant" />
+                    </viz:feeds>
+                  </viz:VizFrame>
+                </f:content>
+              </f:Card>
+              <f:Card>
+                <f:header><card:Header title="Plant by plant" subtitle="Red = below the 90% claim" iconSrc="sap-icon://list" /></f:header>
+                <f:content>
+                  <List items="{/recyclingByPlant}" showSeparators="Inner" width="100%">
+                    <StandardListItem title="{name}" info="{ path: 'value', formatter: '.formatter.compactNumber' }%" infoState="{valueState}" highlight="{valueState}" />
+                  </List>
+                </f:content>
+              </f:Card>
+            </HBox>
+            <HBox class="wsRow" renderType="Bare">
+              <f:Card>
+                <f:header><card:Header title="Recommended action" subtitle="For the Head of Communications" iconSrc="sap-icon://action" /></f:header>
+                <f:content>
+                  <VBox class="sapUiSmallMargin">
+                    <MessageStrip type="Warning" showIcon="true"
+                      text="Change the sentence before Monday: &quot;The group recycles { path: '/recyclingGroup', formatter: '.formatter.compactNumber' }% of its waste; four of our five plants are above 90%.&quot; Ask Leipzig for a plan to reach 90% next year." />
+                  </VBox>
+                </f:content>
+              </f:Card>
+            </HBox>
+          </VBox>
+        </IconTabFilter>
 
-          <f:Card width="100%">
-            <f:layoutData><layout:GridData span="XL5 L5 M12 S12" /></f:layoutData>
-            <f:header><card:Header title="{/meta/breakdown/title}" subtitle="{/meta/breakdown/subtitle}" iconSrc="sap-icon://horizontal-bullet-chart" /></f:header>
-            <f:content>
-              <viz:VizFrame vizType="bullet" width="100%" height="22rem" uiConfig="{applicationSet:'fiori'}" selectData=".onChartSelect">
-                <viz:dataset>
-                  <viz.data:FlattenedDataset data="{/breakdown}">
-                    <viz.data:dimensions><viz.data:DimensionDefinition name="Name" value="{name}" /></viz.data:dimensions>
-                    <viz.data:measures>
-                      <viz.data:MeasureDefinition name="Actual" value="{value}" />
-                      <viz.data:MeasureDefinition name="Target" value="{target}" />
-                    </viz.data:measures>
-                  </viz.data:FlattenedDataset>
-                </viz:dataset>
-                <viz:feeds>
-                  <viz.feeds:FeedItem uid="actualValues" type="Measure" values="Actual" />
-                  <viz.feeds:FeedItem uid="targetValues" type="Measure" values="Target" />
-                  <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Name" />
-                </viz:feeds>
-              </viz:VizFrame>
-            </f:content>
-          </f:Card>
+        <!-- ================= Case 2: The renewable gap ================= -->
+        <IconTabFilter text="2. The renewable gap" key="renewable">
+          <VBox class="wsSolution">
+            <Title text="It's Brno, not Hamburg. Without Brno we would already be at { path: '/renewableWithoutBrno', formatter: '.formatter.compactNumber' }% renewable." level="H2" wrapping="true" />
+            <Text text="Brno buys grey electricity, so only a third of its power is renewable. Hamburg's solar roof works: its share jumped when it went live in July." class="sapUiTinyMarginTop" />
+            <HBox class="wsRow" renderType="Bare">
+              <f:Card>
+                <f:header><card:Header title="Today" subtitle="Share of renewable electricity, fiscal year" iconSrc="sap-icon://energy-saving-lightbulb" /></f:header>
+                <f:content>
+                  <HBox class="sapUiSmallMargin" wrap="Wrap">
+                    <VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                      <Label text="All plants" />
+                      <NumericContent value="{ path: '/renewableGroup', formatter: '.formatter.compactNumber' }" scale="%" valueColor="Critical" withMargin="false" />
+                    </VBox>
+                    <VBox class="sapUiSmallMarginBottom">
+                      <Label text="All plants except Brno" />
+                      <NumericContent value="{ path: '/renewableWithoutBrno', formatter: '.formatter.compactNumber' }" scale="%" valueColor="Good" withMargin="false" />
+                    </VBox>
+                  </HBox>
+                </f:content>
+              </f:Card>
+              <f:Card class="wsWide">
+                <f:header><card:Header title="Renewable share per plant" subtitle="Bar = share, marker = 75% target" iconSrc="sap-icon://horizontal-bullet-chart" /></f:header>
+                <f:content>
+                  <viz:VizFrame vizType="bullet" width="100%" height="16rem" uiConfig="{applicationSet:'fiori'}">
+                    <viz:dataset>
+                      <viz.data:FlattenedDataset data="{/renewableByPlant}">
+                        <viz.data:dimensions><viz.data:DimensionDefinition name="Plant" value="{name}" /></viz.data:dimensions>
+                        <viz.data:measures>
+                          <viz.data:MeasureDefinition name="Renewable %" value="{value}" />
+                          <viz.data:MeasureDefinition name="Target %" value="{target}" />
+                        </viz.data:measures>
+                      </viz.data:FlattenedDataset>
+                    </viz:dataset>
+                    <viz:feeds>
+                      <viz.feeds:FeedItem uid="actualValues" type="Measure" values="Renewable %" />
+                      <viz.feeds:FeedItem uid="targetValues" type="Measure" values="Target %" />
+                      <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Plant" />
+                    </viz:feeds>
+                  </viz:VizFrame>
+                </f:content>
+              </f:Card>
+            </HBox>
+            <HBox class="wsRow" renderType="Bare">
+              <f:Card class="wsWide">
+                <f:header><card:Header title="Hamburg's solar roof works" subtitle="Hamburg renewable share per month, %" iconSrc="sap-icon://line-chart" /></f:header>
+                <f:content>
+                  <viz:VizFrame vizType="line" width="100%" height="14rem" uiConfig="{applicationSet:'fiori'}">
+                    <viz:dataset>
+                      <viz.data:FlattenedDataset data="{/hamburgRenewableByMonth}">
+                        <viz.data:dimensions><viz.data:DimensionDefinition name="Month" value="{month}" /></viz.data:dimensions>
+                        <viz.data:measures><viz.data:MeasureDefinition name="Hamburg %" value="{value}" /></viz.data:measures>
+                      </viz.data:FlattenedDataset>
+                    </viz:dataset>
+                    <viz:feeds>
+                      <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Hamburg %" />
+                      <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
+                    </viz:feeds>
+                  </viz:VizFrame>
+                </f:content>
+              </f:Card>
+              <f:Card>
+                <f:header><card:Header title="Recommended action" subtitle="For the investor update" iconSrc="sap-icon://action" /></f:header>
+                <f:content>
+                  <VBox class="sapUiSmallMargin">
+                    <Text text="Report the gap as Brno-only and temporary. Brno's &quot;{/brnoProject/InitiativeName}&quot; goes live on { path: '/brnoProject/PlannedGoLiveDate', formatter: '.formatter.date' } and is {/brnoProject/ProgressPercent}% done." />
+                    <ObjectStatus text="{/brnoProject/StatusText}" state="Success" inverted="true" class="sapUiSmallMarginTop" />
+                  </VBox>
+                </f:content>
+              </f:Card>
+            </HBox>
+          </VBox>
+        </IconTabFilter>
 
-          <f:Card width="100%">
-            <f:layoutData><layout:GridData span="XL7 L7 M12 S12" /></f:layoutData>
-            <f:header><card:Header title="{/meta/items/title}" subtitle="{/meta/items/subtitle}" iconSrc="sap-icon://table-view" /></f:header>
-            <f:content>
-              <Table items="{ path: '/items', sorter: { path: 'state', descending: false } }" autoPopinMode="true">
-                <columns>
-                  <Column><Text text="{/meta/items/columns/title}" /></Column>
-                  <Column hAlign="End"><Text text="{/meta/items/columns/amount}" /></Column>
-                  <Column width="9rem"><Text text="{/meta/items/columns/progress}" /></Column>
-                  <Column><Text text="{/meta/items/columns/status}" /></Column>
-                </columns>
-                <items>
-                  <ColumnListItem type="Navigation" press=".onItemPress" highlight="{state}">
-                    <cells>
-                      <ObjectIdentifier title="{title}" text="{subtitle} · {owner}" />
-                      <ObjectNumber number="{ parts: ['amount', 'currency'], formatter: '.formatter.currency' }" />
-                      <ProgressIndicator percentValue="{progress}" displayValue="{progress}%" state="{state}" />
-                      <ObjectStatus text="{status}" state="{state}" inverted="true" />
-                    </cells>
-                  </ColumnListItem>
-                </items>
-              </Table>
-            </f:content>
-          </f:Card>
-        </layout:Grid>
-      </VBox>
-    </f:content>
-  </f:DynamicPage>
+        <!-- ================= Case 3: The CO2 overshoot ================= -->
+        <IconTabFilter text="3. The CO2 overshoot" key="co2">
+          <VBox class="wsSolution">
+            <Title text="It's Leipzig, not Porto. Leipzig is {= ${/co2Leipzig/value} - ${/co2Leipzig/target} } t over its budget, more than the whole group overshoot of {= ${/co2Group/value} - ${/co2Group/target} } t." level="H2" wrapping="true" />
+            <Text text="Leipzig was exactly on budget until March. From April its budget assumed the new electric paint oven, but that project is late." class="sapUiTinyMarginTop" />
+            <HBox class="wsRow" renderType="Bare">
+              <f:Card class="wsWide">
+                <f:header><card:Header title="Leipzig per month" subtitle="CO2e vs. budget, tonnes. The gap opens in April." iconSrc="sap-icon://line-chart" /></f:header>
+                <f:content>
+                  <viz:VizFrame vizType="line" width="100%" height="18rem" uiConfig="{applicationSet:'fiori'}">
+                    <viz:dataset>
+                      <viz.data:FlattenedDataset data="{/leipzigByMonth}">
+                        <viz.data:dimensions><viz.data:DimensionDefinition name="Month" value="{month}" /></viz.data:dimensions>
+                        <viz.data:measures>
+                          <viz.data:MeasureDefinition name="CO2e" value="{value}" />
+                          <viz.data:MeasureDefinition name="Budget" value="{budget}" />
+                        </viz.data:measures>
+                      </viz.data:FlattenedDataset>
+                    </viz:dataset>
+                    <viz:feeds>
+                      <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="CO2e,Budget" />
+                      <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
+                    </viz:feeds>
+                  </viz:VizFrame>
+                </f:content>
+              </f:Card>
+              <f:Card>
+                <f:header><card:Header title="Every plant vs. its budget" subtitle="Porto is under budget" iconSrc="sap-icon://list" /></f:header>
+                <f:content>
+                  <List items="{/co2ByPlant}" showSeparators="Inner" width="100%">
+                    <StandardListItem title="{name}" description="Budget { path: 'target', formatter: '.formatter.compactNumber' } t"
+                      info="{ path: 'value', formatter: '.formatter.compactNumber' } t" infoState="{valueState}" highlight="{valueState}" />
+                  </List>
+                </f:content>
+              </f:Card>
+            </HBox>
+            <HBox class="wsRow" renderType="Bare">
+              <f:Card>
+                <f:header><card:Header title="Recommended action" subtitle="For the board, Friday" iconSrc="sap-icon://action" /></f:header>
+                <f:content>
+                  <VBox class="sapUiSmallMargin">
+                    <Text text="&quot;{/leipzigOven/InitiativeName}&quot; was planned for { path: '/leipzigOven/OriginalGoLiveDate', formatter: '.formatter.date' } and now goes live on { path: '/leipzigOven/PlannedGoLiveDate', formatter: '.formatter.date' } ({/leipzigOven/ProgressPercent}% done). Every month of delay costs about {/leipzigOven/ExpectedCO2eSavingTonnesPerMonth} t of CO2e." />
+                    <MessageStrip type="Error" showIcon="true" class="sapUiSmallMarginTop"
+                      text="Decision for the board: speed up the paint-oven project (extra budget or a temporary electric oven), and tell investors the overshoot has one cause with an end date." />
+                  </VBox>
+                </f:content>
+              </f:Card>
+            </HBox>
+          </VBox>
+        </IconTabFilter>
+
+        <IconTabFilter text="The code" key="code">
+          <VBox class="wsSolution">
+            <Text text="The queries behind all three pages. Same format as webapp/workspace/data.js." />
+            <VBox id="codeBox" class="sapUiSmallMarginTop" />
+          </VBox>
+        </IconTabFilter>
+      </items>
+    </IconTabBar>
+  </Page>
 </mvc:View>

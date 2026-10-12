@@ -27,7 +27,10 @@ sap.ui.define([], function () {
     },
 
     loadIndex: function () {
-      return getJson(BASE + "/index.json");
+      if (!this._index) {
+        this._index = getJson(BASE + "/index.json");
+      }
+      return this._index;
     },
 
     /** Calls every endpoint of a scenario and returns { meta, kpis, trend, breakdown, items, alerts }. */
@@ -38,6 +41,57 @@ sap.ui.define([], function () {
         const data = {};
         ENDPOINTS.forEach(function (endpoint, i) { data[endpoint] = results[i]; });
         return data;
+      });
+    },
+
+    /**
+     * Which scenarios are switched on: webapp/config.json, or ?scenarios=all / ?scenarios=sales,sustainability in the URL.
+     * @returns {Promise<string[]>} scenario ids
+     */
+    loadConfig: function () {
+      if (!this._config) {
+        const fromUrl = new URLSearchParams(window.location.search).get("scenarios");
+        this._config = Promise.all([getJson(sap.ui.require.toUrl("workshop/dashboard/config.json")), this.loadIndex()]).then(function (results) {
+          const all = results[1].scenarios.map(function (s) { return s.id; });
+          const wanted = fromUrl === "all" ? all : fromUrl ? fromUrl.split(",") : results[0].scenarios;
+          return all.filter(function (id) { return wanted.indexOf(id) > -1; });
+        });
+      }
+      return this._config;
+    },
+
+    /** Loads the ERP tables of the switched-on scenarios: { index, db: { ZI_PlantEmissions: [...], ... } }. Cached. */
+    loadErp: function () {
+      if (!this._erp) {
+        this._erp = Promise.all([getJson(BASE + "/erp/index.json"), this.loadConfig()]).then(function (results) {
+          const scenarios = results[1];
+          const index = Object.assign({}, results[0], {
+            entities: results[0].entities.filter(function (e) {
+              return e.scenarios.some(function (s) { return scenarios.indexOf(s) > -1; });
+            })
+          });
+          const names = index.entities.map(function (e) { return e.name; });
+          index.relations = index.relations.filter(function (r) { return names.indexOf(r.from) > -1 && names.indexOf(r.to) > -1; });
+          return Promise.all(index.entities.map(function (entity) {
+            return getJson(BASE + "/erp/" + entity.name + ".json");
+          })).then(function (results) {
+            const db = {};
+            index.entities.forEach(function (entity, i) { db[entity.name] = results[i].value; });
+            return { index: index, db: db };
+          });
+        });
+      }
+      return this._erp;
+    },
+
+    erpUrl: function (entity) {
+      return BASE + "/erp/" + entity + ".json";
+    },
+
+    /** The cases of the switched-on scenarios. */
+    loadCases: function () {
+      return Promise.all([getJson(BASE + "/cases.json"), this.loadConfig()]).then(function (results) {
+        return results[0].filter(function (c) { return results[1].indexOf(c.scenario) > -1; });
       });
     },
 

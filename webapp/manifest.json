@@ -101,9 +101,9 @@
           "target": "api"
         },
         {
-          "name": "dashboard",
-          "pattern": "dashboard",
-          "target": "dashboard"
+          "name": "playground",
+          "pattern": "playground",
+          "target": "playground"
         },
         {
           "name": "solution",
@@ -127,9 +127,9 @@
           "name": "ApiExplorer",
           "level": 2
         },
-        "dashboard": {
-          "id": "dashboard",
-          "name": "Dashboard",
+        "playground": {
+          "id": "playground",
+          "name": "Playground",
           "level": 2
         },
         "solution": {

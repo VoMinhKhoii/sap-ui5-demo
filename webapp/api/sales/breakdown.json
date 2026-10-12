@@ -1,14 +1,14 @@
 [
   {
     "name": "DACH",
-    "value": 19800,
-    "target": 19500,
+    "value": 19777,
+    "target": 19499,
     "state": "Good",
     "share": 40.7
   },
   {
     "name": "Benelux",
-    "value": 9400,
+    "value": 9396,
     "target": 9000,
     "state": "Good",
     "share": 19.3
@@ -16,28 +16,28 @@
   {
     "name": "Nordics",
     "value": 7300,
-    "target": 7500,
+    "target": 7501,
     "state": "Critical",
     "share": 15
   },
   {
     "name": "France",
-    "value": 6900,
-    "target": 8200,
+    "value": 6908,
+    "target": 8201,
     "state": "Error",
     "share": 14.2
   },
   {
     "name": "Iberia",
-    "value": 3400,
-    "target": 3800,
-    "state": "Critical",
+    "value": 3396,
+    "target": 3798,
+    "state": "Error",
     "share": 7
   },
   {
     "name": "UK & Ireland",
-    "value": 1800,
-    "target": 2000,
+    "value": 1803,
+    "target": 1999,
     "state": "Critical",
     "share": 3.7
   }

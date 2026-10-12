@@ -12,7 +12,8 @@ sap.ui.define([
       if (value === undefined || value === null || value === "") {
         return "";
       }
-      return new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(value);
+      // Below 1000, compact notation would round to 2 significant digits (87.49 -> "87"), so use plain 1-decimal numbers.
+      return new Intl.NumberFormat("en", Math.abs(value) < 1000 ? { maximumFractionDigits: 1 } : { notation: "compact", maximumFractionDigits: 1 }).format(value);
     },
 
     /** 284000, "EUR" -> "€284,000" */
