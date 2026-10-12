@@ -2,12 +2,22 @@
   "categories": [
     {
       "key": "layout", "title": "Layout", "icon": "sap-icon://grid",
-      "intro": "Boxes and grids that hold everything else. Start every dashboard with a Grid of Cards.",
+      "intro": "What holds everything else. Start with rows of cards: one row per idea, cards in a row share the width.",
       "samples": [
+        { "id": "LayoutRow", "title": "Row of cards", "description": "The easiest layout: cards in a row share the width. Add a card and the others make room.", "data": "-", "controls": ["sap.m.HBox", "sap.f.Card"] },
         { "id": "LayoutCard", "title": "Card", "description": "The Fiori container. Header on top, any control inside <f:content>.", "data": "/meta", "controls": ["sap.f.Card", "sap.f.cards.Header"] },
-        { "id": "LayoutGrid", "title": "Responsive grid", "description": "12-column grid. Each child gets a span per screen size (XL/L/M/S).", "data": "-", "controls": ["sap.ui.layout.Grid", "sap.ui.layout.GridData"] },
+        { "id": "LayoutGrid", "title": "Responsive grid (advanced)", "description": "12-column grid for exact widths. Each child gets a span per screen size (XL/L/M/S).", "data": "-", "controls": ["sap.ui.layout.Grid", "sap.ui.layout.GridData"] },
         { "id": "LayoutTabs", "title": "Tabs", "description": "Split a busy dashboard into views. Counts come from expression binding.", "data": "/items, /alerts", "controls": ["sap.m.IconTabBar", "sap.m.IconTabFilter"] },
         { "id": "LayoutHeader", "title": "Story header", "description": "Tell the viewer what question this dashboard answers.", "data": "/meta, /alerts", "controls": ["sap.m.Title", "sap.m.ObjectStatus"] }
+      ]
+    },
+    {
+      "key": "shells", "title": "App shells", "icon": "sap-icon://header",
+      "intro": "The frame around your pages. A shell goes into workspace/view/App.view.xml (replace everything between the 🧩 SHELL markers). The List → detail layout replaces a whole page.",
+      "samples": [
+        { "id": "SideNav", "shell": true, "title": "Side navigation", "description": "Header bar and a collapsible sidebar. This is what your app starts with.", "data": "/case", "controls": ["sap.tnt.ToolPage", "sap.tnt.SideNavigation"], "target": "Paste it into workspace/view/App.view.xml, replacing everything between the 🧩 SHELL markers." },
+        { "id": "TopTabs", "shell": true, "title": "Tabs on top", "description": "Header bar with tabs underneath. Full width for your charts.", "data": "/case", "controls": ["sap.tnt.ToolPage", "sap.m.IconTabHeader"], "target": "Paste it into workspace/view/App.view.xml, replacing everything between the 🧩 SHELL markers." },
+        { "id": "ListDetail", "shell": true, "title": "Page layout: List → detail", "description": "Pick a plant on the left, see its months and initiatives on the right. Uses {/plants} from data.js.", "data": "/plants", "controls": ["sap.f.FlexibleColumnLayout", "sap.m.ObjectListItem", "sap.m.IconTabBar"], "target": "Paste it into a page (e.g. workspace/view/Page2.view.xml), replacing everything between the 🧩 PAGE markers." }
       ]
     },
     {
@@ -72,7 +82,7 @@
     },
     {
       "key": "templates", "title": "Page templates", "icon": "sap-icon://business-objects-experience",
-      "intro": "Whole dashboards. Paste one into the slot in Dashboard.view.xml, then make it yours.",
+      "intro": "Whole dashboards. Paste one into the 🧩 MORE slot of a page in workspace/view/, then make it yours.",
       "samples": [
         { "id": "Overview", "template": true, "title": "Overview", "description": "KPI row, trend + share charts, detail table. The classic.", "data": "everything", "controls": ["sap.f.Card", "sap.viz.ui5.controls.VizFrame", "sap.m.Table"] },
         { "id": "AnalyticalList", "template": true, "title": "Analytical list", "description": "Filters, one big chart, detail table. For exploring a single measure.", "data": "/trend, /items", "controls": ["sap.viz.ui5.controls.VizFrame", "sap.m.Table"] },

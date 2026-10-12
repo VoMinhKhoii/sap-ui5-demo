@@ -31,7 +31,7 @@
     "name": "Valencia DC",
     "value": 480,
     "target": 400,
-    "state": "Critical",
+    "state": "Error",
     "share": 3.8
   }
 ]

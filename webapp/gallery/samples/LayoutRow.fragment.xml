@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+  xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+<!-- A row of cards. Cards share the width equally; add or remove a card and the others adjust.
+     class="wsWide" makes a card twice as wide. On a narrow screen the cards wrap below each other. -->
+<HBox class="wsRow" renderType="Bare">
+  <f:Card class="wsWide">
+    <f:header><card:Header title="Wide card" subtitle="class=&quot;wsWide&quot;: twice as wide" iconSrc="sap-icon://bar-chart" /></f:header>
+    <f:content><Text text="Put your main chart here." class="sapUiSmallMargin" /></f:content>
+  </f:Card>
+  <f:Card>
+    <f:header><card:Header title="Card" subtitle="An equal share of the row" iconSrc="sap-icon://list" /></f:header>
+    <f:content><Text text="Put a list or a micro chart here." class="sapUiSmallMargin" /></f:content>
+  </f:Card>
+  <f:Card>
+    <f:header><card:Header title="Card" subtitle="An equal share of the row" iconSrc="sap-icon://alert" /></f:header>
+    <f:content><Text text="Put alerts or a KPI here." class="sapUiSmallMargin" /></f:content>
+  </f:Card>
+</HBox>
+</core:FragmentDefinition>

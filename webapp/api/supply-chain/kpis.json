@@ -3,10 +3,10 @@
     "id": "inventoryValue",
     "title": "Inventory Value",
     "subtitle": "All plants, today",
-    "value": 18400000,
+    "value": 18399684,
     "unit": "EUR",
-    "target": 16000000,
-    "deltaPercent": 6.2,
+    "target": 17500000,
+    "deltaPercent": 8.2,
     "trend": "Up",
     "state": "Critical",
     "icon": "sap-icon://product",
@@ -15,27 +15,27 @@
       {
         "x": 0,
         "period": "Apr 26",
-        "value": 15.1
+        "value": 17
       },
       {
         "x": 1,
         "period": "May 26",
-        "value": 15.6
+        "value": 17.1
       },
       {
         "x": 2,
         "period": "Jun 26",
-        "value": 16.3
+        "value": 17.5
       },
       {
         "x": 3,
         "period": "Jul 26",
-        "value": 17.2
+        "value": 17.8
       },
       {
         "x": 4,
         "period": "Aug 26",
-        "value": 17.9
+        "value": 18
       },
       {
         "x": 5,
@@ -48,10 +48,10 @@
     "id": "onTimeDelivery",
     "title": "On-time Delivery",
     "subtitle": "Supplier PO lines, Sep 26",
-    "value": 92.3,
+    "value": 88.9,
     "unit": "%",
     "target": 95,
-    "deltaPercent": 2.8,
+    "deltaPercent": 1,
     "trend": "Up",
     "state": "Critical",
     "icon": "sap-icon://shipping-status",
@@ -60,88 +60,88 @@
       {
         "x": 0,
         "period": "Apr 26",
-        "value": 94.2
+        "value": 88
       },
       {
         "x": 1,
         "period": "May 26",
-        "value": 91.7
+        "value": 87.5
       },
       {
         "x": 2,
         "period": "Jun 26",
-        "value": 86.4
+        "value": 72
       },
       {
         "x": 3,
         "period": "Jul 26",
-        "value": 84.9
+        "value": 70
       },
       {
         "x": 4,
         "period": "Aug 26",
-        "value": 89.8
+        "value": 80
       },
       {
         "x": 5,
         "period": "Sep 26",
-        "value": 92.3
+        "value": 88.9
       }
     ]
   },
   {
-    "id": "warehouseUtilization",
-    "title": "Warehouse Utilization",
-    "subtitle": "Average across 5 sites",
-    "value": 87,
-    "unit": "%",
-    "target": 85,
-    "deltaPercent": 4.1,
+    "id": "lateDeliveries",
+    "title": "Late PO Lines",
+    "subtitle": "Open lines past their due date",
+    "value": 3,
+    "unit": "lines",
+    "target": 0,
+    "deltaPercent": 0,
     "trend": "Up",
-    "state": "Critical",
-    "icon": "sap-icon://building",
+    "state": "Error",
+    "icon": "sap-icon://past",
     "higherIsBetter": false,
     "history": [
       {
         "x": 0,
         "period": "Apr 26",
-        "value": 78
+        "value": 0
       },
       {
         "x": 1,
         "period": "May 26",
-        "value": 80
+        "value": 2
       },
       {
         "x": 2,
         "period": "Jun 26",
-        "value": 82
+        "value": 4
       },
       {
         "x": 3,
         "period": "Jul 26",
-        "value": 84
+        "value": 6
       },
       {
         "x": 4,
         "period": "Aug 26",
-        "value": 85
+        "value": 1
       },
       {
         "x": 5,
         "period": "Sep 26",
-        "value": 87
+        "value": 3
       }
     ]
   },
   {
     "id": "stockOuts",
     "title": "Stock-outs",
-    "subtitle": "Materials with zero stock",
+    "subtitle": "Material/plant pairs with zero stock",
     "value": 7,
     "unit": "materials",
     "target": 0,
-    "deltaPercent": 40,
+    "deltaPercent": 250,
     "trend": "Up",
     "state": "Error",
     "icon": "sap-icon://alert",

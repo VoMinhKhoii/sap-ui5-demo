@@ -1,0 +1,131 @@
+<!--
+  ╔══════════════════════════════════════════════════════════════════════╗
+  ║  PAGE 1: THE ANSWER TO YOUR CASE (required).                          ║
+  ║  Three zones: the finding (one sentence) → the evidence (charts) →   ║
+  ║  the action you recommend. Replace the placeholder texts.            ║
+  ║                                                                      ║
+  ║  1. Gallery (tab 1) → "Copy XML" → paste between a pair of 🧩 markers. ║
+  ║  2. Your own numbers: write a query in data.js, bind {/yourQuery}.   ║
+  ║  3. Save, press F5. Something broke? F12 → Console.                  ║
+  ║                                                                      ║
+  ║  Data: {/case/…} your case · {/yourQuery} from data.js ·             ║
+  ║        {/kpis} {/trend} {/breakdown} {/items} {/alerts} ready-made    ║
+  ╚══════════════════════════════════════════════════════════════════════╝
+-->
+<mvc:View
+  controllerName="workshop.dashboard.workspace.controller.Page"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:f="sap.f"
+  xmlns:card="sap.f.cards"
+  xmlns:layout="sap.ui.layout"
+  xmlns:mc="sap.suite.ui.microchart"
+  xmlns:viz="sap.viz.ui5.controls"
+  xmlns:viz.data="sap.viz.ui5.data"
+  xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+  displayBlock="true"
+  height="100%"
+>
+<!-- 🧩 PAGE START (a page layout from Gallery → App shells replaces everything down to PAGE END) -->
+<f:DynamicPage id="page1Content" headerExpanded="true" showFooter="false">
+
+  <f:title>
+    <f:DynamicPageTitle>
+      <f:heading>
+        <Title text="{/case/title}" level="H1" wrapping="true" />
+      </f:heading>
+      <f:expandedContent>
+        <Text text="For: {/case/client} · {/case/deadline}" />
+      </f:expandedContent>
+      <f:snappedContent>
+        <Text text="{/case/question}" />
+      </f:snappedContent>
+    </f:DynamicPageTitle>
+  </f:title>
+
+  <!-- ZONE 1: THE FINDING. One sentence a manager understands in 3 seconds. -->
+  <f:header>
+    <f:DynamicPageHeader pinnable="true">
+      <VBox>
+        <!-- 🧩 FINDING START (Gallery → Layout → Story header) -->
+        <Title text="Your finding in one sentence. Example: It's Leipzig, not Porto." level="H2" wrapping="true" />
+        <Text text="One line of proof with a number. Question: {/case/question}" class="sapUiTinyMarginTop" />
+        <!-- 🧩 FINDING END -->
+      </VBox>
+    </f:DynamicPageHeader>
+  </f:header>
+
+  <f:content>
+    <VBox width="100%">
+      <!--
+        LAYOUT = ROWS OF CARDS. Each <HBox class="wsRow" renderType="Bare"> ... </HBox> is one row.
+        - Cards in a row share its width equally: 1 card = full width, 2 = halves, 3 = thirds.
+        - Another card next to the others: copy a whole <f:Card> ... </f:Card> into the same row.
+        - A new row: copy a whole <HBox class="wsRow" ...> ... </HBox> block.
+        - One card twice as wide as its neighbours: add class="wsWide" to that card.
+        - On a narrow screen the cards wrap below each other by themselves.
+      -->
+
+      <!-- 🧩 KPIs START (Gallery → KPIs) -->
+
+      <!-- 🧩 KPIs END -->
+
+      <!-- ROW: THE EVIDENCE. The chart that proves the finding (wide) and the reason behind it. -->
+      <HBox class="wsRow" renderType="Bare">
+        <f:Card class="wsWide">
+          <f:header>
+            <card:Header title="Evidence A: rename me" subtitle="What does this chart prove?" iconSrc="sap-icon://bar-chart" />
+          </f:header>
+          <f:content>
+            <VBox width="100%" class="sapUiSmallMargin">
+              <!-- 🧩 EVIDENCE A START (Query Playground → Copy XML, or Gallery → Charts) -->
+              <Text text="Paste a chart here" />
+              <!-- 🧩 EVIDENCE A END -->
+            </VBox>
+          </f:content>
+        </f:Card>
+
+        <f:Card>
+          <f:header>
+            <card:Header title="Evidence B: rename me" subtitle="Why did it happen?" iconSrc="sap-icon://detail-view" />
+          </f:header>
+          <f:content>
+            <VBox width="100%" class="sapUiSmallMargin">
+              <!-- 🧩 EVIDENCE B START (Gallery → Micro charts, Tables & lists, Status & alerts) -->
+              <Text text="Paste a list, table or micro chart here" />
+              <!-- 🧩 EVIDENCE B END -->
+            </VBox>
+          </f:content>
+        </f:Card>
+      </HBox>
+
+      <!-- ROW: THE ACTION. What should the manager decide or do this week? -->
+      <HBox class="wsRow" renderType="Bare">
+        <f:Card>
+          <f:header>
+            <card:Header title="Recommended action" subtitle="What should they do this week?" iconSrc="sap-icon://action" />
+          </f:header>
+          <f:content>
+            <VBox width="100%" class="sapUiSmallMargin">
+              <!-- 🧩 ACTION START -->
+              <MessageStrip text="Write your recommendation here, with the number it is based on." type="Information" showIcon="true" />
+              <HBox class="sapUiSmallMarginTop">
+                <Button text="Approve" type="Emphasized" press=".onActionPress" class="sapUiTinyMarginEnd" />
+                <Button text="Ask for details" press=".onActionPress" />
+              </HBox>
+              <!-- 🧩 ACTION END -->
+            </VBox>
+          </f:content>
+        </f:Card>
+      </HBox>
+
+      <!-- 🧩 MORE START (more cards, or Gallery → Page templates) -->
+
+      <!-- 🧩 MORE END -->
+
+    </VBox>
+  </f:content>
+</f:DynamicPage>
+<!-- 🧩 PAGE END -->
+</mvc:View>

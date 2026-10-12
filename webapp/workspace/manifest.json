@@ -1,0 +1,94 @@
+{
+  "_version": "2.0.0",
+  "sap.app": {
+    "id": "workshop.dashboard.workspace",
+    "type": "application",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "My App",
+    "description": "The team's own app: shell, pages and data queries"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "workshop.dashboard.workspace.view.App",
+      "type": "XML",
+      "id": "shell"
+    },
+    "dependencies": {
+      "minUI5Version": "1.136.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.tnt": {},
+        "sap.ui.layout": {},
+        "sap.suite.ui.microchart": {},
+        "sap.viz": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "../css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "View",
+        "viewType": "XML",
+        "path": "workshop.dashboard.workspace.view",
+        "controlId": "app",
+        "controlAggregation": "pages"
+      },
+      "routes": [
+        {
+          "name": "page1",
+          "pattern": "",
+          "target": "page1"
+        },
+        {
+          "name": "page2",
+          "pattern": "page2",
+          "target": "page2"
+        },
+        {
+          "name": "page3",
+          "pattern": "page3",
+          "target": "page3"
+        }
+      ],
+      "targets": {
+        "page1": {
+          "id": "page1",
+          "name": "Page1",
+          "level": 1
+        },
+        "page2": {
+          "id": "page2",
+          "name": "Page2",
+          "level": 1
+        },
+        "page3": {
+          "id": "page3",
+          "name": "Page3",
+          "level": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,485 @@
+{
+  "@odata.context": "$metadata#ZI_StockValueHistory",
+  "value": [
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2025-10",
+      "StockValue": 5634000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2025-11",
+      "StockValue": 5629000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2025-12",
+      "StockValue": 5411000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2026-01",
+      "StockValue": 5598000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2026-02",
+      "StockValue": 5725000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2026-03",
+      "StockValue": 5810000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2026-04",
+      "StockValue": 5875000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2026-05",
+      "StockValue": 5924000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2026-06",
+      "StockValue": 5928000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2026-07",
+      "StockValue": 6035000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2026-08",
+      "StockValue": 6165000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "YearMonth": "2026-09",
+      "StockValue": 6200000,
+      "StockTargetValue": 6000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2025-10",
+      "StockValue": 4848000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2025-11",
+      "StockValue": 4901000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2025-12",
+      "StockValue": 4846000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2026-01",
+      "StockValue": 4874000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2026-02",
+      "StockValue": 4897000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2026-03",
+      "StockValue": 4842000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2026-04",
+      "StockValue": 4834000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2026-05",
+      "StockValue": 4727000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2026-06",
+      "StockValue": 4831000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2026-07",
+      "StockValue": 4864000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2026-08",
+      "StockValue": 4760000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "YearMonth": "2026-09",
+      "StockValue": 4800000,
+      "StockTargetValue": 5000000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2025-10",
+      "StockValue": 2729000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2025-11",
+      "StockValue": 2748000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2025-12",
+      "StockValue": 2670000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2026-01",
+      "StockValue": 2757000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2026-02",
+      "StockValue": 2835000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2026-03",
+      "StockValue": 2827000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2026-04",
+      "StockValue": 2852000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2026-05",
+      "StockValue": 2925000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2026-06",
+      "StockValue": 3133000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2026-07",
+      "StockValue": 3396000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2026-08",
+      "StockValue": 3630000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "YearMonth": "2026-09",
+      "StockValue": 3900000,
+      "StockTargetValue": 2800000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2025-10",
+      "StockValue": 2170000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2025-11",
+      "StockValue": 2240000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2025-12",
+      "StockValue": 2152000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2026-01",
+      "StockValue": 2194000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2026-02",
+      "StockValue": 2235000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2026-03",
+      "StockValue": 2264000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2026-04",
+      "StockValue": 2277000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2026-05",
+      "StockValue": 2288000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2026-06",
+      "StockValue": 2313000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2026-07",
+      "StockValue": 2295000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2026-08",
+      "StockValue": 2267000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "YearMonth": "2026-09",
+      "StockValue": 2300000,
+      "StockTargetValue": 2400000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2025-10",
+      "StockValue": 1018000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2025-11",
+      "StockValue": 1081000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2025-12",
+      "StockValue": 1252000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2026-01",
+      "StockValue": 950000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2026-02",
+      "StockValue": 976000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2026-03",
+      "StockValue": 1083000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2026-04",
+      "StockValue": 1179000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2026-05",
+      "StockValue": 1229000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2026-06",
+      "StockValue": 1262000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2026-07",
+      "StockValue": 1244000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2026-08",
+      "StockValue": 1202000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    },
+    {
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "YearMonth": "2026-09",
+      "StockValue": 1199000,
+      "StockTargetValue": 1300000,
+      "Currency": "EUR"
+    }
+  ]
+}

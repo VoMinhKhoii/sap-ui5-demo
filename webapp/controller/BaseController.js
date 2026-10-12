@@ -8,7 +8,7 @@ sap.ui.define([
 
   /**
    * Shared logic for every page. All gallery snippets call handlers and
-   * formatters defined here, so anything you paste into Dashboard.view.xml just works.
+   * formatters defined here, so anything you paste into a workspace page just works. The workspace app (webapp/workspace/) extends it too.
    */
   return Controller.extend("workshop.dashboard.controller.BaseController", {
     formatter: formatter,
@@ -54,6 +54,63 @@ sap.ui.define([
       MessageToast.show("Filter: " + key);
     },
 
+    // ---- Handlers used by the app shells and page layouts -------------------
+
+    /** Side navigation item or tab selected: opens the page whose route name is the item's key (page1, page2 ...). */
+    onNavSelect: function (event) {
+      const item = event.getParameter("item");
+      const key = item && item.getKey ? item.getKey() : event.getParameter("key");
+      if (this.getRouter().getRoute(key)) {
+        this.navTo(key);
+      } else {
+        MessageToast.show("In your app this opens " + key);
+      }
+    },
+
+    /** Menu button in a ToolPage header: shows or hides the side navigation. */
+    onToggleSideNav: function (event) {
+      const toolPage = this._ancestor(event.getSource(), "sap.tnt.ToolPage");
+      if (toolPage) {
+        toolPage.setSideExpanded(!toolPage.getSideExpanded());
+      }
+    },
+
+    /** List → detail: shows the selected row in the detail column of the surrounding FlexibleColumnLayout. */
+    onShowDetail: function (event) {
+      const item = event.getParameter("listItem") || event.getSource();
+      const layout = this._ancestor(item, "sap.f.FlexibleColumnLayout");
+      if (layout) {
+        layout.getMidColumnPages()[0].setBindingContext(item.getBindingContext());
+        layout.setLayout("TwoColumnsMidExpanded");
+      }
+    },
+
+    /** List → detail: closes the detail column. */
+    onCloseDetail: function (event) {
+      const layout = this._ancestor(event.getSource(), "sap.f.FlexibleColumnLayout");
+      if (layout) {
+        layout.setLayout("OneColumn");
+      }
+    },
+
+    /** Copies text to the clipboard and shows a toast. Works on http://localhost too. */
+    copyText: function (text, message) {
+      const done = function () {
+        MessageToast.show(message || "Copied!");
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done);
+        return;
+      }
+      const area = document.createElement("textarea");
+      area.value = text;
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      document.body.removeChild(area);
+      done();
+    },
+
     // ---- Chart styling ------------------------------------------------------
 
     /**
@@ -90,6 +147,13 @@ sap.ui.define([
           interaction: { selectability: { mode: "SINGLE" } }
         }, chart.data("vizProperties") || {}));
       });
+    },
+
+    _ancestor: function (control, type) {
+      while (control && !(control.isA && control.isA(type))) {
+        control = control.getParent();
+      }
+      return control;
     },
 
     _objectOf: function (event) {

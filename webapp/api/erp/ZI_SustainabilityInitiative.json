@@ -1,0 +1,103 @@
+{
+  "@odata.context": "$metadata#ZI_SustainabilityInitiative",
+  "value": [
+    {
+      "Initiative": "ESG-2026-01",
+      "InitiativeName": "Rooftop solar 2.1 MWp",
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "ResponsiblePerson": "Mia Schulz",
+      "OriginalGoLiveDate": "2026-06-30",
+      "PlannedGoLiveDate": "2026-06-30",
+      "BudgetAmount": 1850000,
+      "Currency": "EUR",
+      "ProgressPercent": 100,
+      "StatusText": "Live",
+      "ExpectedCO2eSavingTonnesPerMonth": 45
+    },
+    {
+      "Initiative": "ESG-2026-02",
+      "InitiativeName": "Replace gas paint-shop oven",
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "ResponsiblePerson": "Paul Richter",
+      "OriginalGoLiveDate": "2026-04-01",
+      "PlannedGoLiveDate": "2026-12-01",
+      "BudgetAmount": 2400000,
+      "Currency": "EUR",
+      "ProgressPercent": 45,
+      "StatusText": "Delayed",
+      "ExpectedCO2eSavingTonnesPerMonth": 200
+    },
+    {
+      "Initiative": "ESG-2026-03",
+      "InitiativeName": "Green power purchase agreement",
+      "Plant": "1310",
+      "PlantName": "Brno",
+      "ResponsiblePerson": "Petra Dvořák",
+      "OriginalGoLiveDate": "2026-11-01",
+      "PlannedGoLiveDate": "2026-11-01",
+      "BudgetAmount": 0,
+      "Currency": "EUR",
+      "ProgressPercent": 80,
+      "StatusText": "On track",
+      "ExpectedCO2eSavingTonnesPerMonth": 110
+    },
+    {
+      "Initiative": "ESG-2026-04",
+      "InitiativeName": "Heat recovery on compressors",
+      "Plant": "1410",
+      "PlantName": "Porto",
+      "ResponsiblePerson": "Rui Costa",
+      "OriginalGoLiveDate": "2026-12-15",
+      "PlannedGoLiveDate": "2026-12-15",
+      "BudgetAmount": 320000,
+      "Currency": "EUR",
+      "ProgressPercent": 60,
+      "StatusText": "On track",
+      "ExpectedCO2eSavingTonnesPerMonth": 8
+    },
+    {
+      "Initiative": "ESG-2026-05",
+      "InitiativeName": "Electric forklift fleet",
+      "Plant": "1510",
+      "PlantName": "Valencia DC",
+      "ResponsiblePerson": "Elena Ruiz",
+      "OriginalGoLiveDate": "2026-09-30",
+      "PlannedGoLiveDate": "2026-10-31",
+      "BudgetAmount": 540000,
+      "Currency": "EUR",
+      "ProgressPercent": 25,
+      "StatusText": "At risk",
+      "ExpectedCO2eSavingTonnesPerMonth": 6
+    },
+    {
+      "Initiative": "ESG-2026-06",
+      "InitiativeName": "Battery cell recycling loop",
+      "Plant": "1010",
+      "PlantName": "Hamburg",
+      "ResponsiblePerson": "Mia Schulz",
+      "OriginalGoLiveDate": "2027-03-31",
+      "PlannedGoLiveDate": "2027-03-31",
+      "BudgetAmount": 1200000,
+      "Currency": "EUR",
+      "ProgressPercent": 15,
+      "StatusText": "On track",
+      "ExpectedCO2eSavingTonnesPerMonth": 12
+    },
+    {
+      "Initiative": "ESG-2026-07",
+      "InitiativeName": "LED lighting retrofit",
+      "Plant": "1020",
+      "PlantName": "Leipzig",
+      "ResponsiblePerson": "Paul Richter",
+      "OriginalGoLiveDate": "2026-08-31",
+      "PlannedGoLiveDate": "2026-08-31",
+      "BudgetAmount": 210000,
+      "Currency": "EUR",
+      "ProgressPercent": 100,
+      "StatusText": "Live",
+      "ExpectedCO2eSavingTonnesPerMonth": 9
+    }
+  ]
+}

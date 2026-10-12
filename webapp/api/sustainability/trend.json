@@ -1,74 +1,74 @@
 [
   {
     "month": "Oct 25",
-    "actual": 1120,
-    "plan": 1080,
-    "previousYear": 1250
+    "actual": 1055,
+    "plan": 1069,
+    "previousYear": 1126
   },
   {
     "month": "Nov 25",
-    "actual": 1180,
-    "plan": 1070,
-    "previousYear": 1290
+    "actual": 1100,
+    "plan": 1115,
+    "previousYear": 1182
   },
   {
     "month": "Dec 25",
-    "actual": 1260,
-    "plan": 1060,
-    "previousYear": 1360
+    "actual": 1201,
+    "plan": 1208,
+    "previousYear": 1261
   },
   {
     "month": "Jan 26",
-    "actual": 1240,
-    "plan": 1050,
-    "previousYear": 1340
+    "actual": 1169,
+    "plan": 1195,
+    "previousYear": 1250
   },
   {
     "month": "Feb 26",
-    "actual": 1150,
-    "plan": 1040,
-    "previousYear": 1260
+    "actual": 1069,
+    "plan": 1094,
+    "previousYear": 1155
   },
   {
     "month": "Mar 26",
-    "actual": 1060,
-    "plan": 1030,
-    "previousYear": 1170
+    "actual": 1002,
+    "plan": 1015,
+    "previousYear": 1065
   },
   {
     "month": "Apr 26",
-    "actual": 980,
-    "plan": 1020,
-    "previousYear": 1090
+    "actual": 942,
+    "plan": 748,
+    "previousYear": 976
   },
   {
     "month": "May 26",
-    "actual": 1010,
-    "plan": 1010,
-    "previousYear": 1080
+    "actual": 955,
+    "plan": 771,
+    "previousYear": 987
   },
   {
     "month": "Jun 26",
-    "actual": 1040,
-    "plan": 1000,
-    "previousYear": 1100
+    "actual": 976,
+    "plan": 795,
+    "previousYear": 1025
   },
   {
     "month": "Jul 26",
-    "actual": 1150,
-    "plan": 990,
-    "previousYear": 1120
+    "actual": 1067,
+    "plan": 880,
+    "previousYear": 1147
   },
   {
     "month": "Aug 26",
-    "actual": 1120,
-    "plan": 980,
-    "previousYear": 1110
+    "actual": 1037,
+    "plan": 856,
+    "previousYear": 1118
   },
   {
     "month": "Sep 26",
-    "actual": 990,
-    "plan": 970,
-    "previousYear": 1090
+    "actual": 907,
+    "plan": 754,
+    "previousYear": 978
   }
 ]

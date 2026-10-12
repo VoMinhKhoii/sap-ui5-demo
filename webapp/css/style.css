@@ -1,15 +1,57 @@
 /* Workshop shell + gallery styles. Students don't need to touch this file. */
+
+/* Kit pages are for reading: slightly bigger text and more line height than Fiori's dense default.
+   (Only inside .wsPage, so the students' app keeps the standard Fiori look.) */
+.wsPage .sapMText,
+.wsPage .sapMFT,
+.wsPage .sapMMsgStripMessage,
+.wsPage .sapMSLIDescription,
+.wsPage .sapMLIBContent .sapMSLITitle,
+.wsPage .sapMLIBContent .sapMSLITitleOnly {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.wsPage .sapFCardHeader .sapFCardTitle {
+  font-size: 1.0625rem;
+}
+
+.wsPage .sapFCardHeader .sapFCardSubtitle {
+  font-size: 0.9375rem;
+}
 .wsPage .sapMPageEnableScrolling {
   padding-bottom: 2rem;
 }
 
 .wsPageIntro {
-  padding: 1.5rem 1rem 0.5rem;
-  max-width: 64rem;
+  padding: 2rem 1.5rem 1rem;
+  max-width: 52rem;
+}
+
+.wsSection {
+  padding: 1.5rem 1.5rem 0;
+}
+
+.wsSection > .sapMTitle {
+  margin-bottom: 0.75rem;
+}
+
+.wsCaseCard .sapFCardContent {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.wsLevel {
+  margin-bottom: 0.5rem;
+}
+
+.wsQuestion {
+  font-size: 1.25rem !important;
+  line-height: 1.4 !important;
+  font-weight: 600;
 }
 
 .wsSectionTitle {
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
 .wsTiles {
@@ -38,6 +80,28 @@
   overflow: hidden;
 }
 
+/* !important: the surrounding VBox sets an inline height: 100% because the ToolPage inside is 100% high. */
+.wsPreviewShell {
+  height: 26rem !important;
+  padding: 0;
+}
+
+.wsPlaygroundPreview {
+  min-height: 20rem;
+}
+
+.wsFieldScroll {
+  border-top: 1px solid var(--sapList_BorderColor);
+}
+
+.wsMono {
+  font-family: var(--sapFontMonospaceFamily, monospace);
+}
+
+.wsAssumption {
+  font-style: italic;
+}
+
 .wsCode {
   display: block;
   margin: 0 1rem;
@@ -47,7 +111,35 @@
   padding: 0.5rem 1rem 1rem;
 }
 
+/* Rows of cards (workspace pages and the "Row of cards" block): <HBox class="wsRow" renderType="Bare">.
+   Every card gets an equal share of the row; class="wsWide" makes one twice as wide; narrow screens wrap. */
+.wsRow {
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.wsRow > .sapMFlexItem {
+  flex: 1 1 0;               /* equal shares of the row ... */
+  min-width: min(18rem, 100%); /* ... and wrap to the next line when a card would get narrower than this */
+}
+
+.wsRow > .wsWide {
+  flex-grow: 2;
+}
+
 /* Cards stretch to the full width of their grid cell. */
 .sapUiRespGrid .sapFCard {
   width: 100%;
+}
+
+/* Reference solution: one answer page per case tab. */
+.wsSolutionTabs {
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.wsSolution {
+  padding: 1.5rem 0.5rem 2rem;
+  max-width: 80rem;
 }

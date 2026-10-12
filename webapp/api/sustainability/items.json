@@ -17,7 +17,7 @@
     "title": "Replace gas paint-shop oven",
     "subtitle": "Leipzig",
     "owner": "Paul Richter",
-    "date": "2026-09-30",
+    "date": "2026-12-01",
     "amount": 2400000,
     "currency": "EUR",
     "quantity": 1,
@@ -59,7 +59,7 @@
     "date": "2026-10-31",
     "amount": 540000,
     "currency": "EUR",
-    "quantity": 24,
+    "quantity": 1,
     "progress": 25,
     "status": "At risk",
     "state": "Warning"
