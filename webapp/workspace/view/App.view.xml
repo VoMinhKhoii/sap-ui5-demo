@@ -32,7 +32,7 @@
       <Button icon="sap-icon://menu2" type="Transparent" press=".onToggleSideNav" tooltip="Toggle navigation">
         <layoutData><OverflowToolbarLayoutData priority="NeverOverflow" /></layoutData>
       </Button>
-      <Avatar initials="NM" displaySize="XS" backgroundColor="Accent6" />
+      <Avatar initials="CC" displaySize="XS" backgroundColor="Accent6" />
       <Title text="My app: rename me" level="H1" wrapping="false" />
       <ToolbarSpacer />
       <Text text="{/case/client}" wrapping="false" />

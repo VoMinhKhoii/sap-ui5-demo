@@ -2,14 +2,10 @@ sap.ui.define([
   "sap/ui/core/UIComponent",
   "sap/ui/model/json/JSONModel",
   "sap/m/MessageBox",
-  "../util/api",
-  "../util/q"
-], function (UIComponent, JSONModel, MessageBox, api, Q) {
+  "../util/db",
+  "../util/sql"
+], function (UIComponent, JSONModel, MessageBox, db, SqlHelper) {
   "use strict";
-
-  function read(key) {
-    try { return window.localStorage.getItem(key); } catch (e) { return null; }
-  }
 
   // data.js is loaded on its own, so a typo in it shows an error message instead of a blank page.
   function loadDataJs() {
@@ -30,59 +26,63 @@ sap.ui.define([
 
     init: function () {
       UIComponent.prototype.init.apply(this, arguments);
-      // Default model: level-1 data of the scenario ({/kpis} ...), your data.js queries ({/yourQuery}),
-      // the raw ERP tables ({/erp/A_Plant}) and your case ({/case/title}).
-      const dataModel = new JSONModel(api.emptyScenario());
+      // Default model: your data.js queries ({/yourQuery}), your case ({/case/title})
+      // and the gallery sample data ({/kpis} ...), so a pasted gallery block works right away.
+      const dataModel = new JSONModel(db.emptySample());
       dataModel.setSizeLimit(5000); // lists show up to 100 rows by default
       this.setModel(dataModel);
-      this.setModel(new JSONModel({ scenario: "", errors: [] }), "app");
-
-      // Same scenario as the kit (tab 1), as long as it is switched on in config.json.
-      this.dataReady = api.loadConfig().then(function (enabled) {
-        const saved = read("workshop.scenario");
-        const scenario = enabled.indexOf(saved) > -1 ? saved : enabled[0];
-        this.getModel("app").setProperty("/scenario", scenario);
-        return this._load(scenario, read("workshop.case"));
-      }.bind(this));
+      this.setModel(new JSONModel({ errors: [] }), "app");
+      this.dataReady = Promise.all([db.load(), loadDataJs()]).then(this._load.bind(this));
       this.getRouter().initialize();
     },
 
-    _load: function (scenario, caseId) {
-      return Promise.all([api.loadScenario(scenario), api.loadErp(), api.loadCases(), loadDataJs()]).then(function (results) {
-        const erp = results[1], cases = results[2], dataJs = results[3];
-        const q = Q.create(erp.db, erp.index.relations);
-        const data = Object.assign({}, results[0], {
-          erp: erp.db,
-          case: cases.find(function (c) { return c.id === caseId; }) || cases.find(function (c) { return c.scenario === scenario; })
-        });
-        const errors = [];
-        let queries = {};
-        if (dataJs.error) {
-          errors.push("data.js could not be loaded: " + dataJs.error.message);
-        } else {
-          try {
-            queries = dataJs.fn(q) || {};
-          } catch (e) {
-            errors.push("data.js: " + e.message);
-          }
+    _load: function (results) {
+      const loaded = results[0], dataJs = results[1];
+      const data = Object.assign({}, loaded.sample, { case: loaded.case });
+      const errors = [];
+      let queries = {};
+      if (dataJs.error) {
+        errors.push("data.js has a typo (" + dataJs.error.message + "). Usually a query is missing its comma at the end: `), " +
+          "or a ` is missing around the SQL. F12 → Console shows the line.");
+      } else {
+        // Each sql() runs right here. A broken query must not stop the others, so they're run one by one.
+        const sql = function (query) { return { query: query, one: false }; };
+        sql.one = function (query) { return { query: query, one: true }; };
+        try {
+          queries = dataJs.fn(sql) || {};
+        } catch (e) {
+          errors.push("data.js: " + e.message);
         }
-        Object.keys(queries).forEach(function (name) {
-          try {
-            data[name] = q.isQuery(queries[name]) ? queries[name].resolve() : queries[name];
-          } catch (e) {
-            errors.push(name + ": " + e.message);
-          }
-        });
-        this.getModel().setData(data);
-        this.getModel("app").setProperty("/errors", errors);
-        if (errors.length) {
-          MessageBox.error("Some of your queries in webapp/workspace/data.js failed. The rest of the app still works.", {
-            title: "data.js: " + errors.length + " problem" + (errors.length > 1 ? "s" : ""),
-            details: errors.join("\n\n")
-          });
+      }
+      Object.keys(queries).forEach(function (name) {
+        const def = queries[name];
+        if (!def || typeof def.query !== "string") {
+          data[name] = def;
+          return;
         }
-        return data;
-      }.bind(this));
+        try {
+          data[name] = def.one ? loaded.sql.one(def.query) : loaded.sql(def.query);
+          const bad = SqlHelper.badColumns(data[name]);
+          if (bad.length) {
+            errors.push(name + ": give " + bad.join(", ") + " a name with AS (e.g. ROUND(AVG(fill_pct)) AS fill_pct), or you can't bind it.");
+          }
+        } catch (e) {
+          errors.push(name + ": " + e.message);
+        }
+      });
+      this.getModel().setData(data);
+      this.getModel("app").setProperty("/errors", errors);
+      if (errors.length) {
+        // Open it after the first page is on screen: a dialog opened while the app renders gets closed again.
+        this.rootControlLoaded().then(function () {
+          setTimeout(function () {
+            MessageBox.error("Some of your queries in webapp/workspace/data.js need a fix. The rest of the app still works.\n\n" + errors.join("\n\n"), {
+              title: "data.js: " + errors.length + " problem" + (errors.length > 1 ? "s" : "")
+            });
+          }, 300);
+        });
+      }
+      return data;
     }
   });
 });

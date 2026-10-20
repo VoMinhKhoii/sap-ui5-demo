@@ -2,30 +2,26 @@ sap.ui.define([], function () {
   "use strict";
 
   /**
-   * Turns a query result into XML that students can paste into a page, bound to {/name}.
+   * Turns a SQL result into XML that students can paste into a page, bound to {/name}.
    * The Playground renders exactly this XML as its preview, so what you see is what you copy.
+   *
+   * Many rows (sql):  the FIRST column is the label of the chart (x axis); a second text column becomes the
+   *                   colour (one series per value); every number column is plotted.
+   * One row (sql.one): one big number per number column, bound to {/name/column}, or the whole record.
    */
 
   const NAMESPACES = "xmlns=\"sap.m\" xmlns:core=\"sap.ui.core\" xmlns:f=\"sap.f\" xmlns:card=\"sap.f.cards\" xmlns:layout=\"sap.ui.layout\" " +
     "xmlns:mc=\"sap.suite.ui.microchart\" xmlns:viz=\"sap.viz.ui5.controls\" xmlns:viz.data=\"sap.viz.ui5.data\" xmlns:viz.feeds=\"sap.viz.ui5.controls.common.feeds\"";
-  const HELPER_FIELDS = ["count", "share", "deltaPercent", "period"];
-
-  function fieldsOf(rows) {
-    const set = {};
-    rows.slice(0, 20).forEach(function (r) { Object.keys(r).forEach(function (k) { set[k] = true; }); });
-    return Object.keys(set);
-  }
+  const TIME = /^(week|date|month|day|year|period)$|_date$|_week$/i;
+  const MAX_CHART_ROWS = 40;
 
   function isNumber(rows, f) {
     return rows.some(function (r) { return typeof r[f] === "number"; }) && rows.every(function (r) { return r[f] === null || r[f] === undefined || typeof r[f] === "number"; });
   }
 
-  function isPlain(rows, f) {
-    return rows.every(function (r) { return r[f] === null || r[f] === undefined || typeof r[f] !== "object"; });
-  }
-
   function title(field) {
-    return field.charAt(0).toUpperCase() + field.slice(1);
+    const text = field.replace(/_/g, " ");
+    return text.charAt(0).toUpperCase() + text.slice(1);
   }
 
   function escape(text) {
@@ -34,47 +30,45 @@ sap.ui.define([], function () {
 
   /** What kind of result is it, and which views make sense? */
   function shape(result) {
-    if (result === null || result === undefined || typeof result !== "object") {
-      return { kind: "scalar", views: ["number"] };
+    if (result === null || result === undefined) {
+      return { kind: "empty", views: ["table"] };
     }
     if (!Array.isArray(result)) {
-      return { kind: "object", views: ["object"] };
+      const numbers = Object.keys(result).filter(function (f) { return typeof result[f] === "number"; });
+      return { kind: "one", numbers: numbers, views: numbers.length ? ["number", "record"] : ["record"] };
     }
     if (!result.length) {
       return { kind: "empty", views: ["table"] };
     }
-    const fields = fieldsOf(result);
-    const plain = fields.filter(function (f) { return isPlain(result, f); });
-    const measures = plain.filter(function (f) { return isNumber(result, f) && HELPER_FIELDS.indexOf(f) === -1; });
-    if (fields.indexOf("month") > -1 && measures.length) {
-      const series = plain.filter(function (f) { return !isNumber(result, f) && ["month", "period", "name", "state", "valueState"].indexOf(f) === -1; });
-      return { kind: "time", dimensions: ["month"].concat(series.slice(0, 1)), measures: measures, views: ["line", "column", "table"] };
+    const fields = Object.keys(result[0]);
+    const label = fields[0];
+    const series = fields[1] && !isNumber(result, fields[1]) ? fields[1] : null;
+    const measures = fields.slice(series ? 2 : 1).filter(function (f) { return isNumber(result, f); });
+    if (fields.length < 2 || !measures.length || result.length > MAX_CHART_ROWS) {
+      return { kind: "rows", views: ["table"] };
     }
-    if (fields.indexOf("name") > -1 && measures.length) {
-      const views = ["bar", "column", "donut", "table"];
-      if (measures.indexOf("value") > -1 && measures.indexOf("target") > -1) {
-        views.splice(1, 0, "bullet");
-      }
-      return { kind: "category", dimensions: ["name"], measures: measures, views: views };
+    const views = TIME.test(label) ? ["line", "column", "table"] : ["column", "bar", "line", "table"];
+    if (!series && measures.length === 1 && !TIME.test(label) && result.length <= 8) {
+      views.splice(views.length - 1, 0, "donut");
     }
-    return { kind: "rows", views: ["table"] };
+    if (result.length > 15) {
+      views.unshift(views.pop()); // a long list of rows reads better as a table first
+    }
+    return { kind: "chart", dimensions: series ? [label, series] : [label], measures: measures, views: views };
   }
 
   function chart(name, s, vizType) {
     let measures = s.measures, feeds;
+    const dims = vizType === "donut" ? s.dimensions.slice(0, 1) : s.dimensions;
     if (vizType === "donut") {
       measures = measures.slice(0, 1);
-      feeds = [["size", "Measure", measures], ["color", "Dimension", s.dimensions.slice(0, 1)]];
-    } else if (vizType === "bullet") {
-      measures = ["value", "target"];
-      feeds = [["actualValues", "Measure", ["value"]], ["targetValues", "Measure", ["target"]], ["categoryAxis", "Dimension", s.dimensions.slice(0, 1)]];
+      feeds = [["size", "Measure", measures], ["color", "Dimension", dims]];
     } else {
-      feeds = [["valueAxis", "Measure", measures], ["categoryAxis", "Dimension", s.dimensions.slice(0, 1)]];
-      if (s.dimensions[1]) {
-        feeds.push(["color", "Dimension", s.dimensions.slice(1, 2)]);
+      feeds = [["valueAxis", "Measure", measures], ["categoryAxis", "Dimension", dims.slice(0, 1)]];
+      if (dims[1]) {
+        feeds.push(["color", "Dimension", dims.slice(1, 2)]);
       }
     }
-    const dims = vizType === "donut" || vizType === "bullet" ? s.dimensions.slice(0, 1) : s.dimensions;
     return [
       "<viz:VizFrame vizType=\"" + vizType + "\" width=\"100%\" height=\"20rem\" uiConfig=\"{applicationSet:'fiori'}\" selectData=\".onChartSelect\">",
       "  <viz:dataset>",
@@ -94,30 +88,19 @@ sap.ui.define([], function () {
     ].join("\n");
   }
 
-  function cell(rows, f) {
-    if (f === "state") {
-      return "<ObjectStatus text=\"{" + f + "}\" state=\"{ path: 'state', formatter: '.formatter.valueState' }\" />";
-    }
-    if (f === "valueState") {
-      return "<ObjectStatus text=\"{" + f + "}\" state=\"{" + f + "}\" />";
-    }
-    if (isNumber(rows, f)) {
-      return "<ObjectNumber number=\"{ path: '" + f + "', formatter: '.formatter.compactNumber' }\" />";
-    }
-    return "<Text text=\"{" + f + "}\" />";
-  }
-
   function table(name, rows) {
-    const fields = rows.length ? fieldsOf(rows).filter(function (f) { return isPlain(rows, f) && f !== "period"; }).slice(0, 6) : ["name"];
+    const fields = rows.length ? Object.keys(rows[0]) : ["name"];
     return [
       "<Table items=\"{/" + name + "}\" growing=\"true\" growingThreshold=\"10\" autoPopinMode=\"true\">",
       "  <columns>",
-      fields.map(function (f) { return "    <Column" + (isNumber(rows, f) ? " hAlign=\"End\"" : "") + "><Text text=\"" + escape(title(f)) + "\" /></Column>"; }).join("\n"),
+      fields.map(function (f) { return "    <Column" + (rows.length && isNumber(rows, f) ? " hAlign=\"End\"" : "") + "><Text text=\"" + escape(title(f)) + "\" /></Column>"; }).join("\n"),
       "  </columns>",
       "  <items>",
       "    <ColumnListItem>",
       "      <cells>",
-      fields.map(function (f) { return "        " + cell(rows, f); }).join("\n"),
+      fields.map(function (f) {
+        return "        " + (rows.length && isNumber(rows, f) ? "<ObjectNumber number=\"{" + f + "}\" />" : "<Text text=\"{" + f + "}\" />");
+      }).join("\n"),
       "      </cells>",
       "    </ColumnListItem>",
       "  </items>",
@@ -125,36 +108,52 @@ sap.ui.define([], function () {
     ].join("\n");
   }
 
-  function object(name, obj) {
-    const fields = Object.keys(obj).filter(function (f) { return obj[f] === null || typeof obj[f] !== "object"; }).slice(0, 8);
+  function record(name, obj) {
     return [
-      "<HBox wrap=\"Wrap\" binding=\"{/" + name + "}\">",
-      fields.map(function (f) {
-        return "  <VBox class=\"sapUiMediumMarginEnd sapUiSmallMarginBottom\"><Label text=\"" + escape(f) + "\" /><Text text=\"{" + f + "}\" /></VBox>";
+      "<HBox wrap=\"Wrap\">",
+      Object.keys(obj).slice(0, 10).map(function (f) {
+        return "  <VBox class=\"sapUiMediumMarginEnd sapUiSmallMarginBottom\"><Label text=\"" + escape(title(f)) + "\" /><Text text=\"{/" + name + "/" + f + "}\" /></VBox>";
       }).join("\n"),
       "</HBox>"
     ].join("\n");
   }
 
-  function number(name) {
-    return "<NumericContent value=\"{ path: '/" + name + "', formatter: '.formatter.compactNumber' }\" formatterValue=\"true\" withMargin=\"false\" />";
+  function numbers(name, s) {
+    return [
+      "<HBox wrap=\"Wrap\">",
+      s.numbers.slice(0, 4).map(function (f) {
+        return [
+          "  <VBox class=\"sapUiLargeMarginEnd sapUiSmallMarginBottom\">",
+          "    <Label text=\"" + escape(title(f)) + "\" />",
+          "    <NumericContent value=\"{/" + name + "/" + f + "}\" valueColor=\"Neutral\" withMargin=\"false\" />",
+          "  </VBox>"
+        ].join("\n");
+      }).join("\n"),
+      "</HBox>"
+    ].join("\n");
   }
 
   return {
     shape: shape,
 
-    /** XML for a result. view: one of shape(result).views, or "auto" for the first one. */
+    /** The text to paste into data.js: name: sql(`…`), or sql.one(`…`) for a single row. */
+    dataJs: function (name, code, one) {
+      const body = code.trim().split("\n").map(function (line) { return "        " + line; }).join("\n");
+      return "      " + name + ": sql" + (one ? ".one" : "") + "(`\n" + body + "\n      `),";
+    },
+
+    /** XML for a result. view: one of shape(result).views (falls back to the first one). */
     build: function (name, result, view) {
       const s = shape(result);
       const v = s.views.indexOf(view) > -1 ? view : s.views[0];
       if (v === "number") {
-        return number(name);
+        return numbers(name, s);
       }
-      if (v === "object") {
-        return object(name, result);
+      if (v === "record") {
+        return record(name, result);
       }
       if (v === "table") {
-        return table(name, result);
+        return table(name, Array.isArray(result) ? result : []);
       }
       return chart(name, s, v);
     },

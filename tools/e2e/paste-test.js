@@ -32,16 +32,12 @@ const between = (text, start, end, snippet) => {
 const CHART_SLOT = '<Text text="Paste a chart here" />';
 const MORE_SLOT = "<!-- 🧩 MORE START (more cards, or Gallery → Page templates) -->";
 
-// Load the kit's examples + snippet builder + q() in node, exactly as the Playground uses them.
+// Load the kit's examples + snippet builder + sql() in node, exactly as the Playground uses them.
 let factory;
 global.sap = { ui: { define: (deps, f) => { factory = f; } } };
-require(path.join(app, "util/q.js")); const Q = factory();
+require(path.join(app, "util/sql.js")); const SqlHelper = factory();
 require(path.join(app, "util/snippet.js")); const snippet = factory();
 require(path.join(app, "util/examples.js")); const examples = factory();
-const erpIndex = JSON.parse(fs.readFileSync(path.join(app, "api/erp/index.json"), "utf8"));
-const db = {};
-erpIndex.entities.forEach((e) => { db[e.name] = JSON.parse(fs.readFileSync(path.join(app, "api/erp", e.name + ".json"), "utf8")).value; });
-const q = Q.create(db, erpIndex.relations);
 
 const jobs = [];
 const catalog = JSON.parse(fs.readFileSync(path.join(app, "gallery/samples.json"), "utf8"));
@@ -56,24 +52,28 @@ for (const cat of catalog.categories) for (const s of cat.samples) {
     jobs.push({ id: s.id, label: cat.key + "/" + s.id, route: "", edit: { page1: (t) => s.template ? t.replace(MORE_SLOT, MORE_SLOT + "\n" + code) : t.replace(CHART_SLOT, code) } });
   }
 }
-// Only the examples of the scenarios switched on in webapp/config.json, like the Playground shows them.
-const enabled = JSON.parse(fs.readFileSync(path.join(app, "config.json"), "utf8")).scenarios;
-for (const ex of examples.filter((e) => e.scenario === "all" || enabled.includes(e.scenario))) {
-  const result = q.run(ex.code);
-  for (const view of snippet.shape(result).views) {
-    const xml = snippet.build(ex.id, result, view);
-    const dataJs = "      " + ex.id + "Pasted: " + ex.code.trim().split("\n").map((l, i) => (i ? "      " + l : l)).join("\n") + ",";
-    jobs.push({
-      id: ex.id, label: "playground/" + ex.id + " (" + view + ")", route: "",
-      edit: {
-        data: (t) => t.replace("// 🧩 YOUR QUERIES START", "// 🧩 YOUR QUERIES START\n" + dataJs),
-        page1: (t) => t.replace(CHART_SLOT, xml.split("{/" + ex.id).join("{/" + ex.id + "Pasted"))
-      }
-    });
+function addExampleJobs(sql) {
+  for (const ex of examples) {
+    const rows = sql(ex.code);
+    const result = rows.length === 1 ? rows[0] : rows;
+    for (const view of snippet.shape(result).views) {
+      const xml = snippet.build(ex.id, result, view);
+      const dataJs = snippet.dataJs(ex.id + "Pasted", ex.code, rows.length === 1);
+      jobs.push({
+        id: ex.id, label: "playground/" + ex.id + " (" + view + ")", route: "",
+        edit: {
+          data: (t) => t.replace("// 🧩 YOUR QUERIES START", "// 🧩 YOUR QUERIES START\n" + dataJs),
+          page1: (t) => t.replace(CHART_SLOT, xml.split("{/" + ex.id).join("{/" + ex.id + "Pasted"))
+        }
+      });
+    }
   }
 }
 
 (async () => {
+  const SQL = await require("sql.js")();
+  const schema = JSON.parse(fs.readFileSync(path.join(app, "data/schema.json"), "utf8"));
+  addExampleJobs(SqlHelper.create(new SQL.Database(fs.readFileSync(path.join(app, "data/clubs.sqlite"))), schema));
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   let failures = 0;
   try {
@@ -84,7 +84,6 @@ for (const ex of examples.filter((e) => e.scenario === "all" || enabled.includes
       const errors = [];
       page.on("console", (m) => { if (m.type() === "error" && !/favicon/.test(m.text())) errors.push(m.text().slice(0, 250)); });
       page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
-      await page.addInitScript((sc) => localStorage.setItem("workshop.scenario", sc), enabled[0]);
       await page.goto(`${BASE}/workspace/index.html#/${job.route}`);
       await page.waitForSelector(".sapTntToolPage, .sapFFCL", { timeout: 15000 }).catch(() => errors.push("app did not render"));
       await page.waitForTimeout(2500);

@@ -8,8 +8,8 @@
   ║  2. Your own numbers: write a query in data.js, bind {/yourQuery}.   ║
   ║  3. Save, press F5. Something broke? F12 → Console.                  ║
   ║                                                                      ║
-  ║  Data: {/case/…} your case · {/yourQuery} from data.js ·             ║
-  ║        {/kpis} {/trend} {/breakdown} {/items} {/alerts} ready-made    ║
+  ║  Data: {/yourQuery} from data.js · {/case/…} your case ·             ║
+  ║        {/kpis} {/trend} … the gallery's sample data                  ║
   ╚══════════════════════════════════════════════════════════════════════╝
 -->
 <mvc:View
@@ -49,7 +49,7 @@
     <f:DynamicPageHeader pinnable="true">
       <VBox>
         <!-- 🧩 FINDING START (Gallery → Layout → Story header) -->
-        <Title text="Your finding in one sentence. Example: It's Leipzig, not Porto." level="H2" wrapping="true" />
+        <Title text="Your finding in one sentence, the first thing the president reads." level="H2" wrapping="true" />
         <Text text="One line of proof with a number. Question: {/case/question}" class="sapUiTinyMarginTop" />
         <!-- 🧩 FINDING END -->
       </VBox>

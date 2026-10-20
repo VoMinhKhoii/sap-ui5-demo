@@ -7,7 +7,7 @@
   <Page id="galleryPage" showHeader="false" class="wsPage">
     <VBox class="wsPageIntro">
       <Title text="Component Gallery" level="H1" titleStyle="H2" />
-      <Text text="Every block below is live and uses the API data of the scenario selected at the top. Click Copy XML, paste it between a pair of 🧩 markers in your app (webapp/workspace/view/), save and press F5 in your app." class="sapUiTinyMarginTop" />
+      <Text text="Every block below is live and shows the sample data of the Coding Club case (\{/kpis\}, \{/trend\} …, see the Data Explorer). Click Copy XML, paste it between a pair of 🧩 markers in your app (webapp/workspace/view/), save and press F5 in your app." class="sapUiTinyMarginTop" />
     </VBox>
     <IconTabHeader
       id="categoryTabs"

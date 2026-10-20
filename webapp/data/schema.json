@@ -1,0 +1,253 @@
+{
+  "tables": [
+    {
+      "name": "events",
+      "title": "Club events",
+      "description": "Every event of the 8 clubs in the autumn semester 2026 (weeks 1-10). One row per event, with sign-ups, check-ins and the rating already worked out.",
+      "key": "event_id",
+      "count": 90,
+      "fields": [
+        {
+          "name": "event_id",
+          "type": "TEXT",
+          "description": "Event number",
+          "example": "E071"
+        },
+        {
+          "name": "club_id",
+          "type": "TEXT",
+          "description": "The club that ran it (see clubs)",
+          "example": "C07"
+        },
+        {
+          "name": "title",
+          "type": "TEXT",
+          "description": "Name of the event",
+          "example": "Class #1"
+        },
+        {
+          "name": "topic",
+          "type": "TEXT",
+          "description": "Type of event. Coding Club: Workshop, Talk or Social. Other clubs have their own types",
+          "example": "Class"
+        },
+        {
+          "name": "week",
+          "type": "INTEGER",
+          "description": "Semester week, 1-10 (week 1 starts Mon 7 Sep 2026, week 5 on Mon 5 Oct)",
+          "example": 1
+        },
+        {
+          "name": "date",
+          "type": "TEXT",
+          "description": "Date, YYYY-MM-DD",
+          "example": "2026-09-07"
+        },
+        {
+          "name": "weekday",
+          "type": "TEXT",
+          "description": "Mon, Tue, Wed, Thu or Fri",
+          "example": "Mon"
+        },
+        {
+          "name": "start_time",
+          "type": "TEXT",
+          "description": "Start time, HH:MM",
+          "example": "18:00"
+        },
+        {
+          "name": "room",
+          "type": "TEXT",
+          "description": "Room code, e.g. M105 (the computer lab) or M201 (a lecture room)",
+          "example": "G001"
+        },
+        {
+          "name": "capacity",
+          "type": "INTEGER",
+          "description": "Seats in the room",
+          "example": 50
+        },
+        {
+          "name": "registered",
+          "type": "INTEGER",
+          "description": "People who signed up and got a seat",
+          "example": 50
+        },
+        {
+          "name": "checked_in",
+          "type": "INTEGER",
+          "description": "People who were scanned at the door",
+          "example": 40
+        },
+        {
+          "name": "showup_pct",
+          "type": "INTEGER",
+          "description": "checked_in ÷ registered, in %. Of the people who signed up, how many came?",
+          "example": 80
+        },
+        {
+          "name": "fill_pct",
+          "type": "INTEGER",
+          "description": "checked_in ÷ capacity, in %. How full was the room?",
+          "example": 80
+        },
+        {
+          "name": "avg_rating",
+          "type": "REAL",
+          "description": "Average feedback rating, 1 (bad) to 5 (great)",
+          "example": 4.3
+        },
+        {
+          "name": "organiser",
+          "type": "TEXT",
+          "description": "Club member who ran the event",
+          "example": "Leo Costa"
+        }
+      ]
+    },
+    {
+      "name": "clubs",
+      "title": "Student clubs",
+      "description": "The 8 student clubs.",
+      "key": "club_id",
+      "count": 8,
+      "fields": [
+        {
+          "name": "club_id",
+          "type": "TEXT",
+          "description": "Club number, e.g. C01 (the Coding Club)",
+          "example": "C01"
+        },
+        {
+          "name": "name",
+          "type": "TEXT",
+          "description": "Club name",
+          "example": "Coding Club"
+        },
+        {
+          "name": "category",
+          "type": "TEXT",
+          "description": "Tech, Arts, Sports, Academic or Career",
+          "example": "Tech"
+        },
+        {
+          "name": "members",
+          "type": "INTEGER",
+          "description": "Members this semester",
+          "example": 142
+        },
+        {
+          "name": "sponsor",
+          "type": "TEXT",
+          "description": "Sponsor and what they pay for (empty if none)",
+          "example": "Quillmoor Software (EUR 800, workshops)"
+        }
+      ]
+    },
+    {
+      "name": "promotion_posts",
+      "title": "Promotion posts",
+      "description": "Every post that advertised an event: 2-4 per event, a few days before it.",
+      "key": "post_id",
+      "count": 286,
+      "fields": [
+        {
+          "name": "post_id",
+          "type": "TEXT",
+          "description": "Post number",
+          "example": "P0001"
+        },
+        {
+          "name": "event_id",
+          "type": "TEXT",
+          "description": "The event it advertised (see events)",
+          "example": "E071"
+        },
+        {
+          "name": "channel",
+          "type": "TEXT",
+          "description": "Instagram, Discord, Email or Poster",
+          "example": "Instagram"
+        },
+        {
+          "name": "posted_at",
+          "type": "TEXT",
+          "description": "Date of the post, YYYY-MM-DD",
+          "example": "2026-09-05"
+        },
+        {
+          "name": "reach",
+          "type": "INTEGER",
+          "description": "People who saw the post",
+          "example": 417
+        }
+      ]
+    },
+    {
+      "name": "room_bookings",
+      "title": "Room bookings, next semester",
+      "description": "Weekly room bookings that are already fixed for NEXT semester (spring 2027). A room is free at any time not listed here.",
+      "key": "booking_id",
+      "count": 6,
+      "fields": [
+        {
+          "name": "booking_id",
+          "type": "TEXT",
+          "description": "Booking number",
+          "example": "B01"
+        },
+        {
+          "name": "room",
+          "type": "TEXT",
+          "description": "Room code (same codes as events.room)",
+          "example": "M105"
+        },
+        {
+          "name": "weekday",
+          "type": "TEXT",
+          "description": "Mon, Tue, Wed, Thu or Fri",
+          "example": "Mon"
+        },
+        {
+          "name": "start_time",
+          "type": "TEXT",
+          "description": "From, HH:MM",
+          "example": "17:00"
+        },
+        {
+          "name": "end_time",
+          "type": "TEXT",
+          "description": "Until, HH:MM",
+          "example": "19:00"
+        },
+        {
+          "name": "booked_by",
+          "type": "TEXT",
+          "description": "Who has the room",
+          "example": "Exam prep: Statistics"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "from": "events",
+      "field": "club_id",
+      "to": "clubs",
+      "key": "club_id"
+    },
+    {
+      "from": "promotion_posts",
+      "field": "event_id",
+      "to": "events",
+      "key": "event_id"
+    },
+    {
+      "from": "room_bookings",
+      "field": "room",
+      "to": "events",
+      "key": "room",
+      "note": "same room code, not a key"
+    }
+  ]
+}

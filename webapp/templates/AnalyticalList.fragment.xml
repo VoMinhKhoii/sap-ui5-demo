@@ -8,7 +8,7 @@
       <layout:Grid defaultSpan="XL3 L3 M6 S12" hSpacing="1" vSpacing="0.5" class="sapUiSmallMargin" width="100%">
         <VBox><Label text="Period" /><DateRangeSelection width="100%" displayFormat="MMM yyyy" /></VBox>
         <VBox>
-          <Label text="Plant / Region" />
+          <Label text="Club" />
           <MultiComboBox width="100%" items="{/breakdown}" placeholder="All"><core:Item key="{name}" text="{name}" /></MultiComboBox>
         </VBox>
         <VBox>
@@ -28,7 +28,7 @@
 
   <f:Card width="100%" class="sapUiSmallMarginBottom">
     <f:header>
-      <card:NumericHeader title="{/meta/trend/title}" subtitle="{/meta/trend/subtitle}" number="{ path: '/trend/11/actual', formatter: '.formatter.compactNumber' }" unitOfMeasurement="{/meta/trend/unit}" details="latest month" />
+      <card:NumericHeader title="{/meta/trend/title}" subtitle="{/meta/trend/subtitle}" number="{ path: '/trend/9/actual', formatter: '.formatter.compactNumber' }" unitOfMeasurement="{/meta/trend/unit}" details="latest month" />
     </f:header>
     <f:content>
       <viz:VizFrame vizType="combination" width="100%" height="22rem" uiConfig="{applicationSet:'fiori'}" selectData=".onChartSelect">
@@ -73,7 +73,7 @@
               <Text text="{id}" />
               <ObjectIdentifier title="{title}" text="{subtitle}" />
               <Text text="{ path: 'date', formatter: '.formatter.date' }" />
-              <ObjectNumber number="{ parts: ['amount', 'currency'], formatter: '.formatter.currency' }" />
+              <ObjectNumber number="{amount}" unit="{unit}" />
               <ObjectStatus text="{status}" state="{state}" inverted="true" />
             </cells>
           </ColumnListItem>

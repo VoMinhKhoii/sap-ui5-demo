@@ -11,19 +11,19 @@
   <Page showHeader="false" class="wsPage">
     <VBox class="wsPageIntro">
       <Title text="Query Playground" level="H1" titleStyle="H2" />
-      <Text text="Ask the data a question, see the answer as a chart, then copy it into your app." class="sapUiTinyMarginTop" />
+      <Text text="Ask the data a question in SQL, see the answer as a chart, then copy the query and the chart into your app." class="sapUiTinyMarginTop" />
     </VBox>
     <layout:Grid defaultSpan="XL3 L4 M12 S12" hSpacing="1" vSpacing="1" containerQuery="false" class="sapUiSmallMarginBeginEnd">
 
       <!-- Left: your tables and their fields -->
       <f:Card width="100%">
-        <f:header><card:Header title="Your data" subtitle="Click a field to insert it" /></f:header>
+        <f:header><card:Header title="Your data" subtitle="Click a column to insert it" /></f:header>
         <f:content>
           <VBox width="100%">
             <VBox class="sapUiSmallMarginBeginEnd">
               <Label text="Table" labelFor="tablePicker" />
               <Select id="tablePicker" items="{pg>/tables}" selectedKey="{pg>/table}" change=".onTableSelect" width="100%">
-                <core:Item key="{pg>name}" text="{pg>name}" />
+                <core:Item key="{pg>name}" text="{pg>name}" additionalText="{pg>title}" />
               </Select>
               <HBox alignItems="Center" justifyContent="SpaceBetween">
                 <Text text="{pg>/tableInfo}" />
@@ -43,21 +43,22 @@
       <VBox width="100%">
         <layoutData><layout:GridData span="XL9 L8 M12 S12" /></layoutData>
         <f:Card width="100%">
-          <f:header><card:Header title="1. Query" subtitle="Start typing for suggestions. Cmd + Enter runs it." /></f:header>
+          <f:header><card:Header title="1. Query (SQL)" subtitle="Start typing for suggestions. Cmd/Ctrl + Enter runs it." /></f:header>
           <f:content>
             <VBox class="sapUiSmallMargin" width="100%">
               <HBox alignItems="Center" wrap="Wrap">
                 <Select id="exampleSelect" width="22rem" items="{pg>/examples}" selectedKey="{pg>/exampleId}" change=".onExampleSelect" forceSelection="false" class="sapUiTinyMarginEnd">
                   <core:Item key="{pg>id}" text="Example: {pg>title}" />
                 </Select>
-                <Button text="q() help" icon="sap-icon://hint" type="Transparent" press=".onShowHelp" />
+                <Button text="SQL help" icon="sap-icon://hint" type="Transparent" press=".onShowHelp" />
               </HBox>
-              <code:CodeEditor id="editor" type="javascript" value="{pg>/code}" height="7.5rem" width="100%" syntaxHints="false" class="sapUiTinyMarginTop" />
+              <code:CodeEditor id="editor" type="sql" value="{pg>/code}" height="9rem" width="100%" syntaxHints="false" class="sapUiTinyMarginTop" />
               <HBox class="sapUiSmallMarginTop" alignItems="Center">
                 <Button text="Run" icon="sap-icon://media-play" type="Emphasized" press=".onRun" class="sapUiSmallMarginEnd" />
                 <Text text="{pg>/status}" />
               </HBox>
               <MessageStrip text="{pg>/error}" type="Error" showIcon="true" visible="{= !!${pg>/error} }" class="sapUiSmallMarginTop" />
+              <MessageStrip text="{pg>/warning}" type="Warning" showIcon="true" visible="{= !!${pg>/warning} &amp;&amp; !${pg>/error} }" class="sapUiSmallMarginTop" />
             </VBox>
           </f:content>
         </f:Card>
@@ -81,13 +82,13 @@
               <HBox alignItems="Center" wrap="Wrap">
                 <Label text="Name" labelFor="nameInput" class="sapUiTinyMarginEnd" />
                 <Input id="nameInput" value="{pg>/name}" liveChange=".onNameChange" width="14rem" valueState="{= ${pg>/nameValid} ? 'None' : 'Error' }"
-                  valueStateText="Letters and digits only, starting with a letter, e.g. co2ByPlant" class="sapUiSmallMarginEnd" />
+                  valueStateText="Letters and digits only, starting with a letter, e.g. showupByDay" class="sapUiSmallMarginEnd" />
                 <Button text="Copy for data.js" icon="sap-icon://copy" press=".onCopyDataJs" class="sapUiTinyMarginEnd" enabled="{pg>/nameValid}" />
                 <Button text="Copy XML" icon="sap-icon://copy" type="Emphasized" press=".onCopyXml" enabled="{pg>/nameValid}" class="sapUiTinyMarginEnd" />
                 <Button text="Show code" type="Transparent" press=".onToggleCode" />
               </HBox>
               <VBox visible="{pg>/showCode}" class="sapUiSmallMarginTop">
-                <code:CodeEditor type="javascript" value="{pg>/dataJs}" editable="false" height="6rem" width="100%" lineNumbers="false" />
+                <code:CodeEditor type="javascript" value="{pg>/dataJs}" editable="false" height="8rem" width="100%" lineNumbers="false" />
                 <code:CodeEditor type="xml" value="{pg>/xml}" editable="false" height="14rem" width="100%" lineNumbers="false" class="sapUiTinyMarginTop" />
               </VBox>
             </VBox>

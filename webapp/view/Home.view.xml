@@ -1,7 +1,6 @@
 <mvc:View
   controllerName="workshop.dashboard.controller.Home"
   xmlns="sap.m"
-  xmlns:core="sap.ui.core"
   xmlns:f="sap.f"
   xmlns:card="sap.f.cards"
   xmlns:layout="sap.ui.layout"
@@ -9,65 +8,90 @@
 >
   <Page showHeader="false" class="wsPage">
     <VBox class="wsPageIntro">
-      <Title text="Solve a case, then build the screen that proves it" level="H1" titleStyle="H2" wrapping="true" />
-      <Text text="{/meta/company} (a fictional company) makes e-bikes and e-scooters in 4 European plants. Each case is a question from a manager. The data holds the real answer. Pick a case, find the answer in the Query Playground, then build one page that makes it obvious." class="sapUiSmallMarginTop" />
+      <Title text="{app>/case/title}" level="H1" titleStyle="H2" wrapping="true" />
+      <Text text="It's {app>/case/today}. Find out what's really going on in the data, then build the SAPUI5 dashboard that makes the answer impossible to miss." class="sapUiSmallMarginTop" />
     </VBox>
 
-    <!-- 1. Pick a case -->
+    <!-- 1. The story -->
     <VBox class="wsSection">
-      <Title text="1. Pick a case" level="H2" />
-      <layout:Grid content="{app>/cases}" defaultSpan="XL4 L4 M6 S12" hSpacing="1" vSpacing="1" containerQuery="false">
-        <f:Card width="100%" height="100%" class="wsCaseCard">
-          <f:header>
-            <card:Header title="{app>title}" subtitle="Asked by: {app>client}" />
-          </f:header>
-          <f:content>
-            <VBox width="100%">
-              <ObjectStatus text="{app>level}" state="{= ${app>level} === 'Easy' ? 'Success' : ${app>level} === 'Medium' ? 'Warning' : 'Error' }" inverted="true" class="wsLevel" />
-              <Text text="{app>brief}" />
-              <Text text="They think: {app>assumption}" class="sapUiSmallMarginTop wsAssumption" />
-              <HBox justifyContent="End" class="sapUiMediumMarginTop">
-                <Button text="Pick this case" type="Emphasized" press=".onPickCase" visible="{= !${app>selected} }" />
-                <ObjectStatus text="Your case" state="Success" icon="sap-icon://accept" inverted="true" visible="{= !!${app>selected} }" />
-              </HBox>
-            </VBox>
-          </f:content>
-        </f:Card>
-      </layout:Grid>
-    </VBox>
-
-    <!-- 2. The selected case -->
-    <VBox class="wsSection" visible="{= !!${app>/case} }">
-      <Title text="2. Your case: {app>/case/title}" level="H2" />
-      <f:Card width="100%">
+      <Title text="1. The story" level="H2" />
+      <f:Card width="100%" class="wsCaseCard">
+        <f:header>
+          <card:Header title="Asked by: {app>/case/client}" subtitle="Deadline: {app>/case/deadline}" iconSrc="sap-icon://group" />
+        </f:header>
         <f:content>
-          <VBox class="sapUiMediumMargin" width="100%">
-            <Text text="{app>/case/question}" class="wsQuestion" />
-            <Text text="Deadline: {app>/case/deadline}. Deliverable: {app>/case/deliverable}" class="sapUiSmallMarginTop" />
-            <HBox alignItems="Center" wrap="Wrap" class="sapUiSmallMarginTop">
-              <Label text="Start with:" class="sapUiTinyMarginEnd" />
-              <HBox items="{app>/case/startWith}" wrap="Wrap">
-                <GenericTag text="{app>}" design="StatusIconHidden" press=".onOpenEntity" class="sapUiTinyMarginEnd" />
-              </HBox>
-            </HBox>
-            <HBox class="sapUiMediumMarginTop" wrap="Wrap">
-              <Button text="Open the Query Playground" icon="sap-icon://simulate" type="Emphasized" press=".onGoPlayground" class="sapUiSmallMarginEnd" />
-              <Button text="Open my app (new tab)" icon="sap-icon://action" press=".onOpenApp" />
-            </HBox>
-            <VBox items="{app>/case/hints}" class="sapUiMediumMarginTop">
-              <HBox alignItems="Center" class="sapUiTinyMarginBottom">
-                <Button text="Hint for minute {app>minute}" icon="sap-icon://lightbulb" type="Transparent" press=".onRevealHint" visible="{= !${app>shown} }" />
-                <MessageStrip text="Minute {app>minute}: {app>text}" type="Information" customIcon="sap-icon://lightbulb" showIcon="true" visible="{= !!${app>shown} }" />
-              </HBox>
+          <VBox width="100%">
+            <VBox items="{app>/case/story}">
+              <Text text="{app>}" class="sapUiSmallMarginBottom" />
             </VBox>
+            <Text text="{app>/case/question}" class="wsQuestion sapUiSmallMarginTop" />
+            <Text text="The president thinks: {app>/case/assumption} Opinions aren't evidence. What does the data say?" class="sapUiSmallMarginTop wsAssumption" />
           </VBox>
         </f:content>
       </f:Card>
     </VBox>
 
-    <!-- 3. Plan and marking: folded away, the facilitator explains it -->
+    <!-- 2. Three suspects -->
+    <VBox class="wsSection">
+      <Title text="2. Three suspects, one answer" level="H2" />
+      <HBox class="wsRow wsRowTight" renderType="Bare" items="{app>/case/hypotheses}">
+        <f:Card>
+          <f:header>
+            <card:Header title="{app>id}: {app>title}" subtitle="&quot;{app>suspicion}&quot;" />
+          </f:header>
+          <f:content>
+            <Text text="{app>challenge}" class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom" />
+          </f:content>
+        </f:Card>
+      </HBox>
+    </VBox>
+
+    <!-- 3. Start -->
+    <VBox class="wsSection">
+      <Title text="3. Investigate, then build" level="H2" />
+      <HBox class="wsRow wsRowTight" renderType="Bare">
+        <f:Card class="wsWide">
+          <f:header>
+            <card:Header title="Your dashboard must include" subtitle="{app>/case/deliverable}" iconSrc="sap-icon://checklist-item" />
+          </f:header>
+          <f:content>
+            <List items="{app>/case/mustInclude}" showSeparators="Inner" width="100%">
+              <StandardListItem title="{app>title}" description="{app>text}" wrapping="true" />
+            </List>
+          </f:content>
+        </f:Card>
+        <f:Card>
+          <f:header>
+            <card:Header title="Your tools" subtitle="Keep the kit (this tab) and your app side by side" iconSrc="sap-icon://wrench" />
+          </f:header>
+          <f:content>
+            <VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom" width="100%">
+              <Button text="Query Playground" icon="sap-icon://simulate" type="Emphasized" press=".onGoPlayground" width="100%" />
+              <Button text="Open my app (new tab)" icon="sap-icon://action" press=".onOpenApp" width="100%" class="sapUiTinyMarginTop" />
+              <Label text="The data: 4 tables" class="sapUiSmallMarginTop" />
+              <HBox items="{home>/tables}" wrap="Wrap">
+                <GenericTag text="{home>name}" design="StatusIconHidden" press=".onOpenTable" class="sapUiTinyMarginEnd sapUiTinyMarginTop" />
+              </HBox>
+            </VBox>
+          </f:content>
+        </f:Card>
+      </HBox>
+    </VBox>
+
+    <!-- 4. Hints -->
+    <VBox class="wsSection">
+      <Title text="4. Stuck? Two hints" level="H2" />
+      <VBox items="{app>/case/hints}">
+        <HBox alignItems="Center" class="sapUiTinyMarginBottom">
+          <Button text="Show the hint for minute {app>minute}" icon="sap-icon://lightbulb" press=".onRevealHint" visible="{= !${app>shown} }" />
+          <MessageStrip text="Minute {app>minute}: {app>text}" type="Information" customIcon="sap-icon://lightbulb" showIcon="true" visible="{= !!${app>shown} }" />
+        </HBox>
+      </VBox>
+    </VBox>
+
+    <!-- 5. Plan and marking -->
     <VBox class="wsSection sapUiMediumMarginBottom">
-      <Panel headerText="The 45 minutes, and how you are marked" expandable="true" expanded="false" width="auto">
+      <Panel headerText="The 45 minutes, the pitch, and how you are marked" expandable="true" expanded="false" width="auto">
         <layout:Grid defaultSpan="XL6 L6 M12 S12" hSpacing="2" vSpacing="1" containerQuery="false">
           <List items="{home>/steps}" headerText="The plan" showSeparators="Inner">
             <StandardListItem title="{home>title}" description="{home>text}" info="{home>time}" icon="{home>icon}" wrapping="true" />

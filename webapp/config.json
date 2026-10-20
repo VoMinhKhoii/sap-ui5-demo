@@ -1,4 +1,0 @@
-{
-  "_comment": "Which scenarios the workshop uses. Add \"sales\" and/or \"supply-chain\" to turn them on (cases, ERP tables, Playground examples, Scenario dropdown). For a quick look without editing, open the kit with ?scenarios=all",
-  "scenarios": ["sustainability"]
-}
