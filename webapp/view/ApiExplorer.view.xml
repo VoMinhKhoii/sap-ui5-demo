@@ -2,42 +2,40 @@
   controllerName="workshop.dashboard.controller.ApiExplorer"
   xmlns="sap.m"
   xmlns:code="sap.ui.codeeditor"
-  xmlns:core="sap.ui.core"
   xmlns:layout="sap.ui.layout"
   xmlns:mvc="sap.ui.core.mvc"
 >
   <Page showHeader="false" class="wsPage">
     <VBox class="wsPageIntro">
-      <Title text="API Explorer" level="H1" titleStyle="H2" />
-      <Text text="The ERP tables are the raw records of the company, shaped like SAP S/4HANA APIs. The answers to the cases are in there. Pick a table to see its fields, then query it in the Query Playground." class="sapUiTinyMarginTop" />
+      <Title text="Data Explorer" level="H1" titleStyle="H2" />
+      <Text text="The case data is one small SQLite database with 4 tables. Pick a table to see what each column means, then query it in the Query Playground." class="sapUiTinyMarginTop" />
     </VBox>
-    <layout:Grid defaultSpan="XL4 L4 M12 S12" hSpacing="1" vSpacing="1" containerQuery="false" class="sapUiSmallMarginBeginEnd">
-      <List id="endpointList" mode="SingleSelectMaster" selectionChange=".onEndpointSelect" headerText="Endpoints"
+    <layout:Grid defaultSpan="XL3 L4 M12 S12" hSpacing="1" vSpacing="1" containerQuery="false" class="sapUiSmallMarginBeginEnd">
+      <List id="endpointList" mode="SingleSelectMaster" selectionChange=".onEndpointSelect"
         items="{ path: 'explorer>/endpoints', sorter: { path: 'group', group: true } }">
         <StandardListItem title="{explorer>title}" description="{explorer>description}" info="{explorer>info}" wrapping="true" />
       </List>
       <VBox width="100%">
-        <layoutData><layout:GridData span="XL8 L8 M12 S12" /></layoutData>
+        <layoutData><layout:GridData span="XL9 L8 M12 S12" /></layoutData>
         <OverflowToolbar style="Clear">
-          <ObjectStatus text="GET" state="Success" inverted="true" class="sapUiTinyMarginEnd" />
-          <Link text="{explorer>/url}" href="{explorer>/url}" target="_blank" />
+          <Title text="{explorer>/title}" level="H2" />
           <ToolbarSpacer />
-          <Text text="{explorer>/usage}" />
+          <Text text="{explorer>/usage}" class="wsMono" />
         </OverflowToolbar>
 
-        <!-- ERP entity: fields and relations -->
-        <VBox visible="{explorer>/isErp}" width="100%">
-          <MessageStrip text="{explorer>/entity/description} {explorer>/entity/count} rows. Key: {explorer>/entity/key}." type="Information" showIcon="true" class="sapUiTinyMarginBottom" />
-          <Table items="{explorer>/entity/fields}" headerText="Fields" autoPopinMode="true" growing="true" growingThreshold="30">
+        <!-- A table: its columns and the first rows -->
+        <VBox visible="{explorer>/isTable}" width="100%">
+          <MessageStrip text="{explorer>/table/description} {explorer>/table/count} rows. Key: {explorer>/table/key}." type="Information" showIcon="true" class="sapUiTinyMarginBottom" />
+          <Table items="{explorer>/table/fields}" autoPopinMode="true" growing="true" growingThreshold="30">
             <headerToolbar>
               <OverflowToolbar style="Clear">
-                <Title text="Fields" level="H3" />
+                <Title text="Columns" level="H3" />
                 <ToolbarSpacer />
                 <Button text="Try in the Query Playground" icon="sap-icon://simulate" type="Emphasized" press=".onTryInPlayground" />
               </OverflowToolbar>
             </headerToolbar>
             <columns>
-              <Column width="14rem"><Text text="Field" /></Column>
+              <Column width="10rem"><Text text="Column" /></Column>
               <Column width="6rem"><Text text="Type" /></Column>
               <Column><Text text="Meaning" /></Column>
               <Column width="10rem"><Text text="Example" /></Column>
@@ -53,12 +51,17 @@
               </ColumnListItem>
             </items>
           </Table>
-          <Text text="{explorer>/relationsText}" class="sapUiSmallMarginTop sapUiSmallMarginBottom" />
+          <Text text="{explorer>/relationsText}" class="sapUiSmallMarginTop" visible="{= !!${explorer>/relationsText} }" />
+          <Title text="First 5 rows" level="H3" class="sapUiMediumMarginTop" />
+          <VBox id="rowsPreview" width="100%" />
         </VBox>
 
-        <code:CodeEditor type="json" value="{explorer>/response}" editable="false" height="{= ${explorer>/isErp} ? '18rem' : '34rem' }" width="100%" />
-        <MessageStrip type="Information" showIcon="true" class="sapUiSmallMarginTop" visible="{= !${explorer>/isErp} }"
-          text="Tip: arrays (kpis, trend, breakdown, items, alerts) are bound with items=&quot;\{/kpis\}&quot; or data=&quot;\{/trend\}&quot;. Single values with a full path, e.g. text=&quot;\{/kpis/0/title\}&quot;." />
+        <!-- Gallery sample data -->
+        <VBox visible="{= !${explorer>/isTable} }" width="100%">
+          <MessageStrip type="Information" showIcon="true" class="sapUiTinyMarginBottom"
+            text="The gallery blocks show this sample data. It's in your app too, so a pasted block works right away. Lists are bound with items=&quot;\{/kpis\}&quot; or data=&quot;\{/trend\}&quot;, single values with a full path, e.g. text=&quot;\{/kpis/0/title\}&quot;. For the case itself, use your own SQL queries." />
+          <code:CodeEditor type="json" value="{explorer>/response}" editable="false" height="32rem" width="100%" />
+        </VBox>
       </VBox>
     </layout:Grid>
   </Page>

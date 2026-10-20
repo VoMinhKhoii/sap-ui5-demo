@@ -14,7 +14,7 @@ sap.ui.define([
       }
       this.getRouter().attachRouteMatched(function (event) {
         const sideNav = this.byId("sideNav");
-        const items = sideNav.getItem().getItems().concat(sideNav.getFixedItem().getItems());
+        const items = sideNav.getItem().getItems();
         const current = items.find(function (item) { return item.getKey() === event.getParameter("name"); });
         if (current) {
           sideNav.setSelectedItem(current);
@@ -33,10 +33,6 @@ sap.ui.define([
     onToggleSideNav: function () {
       const toolPage = this.byId("toolPage");
       toolPage.setSideExpanded(!toolPage.getSideExpanded());
-    },
-
-    onScenarioChange: function (event) {
-      this.getOwnerComponent().loadScenario(event.getParameter("selectedItem").getKey());
     },
 
     onOpenFigma: function () {

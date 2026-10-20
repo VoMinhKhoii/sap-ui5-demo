@@ -45,20 +45,20 @@ Your page files in `webapp/workspace/view/` already declare all of these at the 
 
 | You write | You get |
 | --- | --- |
-| `text="{/meta/title}"` | one value, read by its absolute path |
+| `text="{/codingClub/members}"` | one value, read by its absolute path (a `sql.one` query) |
 | `text="{/kpis/0/title}"` | the title of the first KPI (arrays start at 0) |
-| `items="{/kpis}"` | **repeats** the child control once per KPI |
-| `text="{title}"` *(inside a repeated child)* | the title of the *current* KPI (relative path, no `/`) |
+| `items="{/membersByClub}"` | **repeats** the child control once per row (a `sql` query) |
+| `text="{name}"` *(inside a repeated child)* | the value of the *current* row (relative path, no `/`) |
 | `binding="{/kpis/2}"` | everything inside is now relative to KPI number 3 |
-| `text="{title}: {value} {unit}"` | mix text and several values |
+| `text="{name}: {members} members"` | mix text and several values |
 
-Charts use `data="{/trend}"` in place of `items=`.
+Charts use `data="{/membersByClub}"` in place of `items=`.
 
 ## 5. Formatters: turn raw data into display text
 
 ```xml
 <Text text="{ path: 'value', formatter: '.formatter.compactNumber' }" />            <!-- 18400000 → 18.4M -->
-<Text text="{ parts: ['amount', 'currency'], formatter: '.formatter.currency' }" /> <!-- → €284,000 -->
+<Text text="{ parts: ['amount', 'currency'], formatter: '.formatter.currency' }" /> <!-- 800, "EUR" → €800 -->
 ```
 
 Ready-made formatters are in `webapp/util/formatter.js`: `compactNumber`, `currency`, `percent`,
@@ -83,7 +83,7 @@ Use the meaning, not a hex code:
 | Text/status color | `None` `Success` `Warning` `Error` `Information` | `ObjectStatus state`, `highlight`, `ProgressIndicator state` |
 | Number/chart color | `Neutral` `Good` `Critical` `Error` | `NumericHeader state`, micro chart `color`/`valueColor` |
 
-The API's `state` fields already use these values. Convert between the two with
+The sample data's `state` fields already use these values. Convert between the two with
 `.formatter.valueState` and `.formatter.valueColor`.
 
 ## 8. Charts in 4 parts (VizFrame)
@@ -140,40 +140,45 @@ Need exact widths? The 12-column `layout:Grid` (Gallery → Layout → Responsiv
 To write your own, add a function in `webapp/workspace/controller/Page.controller.js`. There's an
 example at the bottom of that file.
 
-## 11. Your data: `data.js` and `q()`
+## 11. Your data: `data.js` and SQL
 
-`webapp/workspace/data.js` turns the raw ERP tables into exactly the rows your chart needs. Every
-entry becomes a path:
+`webapp/workspace/data.js` holds your queries. Each one gets a name, and the name becomes a path:
 
 ```js
 return {
-  revenueByRegion: q("A_BillingDocument")     // start from an ERP table
-    .join("A_Customer")                        // add the customer's fields (key found automatically)
-    .groupBy("SalesRegion")                    // one row per region
-    .sum("TotalNetAmount")                     // → { name, value, count, share }
-    .sortBy("value", "desc"),
+  ratingByClub: sql(`
+    SELECT club_id, ROUND(AVG(avg_rating), 1) AS rating
+    FROM events
+    GROUP BY club_id
+  `),
+  codingClub: sql.one(`
+    SELECT name, members
+    FROM clubs
+    WHERE club_id = 'C01'
+  `),
 };
 ```
 
-```xml
-<viz.data:FlattenedDataset data="{/revenueByRegion}">   <!-- {name} and {value} inside -->
-```
+| You write | You get | Bind it with |
+| --- | --- | --- |
+| ``name: sql(`…`)`` | all rows: a list | `items="{/name}"` (table, list) or `data="{/name}"` (chart), then `{column}` inside |
+| ``name: sql.one(`…`)`` | the first row: one object | `{/name/column}` anywhere, e.g. `text="{/codingClub/members}"` |
 
-| Step | Does |
+**Name every calculated column with `AS`**: `ROUND(AVG(fill_pct)) AS fill_pct`. That name is what you bind.
+
+SQL in 9 lines:
+
+| SQL | Does |
 | --- | --- |
-| `.where("Country", "FR")` · `.where("NetAmount", ">", 1000)` · `.where(r => …)` | keep matching rows |
-| `.join("A_Product")` | add fields of a related table (one → one) |
-| `.include("A_SalesOrder", "orders")` | add related rows as a list (one → many), bind `items="{orders}"` |
-| `.compute("Margin", r => r.NetAmount - r.Cost)` | add a calculated field |
-| `.groupBy("Plant")` | one row per value: `{ name, value, count, share }` |
-| `.byMonth("SalesOrderDate")` | one row per month: `{ month: "Jun 26", period: "2026-06", value }` |
-| `.sum("X")` `.avg` `.min` `.max` `.count()` `.percent("IsOk")` `.ratio("A", "B")` | the number (the first one is called `value`) |
-| `.sum("Budget", "target")` | a second number with its own name |
-| `.sum("CO2", "Leipzig", r => r.PlantName === "Leipzig")` | sum only some rows: one series per condition |
-| `.merge(q(…).groupBy(…).sum(…), "plan")` | add the value of another query, matched by name or month |
-| `.withState()` / `.withState(false)` | `state` (Good/Critical/Error) from `value` vs. `target`, higher/lower is better |
-| `.sortBy("value", "desc").top(5)` · `.first()` | sort, cut, or keep one row as an object (`{/q/Field}`) |
+| `SELECT club_id, AVG(avg_rating) AS rating` | the columns you want; `AS` names a result |
+| `FROM events` | the table |
+| `WHERE topic = 'Talk'` | keep some rows. Text goes in **single** quotes |
+| `AND week >= 5` · `OR` · `<>` · `IN ('Talk', 'Social')` | more conditions |
+| `GROUP BY club_id` | one row per value, for `COUNT(*)`, `SUM()`, `AVG()`, `MIN()`, `MAX()` |
+| `ROUND(AVG(avg_rating), 1)` | round to 1 decimal (`ROUND(x)` for none) |
+| `ORDER BY rating DESC LIMIT 5` | sort, then keep the first 5 |
+| `JOIN clubs c ON c.club_id = e.club_id` | add the columns of a linked table |
+| `CASE WHEN week <= 5 THEN 'early' ELSE 'late' END AS period` | make your own groups |
 
-Without `groupBy`/`byMonth`, `sum`/`count`/… give **one number**: bind it as `{/myNumber}`.
-Try everything in the **Query Playground** first. It shows the result as a chart and copies both
-the `data.js` line and the matching XML.
+Try everything in the **Query Playground** first. It shows the result as a chart (the first column
+is the label, number columns are plotted) and copies both the `data.js` entry and the matching XML.

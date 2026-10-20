@@ -7,7 +7,7 @@
   <Text text="{/meta/question}" class="sapUiTinyMarginTop" />
   <HBox class="sapUiSmallMarginTop">
     <ObjectStatus text="{= ${/alerts}.length } alerts need attention" state="Error" icon="sap-icon://error" class="sapUiSmallMarginEnd" />
-    <ObjectStatus text="Data as of Oct 2026" state="None" icon="sap-icon://date-time" />
+    <ObjectStatus text="Data as of {/meta/asOf}" state="None" icon="sap-icon://date-time" />
   </HBox>
 </VBox>
 </core:FragmentDefinition>

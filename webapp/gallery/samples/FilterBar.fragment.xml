@@ -8,7 +8,7 @@
     <DateRangeSelection width="100%" displayFormat="MMM yyyy" />
   </VBox>
   <VBox>
-    <Label text="Plant / Region" />
+    <Label text="Club" />
     <MultiComboBox width="100%" items="{/breakdown}" placeholder="All">
       <core:Item key="{name}" text="{name}" />
     </MultiComboBox>

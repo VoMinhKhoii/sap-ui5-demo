@@ -14,13 +14,7 @@
       "version": "1.0.0"
     },
     "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "dataSources": {
-      "api": {
-        "uri": "api/",
-        "type": "JSON"
-      }
-    }
+    "description": "{{appDescription}}"
   },
   "sap.ui": {
     "technology": "UI5",
@@ -104,11 +98,6 @@
           "name": "playground",
           "pattern": "playground",
           "target": "playground"
-        },
-        {
-          "name": "solution",
-          "pattern": "solution",
-          "target": "solution"
         }
       ],
       "targets": {
@@ -130,11 +119,6 @@
         "playground": {
           "id": "playground",
           "name": "Playground",
-          "level": 2
-        },
-        "solution": {
-          "id": "solution",
-          "name": "Solution",
           "level": 2
         }
       }

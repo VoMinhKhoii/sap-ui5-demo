@@ -1,23 +1,23 @@
 <core:FragmentDefinition
   xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:card="sap.f.cards" xmlns:layout="sap.ui.layout"
   xmlns:mc="sap.suite.ui.microchart" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:tnt="sap.tnt">
-<!-- Page layout "List → detail": pick a plant on the left, see its months and initiatives on the right.
-     Paste it into a page view in place of everything between the PAGE markers. Needs "plants" in data.js (there by default).
-     Inside the detail column, bindings are relative to the selected plant: {PlantName}, items="{months}". -->
+<!-- Page layout "List → detail": pick a club on the left, see its events on the right.
+     Paste it into a page view in place of everything between the PAGE markers. Uses {/clubList} (sample data, always there).
+     Inside the detail column, bindings are relative to the selected club: {name}, items="{eventList}". -->
 <f:FlexibleColumnLayout layout="OneColumn" backgroundDesign="Solid">
   <f:beginColumnPages>
     <f:DynamicPage showFooter="false">
       <f:title>
         <f:DynamicPageTitle>
-          <f:heading><Title text="Plants" level="H2" /></f:heading>
-          <f:expandedContent><Text text="Click a plant to see the details" /></f:expandedContent>
+          <f:heading><Title text="Clubs" level="H2" /></f:heading>
+          <f:expandedContent><Text text="Click a club to see its events" /></f:expandedContent>
         </f:DynamicPageTitle>
       </f:title>
       <f:content>
-        <List items="{/plants}" mode="SingleSelectMaster" selectionChange=".onShowDetail">
-          <ObjectListItem title="{PlantName}" number="{ path: 'CO2eTonnes', formatter: '.formatter.compactNumber' }" numberUnit="t CO2e">
+        <List items="{/clubList}" mode="SingleSelectMaster" selectionChange=".onShowDetail">
+          <ObjectListItem title="{name}" number="{fill_pct}" numberUnit="% seats filled">
             <attributes>
-              <ObjectAttribute text="{PlantCategoryText} · {MainProducts}" />
+              <ObjectAttribute text="{category} · {members} members" />
             </attributes>
           </ObjectListItem>
         </List>
@@ -28,8 +28,8 @@
     <f:DynamicPage showFooter="false">
       <f:title>
         <f:DynamicPageTitle>
-          <f:heading><Title text="{PlantName}" level="H2" /></f:heading>
-          <f:expandedContent><Text text="Plant {Plant} · {CityName}, {Country} · {MainProducts}" /></f:expandedContent>
+          <f:heading><Title text="{name}" level="H2" /></f:heading>
+          <f:expandedContent><Text text="Club {club_id} · {category} · organiser {organiser}" /></f:expandedContent>
           <f:navigationActions>
             <Button icon="sap-icon://decline" type="Transparent" press=".onCloseDetail" tooltip="Close" />
           </f:navigationActions>
@@ -39,61 +39,41 @@
         <f:DynamicPageHeader>
           <HBox wrap="Wrap">
             <VBox class="sapUiMediumMarginEnd sapUiSmallMarginBottom">
-              <Label text="CO2e this year" />
-              <ObjectNumber number="{ path: 'CO2eTonnes', formatter: '.formatter.compactNumber' }" unit="t" emphasized="true" />
+              <Label text="Seats filled" />
+              <ObjectNumber number="{fill_pct}" unit="%" emphasized="true" />
             </VBox>
             <VBox class="sapUiMediumMarginEnd sapUiSmallMarginBottom">
-              <Label text="CO2e budget" />
-              <ObjectNumber number="{ path: 'CO2eBudgetTonnes', formatter: '.formatter.compactNumber' }" unit="t" />
+              <Label text="Show-up" />
+              <ObjectNumber number="{showup_pct}" unit="%" />
+            </VBox>
+            <VBox class="sapUiMediumMarginEnd sapUiSmallMarginBottom">
+              <Label text="Members" />
+              <ObjectNumber number="{members}" />
             </VBox>
           </HBox>
         </f:DynamicPageHeader>
       </f:header>
       <f:content>
-        <IconTabBar expandable="false" headerBackgroundDesign="Transparent">
+        <Table items="{eventList}" autoPopinMode="true" headerText="Events ({= ${eventList} ? ${eventList}.length : 0 })">
+          <columns>
+            <Column><Text text="Event" /></Column>
+            <Column><Text text="When" /></Column>
+            <Column><Text text="Room" /></Column>
+            <Column hAlign="End"><Text text="Seats filled" /></Column>
+            <Column hAlign="End"><Text text="Rating" /></Column>
+          </columns>
           <items>
-            <IconTabFilter text="Months" icon="sap-icon://calendar" count="{= ${months} ? ${months}.length : 0 }">
-              <Table items="{months}" autoPopinMode="true">
-                <columns>
-                  <Column><Text text="Month" /></Column>
-                  <Column hAlign="End"><Text text="CO2e (t)" /></Column>
-                  <Column hAlign="End"><Text text="Budget (t)" /></Column>
-                  <Column hAlign="End"><Text text="Electricity (MWh)" /></Column>
-                </columns>
-                <items>
-                  <ColumnListItem>
-                    <cells>
-                      <Text text="{YearMonth}" />
-                      <ObjectNumber number="{CO2eTonnes}" />
-                      <ObjectNumber number="{BudgetCO2eTonnes}" />
-                      <ObjectNumber number="{ElectricityMWh}" />
-                    </cells>
-                  </ColumnListItem>
-                </items>
-              </Table>
-            </IconTabFilter>
-            <IconTabFilter text="Initiatives" icon="sap-icon://e-care" count="{= ${initiatives} ? ${initiatives}.length : 0 }">
-              <Table items="{initiatives}" autoPopinMode="true">
-                <columns>
-                  <Column><Text text="Initiative" /></Column>
-                  <Column><Text text="Go-live" /></Column>
-                  <Column width="9rem"><Text text="Progress" /></Column>
-                  <Column><Text text="Status" /></Column>
-                </columns>
-                <items>
-                  <ColumnListItem>
-                    <cells>
-                      <ObjectIdentifier title="{InitiativeName}" text="{ResponsiblePerson}" />
-                      <Text text="{ path: 'PlannedGoLiveDate', formatter: '.formatter.date' }" />
-                      <ProgressIndicator percentValue="{ProgressPercent}" displayValue="{ProgressPercent}%" />
-                      <ObjectStatus text="{StatusText}" state="{= ${StatusText} === 'Delayed' ? 'Error' : ${StatusText} === 'At risk' ? 'Warning' : ${StatusText} === 'Live' ? 'Success' : 'Information' }" />
-                    </cells>
-                  </ColumnListItem>
-                </items>
-              </Table>
-            </IconTabFilter>
+            <ColumnListItem>
+              <cells>
+                <ObjectIdentifier title="{title}" text="{topic}" />
+                <Text text="{weekday} { path: 'date', formatter: '.formatter.date' }, {start_time}" />
+                <Text text="{room}" />
+                <ObjectNumber number="{fill_pct}" unit="%" state="{= ${fill_pct} >= 80 ? 'Success' : ${fill_pct} >= 60 ? 'Warning' : 'Error' }" />
+                <ObjectNumber number="{avg_rating}" />
+              </cells>
+            </ColumnListItem>
           </items>
-        </IconTabBar>
+        </Table>
       </f:content>
     </f:DynamicPage>
   </f:midColumnPages>

@@ -133,13 +133,7 @@
   width: 100%;
 }
 
-/* Reference solution: one answer page per case tab. */
-.wsSolutionTabs {
-  padding: 0 1rem;
-  box-sizing: border-box;
-}
-
-.wsSolution {
-  padding: 1.5rem 0.5rem 2rem;
-  max-width: 80rem;
+/* Rows of cards on the kit's reading pages sit right under their section title. */
+.wsRowTight {
+  margin-top: 0;
 }

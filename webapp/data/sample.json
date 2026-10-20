@@ -1,0 +1,1475 @@
+{
+  "meta": {
+    "company": "Coding Club",
+    "title": "Coding Club · autumn semester 2026",
+    "description": "8 student clubs, 90 events, weeks 1-10 (7 Sep - 13 Nov 2026). Fictional data.",
+    "question": "Why are our events half empty: the topics, the timing or the promotion? And what should we change next semester?",
+    "asOf": "13 Nov 2026",
+    "trend": {
+      "title": "Seats filled per week",
+      "subtitle": "Coding Club, checked in ÷ seats, %",
+      "unit": "%",
+      "actualLabel": "Seats filled %",
+      "planLabel": "Target"
+    },
+    "breakdown": {
+      "title": "People per club",
+      "subtitle": "Checked in this semester vs. 80% of seats",
+      "unit": "people"
+    },
+    "items": {
+      "title": "Student clubs",
+      "subtitle": "All 8 clubs this semester",
+      "columns": {
+        "id": "Club",
+        "title": "Club",
+        "subtitle": "Category",
+        "owner": "Organiser",
+        "date": "Last event",
+        "amount": "Members",
+        "progress": "Seats filled",
+        "status": "Status"
+      }
+    }
+  },
+  "kpis": [
+    {
+      "id": "seatsFilled",
+      "title": "Seats filled",
+      "subtitle": "Coding Club, checked in ÷ seats",
+      "value": 72.3,
+      "unit": "%",
+      "target": 80,
+      "deltaPercent": 10.7,
+      "trend": "Up",
+      "state": "Critical",
+      "icon": "sap-icon://group",
+      "higherIsBetter": true,
+      "history": [
+        {
+          "x": 0,
+          "period": "Wk 5",
+          "value": 61.7
+        },
+        {
+          "x": 1,
+          "period": "Wk 6",
+          "value": 67.5
+        },
+        {
+          "x": 2,
+          "period": "Wk 7",
+          "value": 64.2
+        },
+        {
+          "x": 3,
+          "period": "Wk 8",
+          "value": 64.2
+        },
+        {
+          "x": 4,
+          "period": "Wk 9",
+          "value": 67.5
+        },
+        {
+          "x": 5,
+          "period": "Wk 10",
+          "value": 68.3
+        }
+      ]
+    },
+    {
+      "id": "signUps",
+      "title": "Sign-ups",
+      "subtitle": "Coding Club, signed up ÷ seats",
+      "value": 94.2,
+      "unit": "%",
+      "target": 80,
+      "deltaPercent": 6.6,
+      "trend": "Up",
+      "state": "Good",
+      "icon": "sap-icon://add-employee",
+      "higherIsBetter": true,
+      "history": [
+        {
+          "x": 0,
+          "period": "Wk 5",
+          "value": 87.5
+        },
+        {
+          "x": 1,
+          "period": "Wk 6",
+          "value": 95
+        },
+        {
+          "x": 2,
+          "period": "Wk 7",
+          "value": 93.3
+        },
+        {
+          "x": 3,
+          "period": "Wk 8",
+          "value": 90
+        },
+        {
+          "x": 4,
+          "period": "Wk 9",
+          "value": 95
+        },
+        {
+          "x": 5,
+          "period": "Wk 10",
+          "value": 93.3
+        }
+      ]
+    },
+    {
+      "id": "rating",
+      "title": "Rating",
+      "subtitle": "Coding Club, average feedback",
+      "value": 4.3,
+      "unit": "/ 5",
+      "target": 4,
+      "deltaPercent": -4.5,
+      "trend": "Down",
+      "state": "Good",
+      "icon": "sap-icon://favorite",
+      "higherIsBetter": true,
+      "history": [
+        {
+          "x": 0,
+          "period": "Wk 5",
+          "value": 4.4
+        },
+        {
+          "x": 1,
+          "period": "Wk 6",
+          "value": 4.5
+        },
+        {
+          "x": 2,
+          "period": "Wk 7",
+          "value": 4.2
+        },
+        {
+          "x": 3,
+          "period": "Wk 8",
+          "value": 4.4
+        },
+        {
+          "x": 4,
+          "period": "Wk 9",
+          "value": 4.2
+        },
+        {
+          "x": 5,
+          "period": "Wk 10",
+          "value": 4.2
+        }
+      ]
+    },
+    {
+      "id": "reach",
+      "title": "Promotion reach",
+      "subtitle": "People reached per event, weeks 7-10",
+      "value": 286,
+      "unit": "people",
+      "target": 600,
+      "deltaPercent": -60.5,
+      "trend": "Down",
+      "state": "Error",
+      "icon": "sap-icon://marketing-campaign",
+      "higherIsBetter": true,
+      "history": [
+        {
+          "x": 0,
+          "period": "Wk 5",
+          "value": 744
+        },
+        {
+          "x": 1,
+          "period": "Wk 6",
+          "value": 780
+        },
+        {
+          "x": 2,
+          "period": "Wk 7",
+          "value": 285
+        },
+        {
+          "x": 3,
+          "period": "Wk 8",
+          "value": 263
+        },
+        {
+          "x": 4,
+          "period": "Wk 9",
+          "value": 302
+        },
+        {
+          "x": 5,
+          "period": "Wk 10",
+          "value": 294
+        }
+      ]
+    }
+  ],
+  "trend": [
+    {
+      "month": "Wk 1",
+      "actual": 80.8,
+      "plan": 80,
+      "previousYear": 86
+    },
+    {
+      "month": "Wk 2",
+      "actual": 81.7,
+      "plan": 80,
+      "previousYear": 84
+    },
+    {
+      "month": "Wk 3",
+      "actual": 84.2,
+      "plan": 80,
+      "previousYear": 85
+    },
+    {
+      "month": "Wk 4",
+      "actual": 83.3,
+      "plan": 80,
+      "previousYear": 83
+    },
+    {
+      "month": "Wk 5",
+      "actual": 61.7,
+      "plan": 80,
+      "previousYear": 84
+    },
+    {
+      "month": "Wk 6",
+      "actual": 67.5,
+      "plan": 80,
+      "previousYear": 82
+    },
+    {
+      "month": "Wk 7",
+      "actual": 64.2,
+      "plan": 80,
+      "previousYear": 83
+    },
+    {
+      "month": "Wk 8",
+      "actual": 64.2,
+      "plan": 80,
+      "previousYear": 81
+    },
+    {
+      "month": "Wk 9",
+      "actual": 67.5,
+      "plan": 80,
+      "previousYear": 82
+    },
+    {
+      "month": "Wk 10",
+      "actual": 68.3,
+      "plan": 80,
+      "previousYear": 80
+    }
+  ],
+  "breakdown": [
+    {
+      "name": "Coding Club",
+      "value": 868,
+      "target": 960,
+      "share": 22.8,
+      "state": "Critical"
+    },
+    {
+      "name": "Film Society",
+      "value": 470,
+      "target": 560,
+      "share": 12.3,
+      "state": "Error"
+    },
+    {
+      "name": "Hiking Club",
+      "value": 363,
+      "target": 480,
+      "share": 9.5,
+      "state": "Error"
+    },
+    {
+      "name": "Debate Society",
+      "value": 311,
+      "target": 320,
+      "share": 8.2,
+      "state": "Critical"
+    },
+    {
+      "name": "Robotics Team",
+      "value": 241,
+      "target": 320,
+      "share": 6.3,
+      "state": "Error"
+    },
+    {
+      "name": "Photography Club",
+      "value": 405,
+      "target": 480,
+      "share": 10.6,
+      "state": "Error"
+    },
+    {
+      "name": "Salsa Club",
+      "value": 364,
+      "target": 400,
+      "share": 9.5,
+      "state": "Critical"
+    },
+    {
+      "name": "Entrepreneurs Club",
+      "value": 792,
+      "target": 960,
+      "share": 20.8,
+      "state": "Error"
+    }
+  ],
+  "items": [
+    {
+      "id": "C05",
+      "title": "Robotics Team",
+      "subtitle": "Tech · 10 events",
+      "owner": "Minh Do",
+      "date": "2026-11-13",
+      "amount": 51,
+      "unit": "members",
+      "quantity": 10,
+      "progress": 60,
+      "status": "Well below target",
+      "state": "Error"
+    },
+    {
+      "id": "C03",
+      "title": "Hiking Club",
+      "subtitle": "Sports · 10 events",
+      "owner": "Tom Hale",
+      "date": "2026-11-13",
+      "amount": 118,
+      "unit": "members",
+      "quantity": 10,
+      "progress": 61,
+      "status": "Well below target",
+      "state": "Error"
+    },
+    {
+      "id": "C08",
+      "title": "Entrepreneurs Club",
+      "subtitle": "Career · 10 events",
+      "owner": "Nora Weiss",
+      "date": "2026-11-10",
+      "amount": 109,
+      "unit": "members",
+      "quantity": 10,
+      "progress": 66,
+      "status": "Well below target",
+      "state": "Error"
+    },
+    {
+      "id": "C02",
+      "title": "Film Society",
+      "subtitle": "Arts · 10 events",
+      "owner": "Ana Ruiz",
+      "date": "2026-11-09",
+      "amount": 96,
+      "unit": "members",
+      "quantity": 10,
+      "progress": 67,
+      "status": "Well below target",
+      "state": "Error"
+    },
+    {
+      "id": "C06",
+      "title": "Photography Club",
+      "subtitle": "Arts · 10 events",
+      "owner": "Sara Kim",
+      "date": "2026-11-12",
+      "amount": 88,
+      "unit": "members",
+      "quantity": 10,
+      "progress": 68,
+      "status": "Well below target",
+      "state": "Error"
+    },
+    {
+      "id": "C01",
+      "title": "Coding Club",
+      "subtitle": "Tech · 20 events",
+      "owner": "Linh Pham",
+      "date": "2026-11-13",
+      "amount": 142,
+      "unit": "members",
+      "quantity": 20,
+      "progress": 72,
+      "status": "Below target",
+      "state": "Warning"
+    },
+    {
+      "id": "C07",
+      "title": "Salsa Club",
+      "subtitle": "Sports · 10 events",
+      "owner": "Leo Costa",
+      "date": "2026-11-10",
+      "amount": 73,
+      "unit": "members",
+      "quantity": 10,
+      "progress": 73,
+      "status": "Below target",
+      "state": "Warning"
+    },
+    {
+      "id": "C04",
+      "title": "Debate Society",
+      "subtitle": "Academic · 10 events",
+      "owner": "Priya Nair",
+      "date": "2026-11-09",
+      "amount": 64,
+      "unit": "members",
+      "quantity": 10,
+      "progress": 78,
+      "status": "Below target",
+      "state": "Warning"
+    }
+  ],
+  "alerts": [
+    {
+      "type": "Error",
+      "title": "Seats half empty since October",
+      "description": "The Coding Club filled 66% of its seats in weeks 5-10, after 83% in weeks 1-4.",
+      "date": "2026-11-13"
+    },
+    {
+      "type": "Warning",
+      "title": "Sponsor renewal on Friday",
+      "description": "Quillmoor Software pays EUR 800 a semester for the workshops. Renewal meeting: Fri 20 Nov.",
+      "date": "2026-11-20"
+    },
+    {
+      "type": "Information",
+      "title": "No more Instagram posts",
+      "description": "The Coding Club stopped posting on Instagram in week 7 (from 19 Oct).",
+      "date": "2026-10-19"
+    },
+    {
+      "type": "Information",
+      "title": "Room plan for spring 2027 is out",
+      "description": "The weekly room bookings for next semester are fixed (table room_bookings).",
+      "date": "2026-11-09"
+    }
+  ],
+  "clubList": [
+    {
+      "club_id": "C01",
+      "name": "Coding Club",
+      "category": "Tech",
+      "members": 142,
+      "sponsor": "Quillmoor Software (EUR 800, workshops)",
+      "organiser": "Linh Pham",
+      "events": 20,
+      "fill_pct": 72,
+      "showup_pct": 77,
+      "eventList": [
+        {
+          "title": "Life as a junior dev",
+          "topic": "Talk",
+          "date": "2026-09-09",
+          "weekday": "Wed",
+          "start_time": "18:00",
+          "room": "M201",
+          "fill_pct": 76,
+          "avg_rating": 4
+        },
+        {
+          "title": "Git basics",
+          "topic": "Workshop",
+          "date": "2026-09-10",
+          "weekday": "Thu",
+          "start_time": "18:00",
+          "room": "M105",
+          "fill_pct": 90,
+          "avg_rating": 4.5
+        },
+        {
+          "title": "Welcome drinks",
+          "topic": "Social",
+          "date": "2026-09-16",
+          "weekday": "Wed",
+          "start_time": "18:00",
+          "room": "M201",
+          "fill_pct": 79,
+          "avg_rating": 3.9
+        },
+        {
+          "title": "Build a web app in 90 min",
+          "topic": "Workshop",
+          "date": "2026-09-17",
+          "weekday": "Thu",
+          "start_time": "18:00",
+          "room": "M105",
+          "fill_pct": 88,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "How startups hire",
+          "topic": "Talk",
+          "date": "2026-09-23",
+          "weekday": "Wed",
+          "start_time": "18:00",
+          "room": "M201",
+          "fill_pct": 88,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Intro to Python",
+          "topic": "Workshop",
+          "date": "2026-09-24",
+          "weekday": "Thu",
+          "start_time": "18:00",
+          "room": "M105",
+          "fill_pct": 78,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Board game night",
+          "topic": "Social",
+          "date": "2026-09-30",
+          "weekday": "Wed",
+          "start_time": "18:00",
+          "room": "M201",
+          "fill_pct": 86,
+          "avg_rating": 4.1
+        },
+        {
+          "title": "APIs with JavaScript",
+          "topic": "Workshop",
+          "date": "2026-10-01",
+          "weekday": "Thu",
+          "start_time": "18:00",
+          "room": "M105",
+          "fill_pct": 78,
+          "avg_rating": 4.5
+        },
+        {
+          "title": "Open source 101",
+          "topic": "Talk",
+          "date": "2026-10-07",
+          "weekday": "Wed",
+          "start_time": "18:00",
+          "room": "M201",
+          "fill_pct": 74,
+          "avg_rating": 4.1
+        },
+        {
+          "title": "SQL for beginners",
+          "topic": "Workshop",
+          "date": "2026-10-09",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "M105",
+          "fill_pct": 38,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Docker in an hour",
+          "topic": "Workshop",
+          "date": "2026-10-14",
+          "weekday": "Wed",
+          "start_time": "18:00",
+          "room": "M201",
+          "fill_pct": 85,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "Hack your CV site",
+          "topic": "Workshop",
+          "date": "2026-10-16",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "M105",
+          "fill_pct": 33,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Unit testing 101",
+          "topic": "Workshop",
+          "date": "2026-10-21",
+          "weekday": "Wed",
+          "start_time": "18:00",
+          "room": "M201",
+          "fill_pct": 74,
+          "avg_rating": 4.5
+        },
+        {
+          "title": "Pizza & projects",
+          "topic": "Social",
+          "date": "2026-10-23",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "M105",
+          "fill_pct": 45,
+          "avg_rating": 3.9
+        },
+        {
+          "title": "AI in practice",
+          "topic": "Talk",
+          "date": "2026-10-28",
+          "weekday": "Wed",
+          "start_time": "18:00",
+          "room": "M201",
+          "fill_pct": 78,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Debugging like a pro",
+          "topic": "Workshop",
+          "date": "2026-10-30",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "M105",
+          "fill_pct": 38,
+          "avg_rating": 4.5
+        },
+        {
+          "title": "Quiz night",
+          "topic": "Social",
+          "date": "2026-11-04",
+          "weekday": "Wed",
+          "start_time": "18:00",
+          "room": "M201",
+          "fill_pct": 78,
+          "avg_rating": 4
+        },
+        {
+          "title": "React crash course",
+          "topic": "Workshop",
+          "date": "2026-11-06",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "M105",
+          "fill_pct": 48,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "From intern to engineer",
+          "topic": "Talk",
+          "date": "2026-11-11",
+          "weekday": "Wed",
+          "start_time": "18:00",
+          "room": "M201",
+          "fill_pct": 85,
+          "avg_rating": 4
+        },
+        {
+          "title": "Git basics",
+          "topic": "Workshop",
+          "date": "2026-11-13",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "M105",
+          "fill_pct": 35,
+          "avg_rating": 4.4
+        }
+      ]
+    },
+    {
+      "club_id": "C02",
+      "name": "Film Society",
+      "category": "Arts",
+      "members": 96,
+      "sponsor": null,
+      "organiser": "Ana Ruiz",
+      "events": 10,
+      "fill_pct": 67,
+      "showup_pct": 71,
+      "eventList": [
+        {
+          "title": "Screening #1",
+          "topic": "Screening",
+          "date": "2026-09-07",
+          "weekday": "Mon",
+          "start_time": "18:30",
+          "room": "A120",
+          "fill_pct": 71,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Screening #2",
+          "topic": "Screening",
+          "date": "2026-09-17",
+          "weekday": "Thu",
+          "start_time": "18:30",
+          "room": "A120",
+          "fill_pct": 81,
+          "avg_rating": 4
+        },
+        {
+          "title": "Screening #3",
+          "topic": "Screening",
+          "date": "2026-09-25",
+          "weekday": "Fri",
+          "start_time": "19:00",
+          "room": "A120",
+          "fill_pct": 46,
+          "avg_rating": 4
+        },
+        {
+          "title": "Screening #4",
+          "topic": "Screening",
+          "date": "2026-09-28",
+          "weekday": "Mon",
+          "start_time": "18:30",
+          "room": "A120",
+          "fill_pct": 81,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Screening #5",
+          "topic": "Screening",
+          "date": "2026-10-08",
+          "weekday": "Thu",
+          "start_time": "18:00",
+          "room": "A120",
+          "fill_pct": 71,
+          "avg_rating": 4.1
+        },
+        {
+          "title": "Screening #6",
+          "topic": "Screening",
+          "date": "2026-10-16",
+          "weekday": "Fri",
+          "start_time": "19:00",
+          "room": "A120",
+          "fill_pct": 41,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Screening #7",
+          "topic": "Screening",
+          "date": "2026-10-19",
+          "weekday": "Mon",
+          "start_time": "18:00",
+          "room": "A120",
+          "fill_pct": 73,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Screening #8",
+          "topic": "Screening",
+          "date": "2026-10-29",
+          "weekday": "Thu",
+          "start_time": "18:30",
+          "room": "A120",
+          "fill_pct": 81,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Screening #9",
+          "topic": "Screening",
+          "date": "2026-11-06",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "A120",
+          "fill_pct": 44,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Screening #10",
+          "topic": "Screening",
+          "date": "2026-11-09",
+          "weekday": "Mon",
+          "start_time": "17:30",
+          "room": "A120",
+          "fill_pct": 80,
+          "avg_rating": 4.1
+        }
+      ]
+    },
+    {
+      "club_id": "C03",
+      "name": "Hiking Club",
+      "category": "Sports",
+      "members": 118,
+      "sponsor": null,
+      "organiser": "Tom Hale",
+      "events": 10,
+      "fill_pct": 61,
+      "showup_pct": 65,
+      "eventList": [
+        {
+          "title": "Trip #1",
+          "topic": "Trip",
+          "date": "2026-09-08",
+          "weekday": "Tue",
+          "start_time": "17:30",
+          "room": "L002",
+          "fill_pct": 72,
+          "avg_rating": 4.3
+        },
+        {
+          "title": "Trip #2",
+          "topic": "Trip",
+          "date": "2026-09-18",
+          "weekday": "Fri",
+          "start_time": "18:00",
+          "room": "L002",
+          "fill_pct": 37,
+          "avg_rating": 4.5
+        },
+        {
+          "title": "Trip #3",
+          "topic": "Trip",
+          "date": "2026-09-22",
+          "weekday": "Tue",
+          "start_time": "18:30",
+          "room": "L002",
+          "fill_pct": 72,
+          "avg_rating": 4.5
+        },
+        {
+          "title": "Trip #4",
+          "topic": "Trip",
+          "date": "2026-10-02",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "L002",
+          "fill_pct": 42,
+          "avg_rating": 4.3
+        },
+        {
+          "title": "Trip #5",
+          "topic": "Trip",
+          "date": "2026-10-06",
+          "weekday": "Tue",
+          "start_time": "17:30",
+          "room": "L002",
+          "fill_pct": 80,
+          "avg_rating": 4.5
+        },
+        {
+          "title": "Trip #6",
+          "topic": "Trip",
+          "date": "2026-10-16",
+          "weekday": "Fri",
+          "start_time": "18:00",
+          "room": "L002",
+          "fill_pct": 38,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "Trip #7",
+          "topic": "Trip",
+          "date": "2026-10-20",
+          "weekday": "Tue",
+          "start_time": "19:00",
+          "room": "L002",
+          "fill_pct": 90,
+          "avg_rating": 4.5
+        },
+        {
+          "title": "Trip #8",
+          "topic": "Trip",
+          "date": "2026-10-30",
+          "weekday": "Fri",
+          "start_time": "17:30",
+          "room": "L002",
+          "fill_pct": 42,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "Trip #9",
+          "topic": "Trip",
+          "date": "2026-11-03",
+          "weekday": "Tue",
+          "start_time": "17:30",
+          "room": "L002",
+          "fill_pct": 90,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "Trip #10",
+          "topic": "Trip",
+          "date": "2026-11-13",
+          "weekday": "Fri",
+          "start_time": "17:30",
+          "room": "L002",
+          "fill_pct": 43,
+          "avg_rating": 4.3
+        }
+      ]
+    },
+    {
+      "club_id": "C04",
+      "name": "Debate Society",
+      "category": "Academic",
+      "members": 64,
+      "sponsor": null,
+      "organiser": "Priya Nair",
+      "events": 10,
+      "fill_pct": 78,
+      "showup_pct": 84,
+      "eventList": [
+        {
+          "title": "Competition #1",
+          "topic": "Competition",
+          "date": "2026-09-09",
+          "weekday": "Wed",
+          "start_time": "19:00",
+          "room": "M310",
+          "fill_pct": 78,
+          "avg_rating": 4.3
+        },
+        {
+          "title": "Competition #2",
+          "topic": "Competition",
+          "date": "2026-09-14",
+          "weekday": "Mon",
+          "start_time": "19:00",
+          "room": "M310",
+          "fill_pct": 75,
+          "avg_rating": 4.3
+        },
+        {
+          "title": "Competition #3",
+          "topic": "Competition",
+          "date": "2026-09-23",
+          "weekday": "Wed",
+          "start_time": "18:30",
+          "room": "M310",
+          "fill_pct": 80,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Competition #4",
+          "topic": "Competition",
+          "date": "2026-09-28",
+          "weekday": "Mon",
+          "start_time": "19:00",
+          "room": "M310",
+          "fill_pct": 75,
+          "avg_rating": 4.1
+        },
+        {
+          "title": "Competition #5",
+          "topic": "Competition",
+          "date": "2026-10-07",
+          "weekday": "Wed",
+          "start_time": "18:00",
+          "room": "M310",
+          "fill_pct": 73,
+          "avg_rating": 4.1
+        },
+        {
+          "title": "Competition #6",
+          "topic": "Competition",
+          "date": "2026-10-12",
+          "weekday": "Mon",
+          "start_time": "17:30",
+          "room": "M310",
+          "fill_pct": 78,
+          "avg_rating": 4.1
+        },
+        {
+          "title": "Competition #7",
+          "topic": "Competition",
+          "date": "2026-10-21",
+          "weekday": "Wed",
+          "start_time": "17:30",
+          "room": "M310",
+          "fill_pct": 85,
+          "avg_rating": 4.3
+        },
+        {
+          "title": "Competition #8",
+          "topic": "Competition",
+          "date": "2026-10-26",
+          "weekday": "Mon",
+          "start_time": "18:00",
+          "room": "M310",
+          "fill_pct": 78,
+          "avg_rating": 4.3
+        },
+        {
+          "title": "Competition #9",
+          "topic": "Competition",
+          "date": "2026-11-04",
+          "weekday": "Wed",
+          "start_time": "17:30",
+          "room": "M310",
+          "fill_pct": 88,
+          "avg_rating": 4.1
+        },
+        {
+          "title": "Competition #10",
+          "topic": "Competition",
+          "date": "2026-11-09",
+          "weekday": "Mon",
+          "start_time": "19:00",
+          "room": "M310",
+          "fill_pct": 70,
+          "avg_rating": 4.1
+        }
+      ]
+    },
+    {
+      "club_id": "C05",
+      "name": "Robotics Team",
+      "category": "Tech",
+      "members": 51,
+      "sponsor": null,
+      "organiser": "Minh Do",
+      "events": 10,
+      "fill_pct": 60,
+      "showup_pct": 63,
+      "eventList": [
+        {
+          "title": "Workshop #1",
+          "topic": "Workshop",
+          "date": "2026-09-08",
+          "weekday": "Tue",
+          "start_time": "18:30",
+          "room": "M310",
+          "fill_pct": 88,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Workshop #2",
+          "topic": "Workshop",
+          "date": "2026-09-18",
+          "weekday": "Fri",
+          "start_time": "17:30",
+          "room": "M310",
+          "fill_pct": 35,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Workshop #3",
+          "topic": "Workshop",
+          "date": "2026-09-22",
+          "weekday": "Tue",
+          "start_time": "19:00",
+          "room": "M310",
+          "fill_pct": 78,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "Workshop #4",
+          "topic": "Workshop",
+          "date": "2026-10-02",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "M310",
+          "fill_pct": 38,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Workshop #5",
+          "topic": "Workshop",
+          "date": "2026-10-06",
+          "weekday": "Tue",
+          "start_time": "18:30",
+          "room": "M310",
+          "fill_pct": 78,
+          "avg_rating": 4.5
+        },
+        {
+          "title": "Workshop #6",
+          "topic": "Workshop",
+          "date": "2026-10-16",
+          "weekday": "Fri",
+          "start_time": "19:00",
+          "room": "M310",
+          "fill_pct": 43,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "Workshop #7",
+          "topic": "Workshop",
+          "date": "2026-10-20",
+          "weekday": "Tue",
+          "start_time": "18:30",
+          "room": "M310",
+          "fill_pct": 83,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Workshop #8",
+          "topic": "Workshop",
+          "date": "2026-10-30",
+          "weekday": "Fri",
+          "start_time": "17:30",
+          "room": "M310",
+          "fill_pct": 40,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "Workshop #9",
+          "topic": "Workshop",
+          "date": "2026-11-03",
+          "weekday": "Tue",
+          "start_time": "17:30",
+          "room": "M310",
+          "fill_pct": 83,
+          "avg_rating": 4.5
+        },
+        {
+          "title": "Workshop #10",
+          "topic": "Workshop",
+          "date": "2026-11-13",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "M310",
+          "fill_pct": 40,
+          "avg_rating": 4.4
+        }
+      ]
+    },
+    {
+      "club_id": "C06",
+      "name": "Photography Club",
+      "category": "Arts",
+      "members": 88,
+      "sponsor": null,
+      "organiser": "Sara Kim",
+      "events": 10,
+      "fill_pct": 68,
+      "showup_pct": 72,
+      "eventList": [
+        {
+          "title": "Workshop #1",
+          "topic": "Workshop",
+          "date": "2026-09-10",
+          "weekday": "Thu",
+          "start_time": "18:00",
+          "room": "L002",
+          "fill_pct": 73,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Workshop #2",
+          "topic": "Workshop",
+          "date": "2026-09-18",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "L002",
+          "fill_pct": 47,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "Workshop #3",
+          "topic": "Workshop",
+          "date": "2026-09-23",
+          "weekday": "Wed",
+          "start_time": "18:30",
+          "room": "L002",
+          "fill_pct": 73,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Workshop #4",
+          "topic": "Workshop",
+          "date": "2026-10-01",
+          "weekday": "Thu",
+          "start_time": "19:00",
+          "room": "L002",
+          "fill_pct": 85,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Workshop #5",
+          "topic": "Workshop",
+          "date": "2026-10-09",
+          "weekday": "Fri",
+          "start_time": "18:00",
+          "room": "L002",
+          "fill_pct": 42,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "Workshop #6",
+          "topic": "Workshop",
+          "date": "2026-10-14",
+          "weekday": "Wed",
+          "start_time": "18:30",
+          "room": "L002",
+          "fill_pct": 77,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Workshop #7",
+          "topic": "Workshop",
+          "date": "2026-10-22",
+          "weekday": "Thu",
+          "start_time": "18:00",
+          "room": "L002",
+          "fill_pct": 73,
+          "avg_rating": 4.5
+        },
+        {
+          "title": "Workshop #8",
+          "topic": "Workshop",
+          "date": "2026-10-30",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "L002",
+          "fill_pct": 48,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Workshop #9",
+          "topic": "Workshop",
+          "date": "2026-11-04",
+          "weekday": "Wed",
+          "start_time": "17:30",
+          "room": "L002",
+          "fill_pct": 82,
+          "avg_rating": 4.6
+        },
+        {
+          "title": "Workshop #10",
+          "topic": "Workshop",
+          "date": "2026-11-12",
+          "weekday": "Thu",
+          "start_time": "18:00",
+          "room": "L002",
+          "fill_pct": 75,
+          "avg_rating": 4.5
+        }
+      ]
+    },
+    {
+      "club_id": "C07",
+      "name": "Salsa Club",
+      "category": "Sports",
+      "members": 73,
+      "sponsor": null,
+      "organiser": "Leo Costa",
+      "events": 10,
+      "fill_pct": 73,
+      "showup_pct": 75,
+      "eventList": [
+        {
+          "title": "Class #1",
+          "topic": "Class",
+          "date": "2026-09-07",
+          "weekday": "Mon",
+          "start_time": "18:00",
+          "room": "G001",
+          "fill_pct": 80,
+          "avg_rating": 4.3
+        },
+        {
+          "title": "Class #2",
+          "topic": "Class",
+          "date": "2026-09-15",
+          "weekday": "Tue",
+          "start_time": "17:30",
+          "room": "G001",
+          "fill_pct": 82,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Class #3",
+          "topic": "Class",
+          "date": "2026-09-24",
+          "weekday": "Thu",
+          "start_time": "17:30",
+          "room": "G001",
+          "fill_pct": 86,
+          "avg_rating": 4.3
+        },
+        {
+          "title": "Class #4",
+          "topic": "Class",
+          "date": "2026-10-02",
+          "weekday": "Fri",
+          "start_time": "17:30",
+          "room": "G001",
+          "fill_pct": 42,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Class #5",
+          "topic": "Class",
+          "date": "2026-10-05",
+          "weekday": "Mon",
+          "start_time": "18:30",
+          "room": "G001",
+          "fill_pct": 84,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "Class #6",
+          "topic": "Class",
+          "date": "2026-10-13",
+          "weekday": "Tue",
+          "start_time": "18:30",
+          "room": "G001",
+          "fill_pct": 78,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Class #7",
+          "topic": "Class",
+          "date": "2026-10-22",
+          "weekday": "Thu",
+          "start_time": "18:30",
+          "room": "G001",
+          "fill_pct": 76,
+          "avg_rating": 4.3
+        },
+        {
+          "title": "Class #8",
+          "topic": "Class",
+          "date": "2026-10-30",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "G001",
+          "fill_pct": 40,
+          "avg_rating": 4.3
+        },
+        {
+          "title": "Class #9",
+          "topic": "Class",
+          "date": "2026-11-02",
+          "weekday": "Mon",
+          "start_time": "19:00",
+          "room": "G001",
+          "fill_pct": 82,
+          "avg_rating": 4.4
+        },
+        {
+          "title": "Class #10",
+          "topic": "Class",
+          "date": "2026-11-10",
+          "weekday": "Tue",
+          "start_time": "19:00",
+          "room": "G001",
+          "fill_pct": 78,
+          "avg_rating": 4.4
+        }
+      ]
+    },
+    {
+      "club_id": "C08",
+      "name": "Entrepreneurs Club",
+      "category": "Career",
+      "members": 109,
+      "sponsor": null,
+      "organiser": "Nora Weiss",
+      "events": 10,
+      "fill_pct": 66,
+      "showup_pct": 72,
+      "eventList": [
+        {
+          "title": "Talk #1",
+          "topic": "Talk",
+          "date": "2026-09-08",
+          "weekday": "Tue",
+          "start_time": "18:00",
+          "room": "S110",
+          "fill_pct": 81,
+          "avg_rating": 4.1
+        },
+        {
+          "title": "Talk #2",
+          "topic": "Talk",
+          "date": "2026-09-17",
+          "weekday": "Thu",
+          "start_time": "18:00",
+          "room": "S110",
+          "fill_pct": 76,
+          "avg_rating": 4
+        },
+        {
+          "title": "Talk #3",
+          "topic": "Talk",
+          "date": "2026-09-25",
+          "weekday": "Fri",
+          "start_time": "18:30",
+          "room": "S110",
+          "fill_pct": 35,
+          "avg_rating": 4.1
+        },
+        {
+          "title": "Talk #4",
+          "topic": "Talk",
+          "date": "2026-09-29",
+          "weekday": "Tue",
+          "start_time": "19:00",
+          "room": "S110",
+          "fill_pct": 77,
+          "avg_rating": 4.1
+        },
+        {
+          "title": "Talk #5",
+          "topic": "Talk",
+          "date": "2026-10-08",
+          "weekday": "Thu",
+          "start_time": "18:30",
+          "room": "S110",
+          "fill_pct": 76,
+          "avg_rating": 4.1
+        },
+        {
+          "title": "Talk #6",
+          "topic": "Talk",
+          "date": "2026-10-16",
+          "weekday": "Fri",
+          "start_time": "19:00",
+          "room": "S110",
+          "fill_pct": 33,
+          "avg_rating": 4
+        },
+        {
+          "title": "Talk #7",
+          "topic": "Talk",
+          "date": "2026-10-20",
+          "weekday": "Tue",
+          "start_time": "18:30",
+          "room": "S110",
+          "fill_pct": 81,
+          "avg_rating": 4
+        },
+        {
+          "title": "Talk #8",
+          "topic": "Talk",
+          "date": "2026-10-29",
+          "weekday": "Thu",
+          "start_time": "17:30",
+          "room": "S110",
+          "fill_pct": 78,
+          "avg_rating": 4.2
+        },
+        {
+          "title": "Talk #9",
+          "topic": "Talk",
+          "date": "2026-11-06",
+          "weekday": "Fri",
+          "start_time": "17:30",
+          "room": "S110",
+          "fill_pct": 42,
+          "avg_rating": 4
+        },
+        {
+          "title": "Talk #10",
+          "topic": "Talk",
+          "date": "2026-11-10",
+          "weekday": "Tue",
+          "start_time": "19:00",
+          "room": "S110",
+          "fill_pct": 82,
+          "avg_rating": 4.1
+        }
+      ]
+    }
+  ]
+}

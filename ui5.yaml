@@ -15,3 +15,11 @@ framework:
     - name: sap.suite.ui.microchart
     - name: sap.viz
     - name: themelib_sap_horizon
+builder:
+  # sql.js (SQLite as WebAssembly) is already built: copy it as it is, don't minify or bundle it.
+  minification:
+    excludes:
+      - "workshop/dashboard/thirdparty/**"
+  componentPreload:
+    excludes:
+      - "workshop/dashboard/thirdparty/**"

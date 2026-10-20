@@ -1,0 +1,64 @@
+{
+  "id": "friday-problem",
+  "title": "The Friday Problem",
+  "client": "Coding Club president",
+  "today": "Monday 16 November 2026",
+  "deadline": "Sponsor renewal meeting, Friday 20 November",
+  "brief": "Since October, the Coding Club's events look half empty. The president wants to swap workshops for socials, and has to tell the sponsor who pays for the workshops by Friday.",
+  "story": [
+    "The Coding Club has a problem. Since October, its events have looked more and more like half-empty classrooms.",
+    "The president thinks they know why: \"Maybe students just aren't interested in workshops anymore. Should we replace them with more social events?\"",
+    "But there's a catch. Quillmoor Software, the club's sponsor, pays for those workshops. The sponsor renewal meeting is this Friday, and the president doesn't want to make the wrong call."
+  ],
+  "assumption": "\"Students are bored with workshops. Let's replace them with more socials.\"",
+  "question": "Why are our events half empty: the topics, the timing or the promotion? And what should we change next semester?",
+  "hypotheses": [
+    {
+      "id": "H1",
+      "title": "The topics",
+      "suspicion": "Students are getting bored with workshops.",
+      "challenge": "Compare workshops with the other event types. Are the topics really the problem?"
+    },
+    {
+      "id": "H2",
+      "title": "The promotion",
+      "suspicion": "Maybe we're not promoting our events enough.",
+      "challenge": "Look at the promotion posts. Does less promotion mean fewer people?"
+    },
+    {
+      "id": "H3",
+      "title": "The timing",
+      "suspicion": "Perhaps we run events at the wrong times.",
+      "challenge": "Look at when events take place. Do some days or time slots do worse?"
+    }
+  ],
+  "mustInclude": [
+    {
+      "title": "The big finding",
+      "text": "A headline that tells the president what you found, in one sentence."
+    },
+    {
+      "title": "The key number",
+      "text": "At least one KPI with an important result."
+    },
+    {
+      "title": "The visual evidence",
+      "text": "At least one chart that proves your finding."
+    },
+    {
+      "title": "The next move",
+      "text": "What the club should do next semester."
+    }
+  ],
+  "hints": [
+    {
+      "minute": 10,
+      "text": "People can sign up for an event and then not come. Compare registered with checked_in. Where are the missing people?"
+    },
+    {
+      "minute": 20,
+      "text": "Workshops look worst. But when were they held? Compare the same topic on different days."
+    }
+  ],
+  "deliverable": "Page 1 of your app: the finding, a key number, a chart that proves it, and the next move."
+}

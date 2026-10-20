@@ -17,7 +17,7 @@
       "samples": [
         { "id": "SideNav", "shell": true, "title": "Side navigation", "description": "Header bar and a collapsible sidebar. This is what your app starts with.", "data": "/case", "controls": ["sap.tnt.ToolPage", "sap.tnt.SideNavigation"], "target": "Paste it into workspace/view/App.view.xml, replacing everything between the 🧩 SHELL markers." },
         { "id": "TopTabs", "shell": true, "title": "Tabs on top", "description": "Header bar with tabs underneath. Full width for your charts.", "data": "/case", "controls": ["sap.tnt.ToolPage", "sap.m.IconTabHeader"], "target": "Paste it into workspace/view/App.view.xml, replacing everything between the 🧩 SHELL markers." },
-        { "id": "ListDetail", "shell": true, "title": "Page layout: List → detail", "description": "Pick a plant on the left, see its months and initiatives on the right. Uses {/plants} from data.js.", "data": "/plants", "controls": ["sap.f.FlexibleColumnLayout", "sap.m.ObjectListItem", "sap.m.IconTabBar"], "target": "Paste it into a page (e.g. workspace/view/Page2.view.xml), replacing everything between the 🧩 PAGE markers." }
+        { "id": "ListDetail", "shell": true, "title": "Page layout: List → detail", "description": "Pick a club on the left, see its events on the right. Uses the sample data {/clubList}.", "data": "/clubList", "controls": ["sap.f.FlexibleColumnLayout", "sap.m.ObjectListItem", "sap.m.IconTabBar"], "target": "Paste it into a page (e.g. workspace/view/Page2.view.xml), replacing everything between the 🧩 PAGE markers." }
       ]
     },
     {
@@ -37,7 +37,7 @@
         { "id": "ChartLine", "title": "Line: actual vs. plan", "description": "Best for a trend over time.", "data": "/trend", "controls": ["sap.viz.ui5.controls.VizFrame"] },
         { "id": "ChartColumn", "title": "Column: this year vs. last year", "description": "Compare two series month by month.", "data": "/trend", "controls": ["sap.viz.ui5.controls.VizFrame"] },
         { "id": "ChartCombo", "title": "Combination: columns + line", "description": "Actual as bars, plan as a line on top.", "data": "/trend", "controls": ["sap.viz.ui5.controls.VizFrame"] },
-        { "id": "ChartBar", "title": "Bar: value vs. target", "description": "Compare categories (plants, regions). Long labels fit better horizontally.", "data": "/breakdown", "controls": ["sap.viz.ui5.controls.VizFrame"] },
+        { "id": "ChartBar", "title": "Bar: value vs. target", "description": "Compare categories (clubs, topics, days). Long labels fit better horizontally.", "data": "/breakdown", "controls": ["sap.viz.ui5.controls.VizFrame"] },
         { "id": "ChartBullet", "title": "Bullet: actual vs. target marker", "description": "One bar per category with its target as a marker.", "data": "/breakdown", "controls": ["sap.viz.ui5.controls.VizFrame"] },
         { "id": "ChartDonut", "title": "Donut: share of total", "description": "Parts of a whole. Use with 6 slices or fewer.", "data": "/breakdown", "controls": ["sap.viz.ui5.controls.VizFrame"] }
       ]

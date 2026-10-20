@@ -2,19 +2,20 @@
   "name": "ui5-dashboard-workshop",
   "version": "1.0.0",
   "private": true,
-  "description": "SAPUI5 / Fiori workshop kit: business cases, S/4HANA-style mock ERP data, query playground, component gallery and a starter app",
+  "description": "SAPUI5 / Fiori workshop kit: one case (The Friday Problem), SQLite data in the browser, SQL playground, component gallery and a starter app",
   "scripts": {
     "start": "ui5 serve --port 8080 --open index.html",
     "build": "ui5 build --clean-dest",
     "build:static": "node tools/build-static.js",
     "lint": "ui5lint",
     "verify": "npm run lint && npm run build",
-    "test": "node tools/test-q.js",
-    "generate-api": "node tools/generate-api.js"
+    "test": "node tools/test.js",
+    "generate-data": "node tools/generate-data.js"
   },
   "devDependencies": {
     "@ui5/cli": "4.0.70",
-    "@ui5/linter": "1.23.6"
+    "@ui5/linter": "1.23.6",
+    "sql.js": "1.13.0"
   },
   "engines": {
     "node": "^20.11.0 || ^22.0.0 || ^24.0.0",

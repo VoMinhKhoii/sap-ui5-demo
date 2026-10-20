@@ -71,7 +71,7 @@
                 <ObjectIdentifier title="{title}" text="{subtitle}" />
                 <Text text="{owner}" />
                 <Text text="{ path: 'date', formatter: '.formatter.date' }" />
-                <ObjectNumber number="{ parts: ['amount', 'currency'], formatter: '.formatter.currency' }" />
+                <ObjectNumber number="{amount}" unit="{unit}" />
                 <ProgressIndicator percentValue="{progress}" displayValue="{progress}%" state="{state}" />
                 <ObjectStatus text="{status}" state="{state}" inverted="true" />
               </cells>

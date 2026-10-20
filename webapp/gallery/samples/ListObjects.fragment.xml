@@ -5,7 +5,8 @@
 <List items="{/items}" headerText="{/meta/items/title}">
   <ObjectListItem
     title="{title}"
-    number="{ parts: ['amount', 'currency'], formatter: '.formatter.currency' }"
+    number="{amount}"
+    numberUnit="{unit}"
     type="Active"
     press=".onItemPress"
     highlight="{state}">

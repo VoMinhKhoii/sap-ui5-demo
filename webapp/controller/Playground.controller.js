@@ -5,55 +5,46 @@ sap.ui.define([
   "sap/m/Popover",
   "sap/m/List",
   "sap/m/StandardListItem",
-  "../util/api",
   "../util/examples",
-  "../util/snippet"
-], function (BaseController, JSONModel, Fragment, Popover, List, StandardListItem, api, examples, snippet) {
+  "../util/snippet",
+  "../util/sql"
+], function (BaseController, JSONModel, Fragment, Popover, List, StandardListItem, examples, snippet, SqlHelper) {
   "use strict";
 
-  const VIEW_TEXT = { line: "Line", column: "Column", bar: "Bar", bullet: "Bullet", donut: "Donut", table: "Table", number: "Number", object: "Record" };
-  const NAME = /^[A-Za-z][A-Za-z0-9_]*$/;
+  const VIEW_TEXT = { line: "Line", column: "Column", bar: "Bar", donut: "Donut", table: "Table", number: "Big numbers", record: "Record" };
   const HELP = [
-    ["q(\"ZI_PlantEmissions\")", "start from a table (left)"],
-    [".where(\"PlantName\", \"Brno\")", "keep rows; also (\"CO2eTonnes\", \">\", 400)"],
-    [".groupBy(\"PlantName\")", "one row per value → name, value"],
-    [".byMonth(\"YearMonth\")", "one row per month → month, value"],
-    [".sum(\"CO2eTonnes\")", "or avg, min, max, count(), ratio(\"A\", \"B\")"],
-    [".sum(\"BudgetCO2eTonnes\", \"target\")", "a second number, named"],
-    [".withState(false)", "Good/Critical/Error vs. target"],
-    [".sortBy(\"value\", \"desc\").top(5)", "sort and cut"],
-    [".join(\"A_Plant\")", "add fields of a linked table"]
+    ["SELECT club_id, AVG(avg_rating) AS rating", "the columns you want; AS gives a result its name"],
+    ["FROM events", "the table (list on the left)"],
+    ["WHERE topic = 'Talk'", "keep some rows; text in single quotes"],
+    ["  AND week >= 5", "more conditions: AND, OR, <>, >=, IN ('Talk', 'Social')"],
+    ["GROUP BY club_id", "one row per value, for COUNT(*), SUM(), AVG()"],
+    ["ROUND(AVG(avg_rating), 1)", "round to 1 decimal (ROUND(x) for none)"],
+    ["ORDER BY rating DESC LIMIT 5", "sort, then keep the first 5"],
+    ["JOIN clubs c ON c.club_id = e.club_id", "add the columns of a linked table"],
+    ["CASE WHEN week <= 5 THEN 'early' ELSE 'late' END", "make your own groups"]
   ];
-  const METHODS = ["where", "join", "include", "compute", "select", "groupBy", "byMonth", "sum", "avg", "min", "max", "count", "percent", "ratio", "merge", "withState", "sortBy", "top", "first"];
+  const KEYWORDS = ["SELECT", "FROM", "WHERE", "AND", "OR", "NOT", "IN", "GROUP BY", "ORDER BY", "DESC", "LIMIT", "AS", "JOIN", "ON",
+    "COUNT(*)", "SUM", "AVG", "MIN", "MAX", "ROUND", "CASE", "WHEN", "THEN", "ELSE", "END", "DISTINCT", "HAVING"];
   let completerAdded = false;
-
-  function indent(code) {
-    return code.trim().split("\n").map(function (line, i) { return i ? "      " + line : line; }).join("\n");
-  }
 
   return BaseController.extend("workshop.dashboard.controller.Playground", {
     onInit: function () {
       this._renderToken = 0;
       this._model = new JSONModel({
-        examples: [], exampleId: "", code: "", name: "", nameValid: true, showCode: false,
+        examples: examples, exampleId: "", code: "", name: "", nameValid: true, showCode: false,
         tables: [], table: "", tableInfo: "", fields: [],
-        error: "", status: "Loading the data…", summary: "Run a query to see the result", views: [], view: "", dataJs: "", xml: ""
+        error: "", warning: "", status: "Loading the data…", summary: "Run a query to see the result", one: false, views: [], view: "", dataJs: "", xml: ""
       });
       this.getView().setModel(this._model, "pg");
       this.getRouter().getRoute("playground").attachPatternMatched(this._onShow, this);
       this.byId("editor").addEventDelegate({ onAfterRendering: this._setUpEditor.bind(this) });
 
-      this._ready = Promise.all([api.loadErp(), api.loadConfig()]).then(function (results) {
-        const erp = results[0], enabled = results[1];
-        this._erp = erp;
-        const list = examples.filter(function (ex) { return ex.scenario === "all" || enabled.indexOf(ex.scenario) > -1; });
-        this._model.setProperty("/examples", list);
-        this._model.setProperty("/tables", erp.index.entities.map(function (e) {
-          return { name: e.name, short: e.name.replace(/^(A_|ZI_)/, ""), title: e.title };
-        }));
-        this._selectTable(erp.index.entities[erp.index.entities.length - 1].name);
+      this._ready = this.getOwnerComponent().dataReady.then(function (data) {
+        this._schema = data.schema;
+        this._model.setProperty("/tables", data.schema.tables.map(function (t) { return { name: t.name, title: t.title }; }));
+        this._selectTable(data.schema.tables[0].name);
         if (!this._model.getProperty("/code")) {
-          this._useExample(list[0]);
+          this._useExample(examples[0]);
         }
       }.bind(this));
     },
@@ -61,18 +52,18 @@ sap.ui.define([
     _onShow: function () {
       const appModel = this.getOwnerComponent().getModel("app");
       const code = appModel.getProperty("/playgroundCode");
-      Promise.all([this._ready, this.getOwnerComponent().erpReady]).then(function () {
+      this._ready.then(function () {
         if (code) {
           appModel.setProperty("/playgroundCode", "");
           this._model.setProperty("/exampleId", "");
-          this._model.setProperty("/code", code);
+          this._setCode(code);
           this._model.setProperty("/name", "myQuery");
         }
         this.onRun();
       }.bind(this));
     },
 
-    // ---- Editor: Ctrl+Enter runs, suggestions for tables, fields and q() steps
+    // ---- Editor: Ctrl+Enter runs, suggestions for tables, columns and SQL words
 
     _setUpEditor: function () {
       const editor = this.byId("editor");
@@ -92,66 +83,60 @@ sap.ui.define([
     },
 
     _completions: function (callback) {
-      if (!this._erp) {
+      if (!this._schema) {
         callback(null, []);
         return;
       }
       const items = [];
-      this._erp.index.entities.forEach(function (e) {
-        items.push({ caption: e.name, value: e.name, meta: "table", score: 300 });
-        e.fields.forEach(function (f) {
-          items.push({ caption: f.name, value: f.name, meta: e.name.replace(/^(A_|ZI_)/, ""), score: 200 });
+      this._schema.tables.forEach(function (t) {
+        items.push({ caption: t.name, value: t.name, meta: "table", score: 300 });
+        t.fields.forEach(function (f) {
+          items.push({ caption: f.name, value: f.name, meta: t.name, score: 200 });
         });
       });
-      METHODS.forEach(function (m) { items.push({ caption: m, value: m, meta: "q()", score: 100 }); });
+      KEYWORDS.forEach(function (k) { items.push({ caption: k, value: k, meta: "SQL", score: 100 }); });
       callback(null, items);
     },
 
-    // ---- Left panel: tables and fields
+    // ---- Left panel: tables and their columns
 
     onTableSelect: function (event) {
       this._selectTable(event.getParameter("selectedItem").getKey());
     },
 
     _selectTable: function (name) {
-      const entity = this._erp.index.entities.find(function (e) { return e.name === name; });
-      if (!entity) {
+      const table = this._schema.tables.find(function (t) { return t.name === name; });
+      if (!table) {
         return;
       }
       this._model.setProperty("/table", name);
-      this._model.setProperty("/tableInfo", entity.title + " · " + entity.count + " rows");
-      this._model.setProperty("/fields", entity.fields.map(function (f) {
+      this._model.setProperty("/tableInfo", table.title + " · " + table.count + " rows");
+      this._model.setProperty("/fields", table.fields.map(function (f) {
         return { name: f.name, type: f.type, description: f.description + (f.example !== null && f.example !== "" ? " (e.g. " + f.example + ")" : "") };
       }));
     },
 
     onFieldPress: function (event) {
-      this._insert("\"" + event.getSource().getTitle() + "\"");
+      const ace = this.byId("editor").getAceEditor();
+      ace.insert(event.getSource().getTitle());
+      ace.focus();
     },
 
     onInsertTable: function () {
-      const ace = this.byId("editor").getAceEditor();
-      ace.setValue("q(\"" + this._model.getProperty("/table") + "\")\n  .top(20)", 1);
+      this._setCode("SELECT *\nFROM " + this._model.getProperty("/table") + "\nLIMIT 20");
       this._model.setProperty("/exampleId", "");
       this._model.setProperty("/name", "myQuery");
       this.onRun();
     },
 
-    _insert: function (text) {
-      const ace = this.byId("editor").getAceEditor();
-      ace.insert(text);
-      ace.focus();
-    },
-
     onShowHelp: function (event) {
       if (!this._help) {
         this._help = new Popover({
-          title: "q() in 9 lines",
+          title: "SQL in 9 lines",
           placement: "Bottom",
-          contentWidth: "30rem",
+          contentWidth: "34rem",
           content: new List({
             items: HELP.map(function (h) {
-              // set via setters: the texts contain quotes and would otherwise be fine, but stay consistent with the gallery
               return new StandardListItem().setTitle(h[0]).setDescription(h[1]);
             })
           })
@@ -165,20 +150,24 @@ sap.ui.define([
 
     onExampleSelect: function (event) {
       const id = event.getParameter("selectedItem").getKey();
-      this._useExample(this._model.getProperty("/examples").find(function (ex) { return ex.id === id; }));
+      this._useExample(examples.find(function (ex) { return ex.id === id; }));
       this.onRun();
     },
 
     _useExample: function (example) {
       this._model.setProperty("/exampleId", example.id);
-      this._model.setProperty("/code", example.code);
+      this._setCode(example.code);
+      this._model.setProperty("/name", example.id);
+      this._model.setProperty("/nameValid", true);
+    },
+
+    _setCode: function (code) {
+      this._model.setProperty("/code", code);
       // Write to the editor directly: the model binding reaches the editor too late, and Run reads the editor.
       const ace = this.byId("editor").getAceEditor();
       if (ace) {
-        ace.setValue(example.code, 1);
+        ace.setValue(code, 1);
       }
-      this._model.setProperty("/name", example.id);
-      this._model.setProperty("/nameValid", true);
     },
 
     _code: function () {
@@ -189,38 +178,46 @@ sap.ui.define([
     },
 
     onRun: function () {
-      const q = this.getOwnerComponent().q;
-      if (!q) {
+      const sql = this.getOwnerComponent().sql;
+      if (!sql) {
         return;
       }
       const code = this._code();
-      const used = code.match(/q\("(\w+)"\)/);
+      const used = code.match(/\bFROM\s+(\w+)/i);
       if (used) {
         this._selectTable(used[1]);
       }
       const started = Date.now();
-      let result;
+      let rows;
       try {
-        result = q.run(code);
+        rows = sql(code);
       } catch (e) {
         this._model.setProperty("/error", e.message);
         this._model.setProperty("/status", "");
         return;
       }
-      this._result = result;
-      const shape = snippet.shape(result);
+      // One row → sql.one: the row itself, bound as {/name/column}. More rows → a list for charts and tables.
+      const one = rows.length === 1;
+      this._result = one ? rows[0] : rows;
+      const shape = snippet.shape(this._result);
       const view = shape.views.indexOf(this._model.getProperty("/view")) > -1 ? this._model.getProperty("/view") : shape.views[0];
-      const rows = Array.isArray(result) ? result.length : 0;
+      const bad = SqlHelper.badColumns(this._result);
       this._model.setData(Object.assign(this._model.getData(), {
         error: "",
+        warning: bad.length ? "Give " + bad.map(function (c) { return "\"" + c + "\""; }).join(", ") + " a name with AS, e.g. ROUND(AVG(fill_pct)) AS fill_pct. You can only bind columns with simple names." : "",
         status: "Done in " + (Date.now() - started) + " ms",
+        one: one,
         views: shape.views.map(function (v) { return { key: v, text: VIEW_TEXT[v] }; }),
         view: view,
-        summary: shape.kind === "scalar" ? "One number: " + result
-          : shape.kind === "object" ? "One record with " + Object.keys(result || {}).length + " fields"
-            : rows + " rows · " + (rows ? Object.keys(result[0]).join(", ") : "no fields")
+        summary: one ? "1 row: copy it as sql.one(…) and bind one value with {/" + this._name() + "/column}"
+          : rows.length + " rows · columns: " + (rows.length ? Object.keys(rows[0]).join(", ") : "none") +
+            (shape.kind === "chart" ? ". Chart: first column = label, number columns = bars" : "")
       }));
       this._render();
+    },
+
+    _name: function () {
+      return this._model.getProperty("/nameValid") && this._model.getProperty("/name") ? this._model.getProperty("/name") : "myQuery";
     },
 
     onViewChange: function (event) {
@@ -229,7 +226,7 @@ sap.ui.define([
     },
 
     onNameChange: function (event) {
-      this._model.setProperty("/nameValid", NAME.test(event.getParameter("value")));
+      this._model.setProperty("/nameValid", SqlHelper.NAME.test(event.getParameter("value")));
       this._render();
     },
 
@@ -241,10 +238,10 @@ sap.ui.define([
       if (this._result === undefined) {
         return;
       }
-      const name = this._model.getProperty("/nameValid") ? this._model.getProperty("/name") : "myQuery";
+      const name = this._name();
       const xml = snippet.build(name, this._result, this._model.getProperty("/view"));
       this._model.setProperty("/xml", xml);
-      this._model.setProperty("/dataJs", "      " + name + ": " + indent(this._model.getProperty("/code")) + ",");
+      this._model.setProperty("/dataJs", snippet.dataJs(name, this._model.getProperty("/code"), this._model.getProperty("/one")));
 
       const box = this.byId("preview");
       const token = ++this._renderToken;

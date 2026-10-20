@@ -20,10 +20,8 @@ for (const entry of fs.readdirSync(out)) {
 }
 fs.cpSync(path.join(root, "dist"), out, { recursive: true });
 
-// Files people read as code in the browser (Reference Solution → "The code") stay unminified.
-for (const file of ["solution/queries.js", "workspace/data.js"]) {
-  fs.copyFileSync(path.join(root, "webapp", file), path.join(out, file));
-}
+// The starter data.js stays readable (unminified).
+fs.copyFileSync(path.join(root, "webapp", "workspace", "data.js"), path.join(out, "workspace", "data.js"));
 
 for (const page of ["index.html", "workspace/index.html"]) {
   const file = path.join(out, page);
