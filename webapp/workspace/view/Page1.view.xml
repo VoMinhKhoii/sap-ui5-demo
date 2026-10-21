@@ -80,7 +80,17 @@
           <f:content>
             <VBox width="100%" class="sapUiSmallMargin">
               <!-- 🧩 EVIDENCE A START (Query Playground → Copy XML, or Gallery → Charts) -->
-              <Text text="Paste a chart here" />
+
+
+
+
+
+
+              <!-- <Text text="Paste a chart here" /> -->
+
+
+
+
               <!-- 🧩 EVIDENCE A END -->
             </VBox>
           </f:content>
@@ -93,12 +103,24 @@
           <f:content>
             <VBox width="100%" class="sapUiSmallMargin">
               <!-- 🧩 EVIDENCE B START (Gallery → Micro charts, Tables & lists, Status & alerts) -->
+
+
+
+
+
               <Text text="Paste a list, table or micro chart here" />
+
+
+
+
+
               <!-- 🧩 EVIDENCE B END -->
             </VBox>
           </f:content>
         </f:Card>
       </HBox>
+
+      
 
       <!-- ROW: THE ACTION. What should the manager decide or do this week? -->
       <HBox class="wsRow" renderType="Bare">
@@ -109,11 +131,21 @@
           <f:content>
             <VBox width="100%" class="sapUiSmallMargin">
               <!-- 🧩 ACTION START -->
+
+
+
+
+
               <MessageStrip text="Write your recommendation here, with the number it is based on." type="Information" showIcon="true" />
               <HBox class="sapUiSmallMarginTop">
                 <Button text="Approve" type="Emphasized" press=".onActionPress" class="sapUiTinyMarginEnd" />
                 <Button text="Ask for details" press=".onActionPress" />
               </HBox>
+
+
+
+
+
               <!-- 🧩 ACTION END -->
             </VBox>
           </f:content>
