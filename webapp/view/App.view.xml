@@ -29,7 +29,6 @@
         <tnt:NavigationList>
           <tnt:NavigationListItem key="home" text="Start here" icon="sap-icon://home" />
           <tnt:NavigationListItem key="gallery" text="Component Gallery" icon="sap-icon://grid" />
-          <tnt:NavigationListItem key="api" text="Data Explorer" icon="sap-icon://database" />
           <tnt:NavigationListItem key="playground" text="Query Playground" icon="sap-icon://simulate" />
           <tnt:NavigationListItem key="workspace" text="Open my app" icon="sap-icon://action" selectable="false" href="workspace/index.html" target="_blank" />
         </tnt:NavigationList>

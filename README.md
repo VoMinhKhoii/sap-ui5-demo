@@ -27,15 +27,14 @@ start is fast. Nothing else to install: the data is already in the repo.
 
 | Tab | URL | What it's for |
 | --- | --- | --- |
-| **1. The kit** | <http://localhost:8080> | The case, the Component Gallery, the Data Explorer and the Query Playground |
+| **1. The kit** | <http://localhost:8080> | The case, the Component Gallery and the Query Playground |
 | **2. Your app** | <http://localhost:8080/workspace/> | *Your* Fiori app. Open it with **Open my app** in the kit |
 
 | Kit page | What it's for |
 | --- | --- |
 | **Start here** | The case: the story, the three suspects, what your dashboard must include, two hints |
 | **Component Gallery** | 29 live building blocks, 3 app shells and layouts, 3 page templates. Each has a **Copy XML** button |
-| **Data Explorer** | The 4 tables, column by column, with the first rows |
-| **Query Playground** | Ask the data a question in SQL and see the answer as a chart, then copy it into your app |
+| **Query Playground** | The 4 tables as a diagram (point at a column to see what it means), then ask the data a question in SQL, see the answer as a chart and copy it into your app |
 
 ## The challenge (45 min)
 
@@ -99,8 +98,9 @@ university, autumn semester 2026 (weeks 1–10, 7 Sep – 13 Nov). It runs right
 | `promotion_posts` | 286 | posts that advertised the events: channel, date, reach |
 | `room_bookings` | 6 | room bookings already fixed for **next** semester |
 
-The **Data Explorer** explains every column. The gallery blocks show ready-made sample data
-(`{/kpis}`, `{/trend}` …) that is in your app too, so a pasted block works straight away.
+The diagram at the top of the **Query Playground** explains every column and shows how the tables
+link. The gallery blocks show ready-made sample data (`{/kpis}`, `{/trend}` …, see *Show the sample
+data* in the Gallery) that is in your app too, so a pasted block works straight away.
 
 All clubs, people and companies are invented.
 

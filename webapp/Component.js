@@ -23,7 +23,7 @@ sap.ui.define([
       dataModel.setSizeLimit(5000); // lists show up to 100 rows by default
       this.setModel(dataModel);
 
-      // this.sql("SELECT …") once the database is open (Playground, Solution).
+      // this.sql("SELECT …") once the database is open (Playground).
       this.dataReady = db.load().then(function (data) {
         this.sql = data.sql;
         this.schema = data.schema;

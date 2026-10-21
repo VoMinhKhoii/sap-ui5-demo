@@ -137,3 +137,134 @@
 .wsRowTight {
   margin-top: 0;
 }
+
+/* Query Playground: "Your data" diagram (ERD), built in Playground.controller.js */
+.wsErdPanel .sapMPanelContent {
+  padding: 0.5rem 1rem 1rem;
+}
+
+.wsErdGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.wsErdCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.wsErdTable {
+  position: relative;
+  z-index: 1;
+  border: 1px solid var(--sapList_BorderColor);
+  border-radius: var(--sapElement_BorderCornerRadius, 0.5rem);
+  background: var(--sapTile_Background);
+  overflow: hidden;
+}
+
+.wsErdTable.wsErdActive {
+  border-color: var(--sapSelectedColor);
+  box-shadow: 0 0 0 1px var(--sapSelectedColor);
+}
+
+.wsErdHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.5rem 0.75rem;
+  background: var(--sapList_HeaderBackground);
+  border-bottom: 1px solid var(--sapList_BorderColor);
+  cursor: pointer;
+}
+
+.wsErdHead b {
+  font-family: var(--sapFontMonospaceFamily, monospace);
+  color: var(--sapLinkColor);
+}
+
+.wsErdHead span,
+.wsErdField i {
+  font-size: 0.75rem;
+  font-style: normal;
+  color: var(--sapContent_LabelColor);
+}
+
+.wsErdField {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.2rem 0.75rem;
+  font-family: var(--sapFontMonospaceFamily, monospace);
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.wsErdField:hover {
+  background: var(--sapList_Hover_Background);
+}
+
+.wsErdKey {
+  font-size: 0.625rem;
+  border-radius: 0.2rem;
+  padding: 0 0.2rem;
+  margin-right: 0.3rem;
+  font-family: var(--sapFontFamily);
+}
+
+.wsErdPK {
+  background: var(--sapWarningBackgroundColor);
+  color: var(--sapCriticalTextColor);
+}
+
+.wsErdFK {
+  background: var(--sapInformationBackgroundColor);
+  color: var(--sapInformativeTextColor);
+}
+
+.wsErdCalc {
+  color: var(--sapPositiveTextColor);
+}
+
+.wsErdLines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.wsErdLink {
+  fill: none;
+  stroke: var(--sapLinkColor);
+  stroke-width: 1.5;
+}
+
+.wsErdLinkSoft {
+  stroke: var(--sapContent_LabelColor);
+  stroke-dasharray: 4 3;
+}
+
+.wsErdInfo {
+  margin-top: 1rem;
+  min-height: 2.5rem;
+  color: var(--sapTextColor);
+}
+
+.wsErdLegend {
+  color: var(--sapContent_LabelColor);
+}
+
+@media (max-width: 900px) {
+  .wsErdGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .wsErdCol {
+    gap: 1rem;
+  }
+}

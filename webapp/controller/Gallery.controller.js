@@ -20,6 +20,15 @@ sap.ui.define([
   "use strict";
 
   const DOCS = "https://ui5.sap.com/#/api/";
+  const SAMPLE_INFO = {
+    meta: "Titles and labels used by the gallery blocks",
+    kpis: "4 headline numbers: value, unit, target, state, history[6]",
+    trend: "10 weeks: month (Wk 1 … Wk 10), actual, plan, previousYear",
+    breakdown: "One row per club: name, value, target, share, state",
+    items: "One record per club: title, subtitle, owner, date, amount, progress, status, state",
+    alerts: "4 messages: type, title, description, date",
+    clubList: "The clubs with their events inside (for the List → detail layout)"
+  };
 
   return BaseController.extend("workshop.dashboard.controller.Gallery", {
     onInit: function () {
@@ -32,6 +41,34 @@ sap.ui.define([
         const category = event.getParameter("arguments").category || "layout";
         this._catalogReady.then(this._showCategory.bind(this, category));
       }, this);
+    },
+
+    onShowSampleData: function () {
+      this.getOwnerComponent().dataReady.then(function (data) {
+        if (!this._sampleModel) {
+          this._sample = data.sample;
+          this._sampleModel = new JSONModel({
+            keys: Object.keys(SAMPLE_INFO).map(function (key) { return { key: key, info: SAMPLE_INFO[key] }; }),
+            key: "kpis", json: ""
+          });
+          this.getView().setModel(this._sampleModel, "sample");
+          this._showSample("kpis");
+        }
+        this.byId("sampleDialog").open();
+      }.bind(this));
+    },
+
+    onSampleKeyChange: function (event) {
+      this._showSample(event.getParameter("selectedItem").getKey());
+    },
+
+    _showSample: function (key) {
+      this._sampleModel.setProperty("/key", key);
+      this._sampleModel.setProperty("/json", JSON.stringify(this._sample[key], null, 2));
+    },
+
+    onCloseSampleData: function () {
+      this.byId("sampleDialog").close();
     },
 
     onCategorySelect: function (event) {

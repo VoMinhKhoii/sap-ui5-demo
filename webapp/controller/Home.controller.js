@@ -37,8 +37,8 @@ sap.ui.define([
     },
 
     onOpenTable: function (event) {
-      this.getOwnerComponent().getModel("app").setProperty("/explorerTable", event.getSource().getText());
-      this.navTo("api");
+      this.getOwnerComponent().getModel("app").setProperty("/playgroundCode", "SELECT *\nFROM " + event.getSource().getText() + "\nLIMIT 20");
+      this.navTo("playground");
     },
 
     onGoPlayground: function () { this.navTo("playground"); },
