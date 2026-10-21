@@ -46,8 +46,8 @@ Handoff context for anyone (human or Claude) continuing this project.
   work unchanged in the kit and in the students' app. It shows the club in general, **not the answer**.
   `tools/test.js` also checks that no Playground example groups the Coding Club by weekday.
 - **The student app is a separate UI5 component** at `/workspace/` (2nd browser tab), so teams own
-  the shell, navigation and pages. The kit (tab 1) is the reference: case, gallery, Data Explorer,
-  Query Playground.
+  the shell, navigation and pages. The kit (tab 1) is the reference: case, gallery, Query Playground
+  (with the data diagram).
 - **The reference solution is a separate, private repo**
   ([VoMinhKhoii/ui5-workshop-solution](https://github.com/VoMinhKhoii/ui5-workshop-solution), local
   `../ui5-workshop-solution`, live at <https://ui5-workshop-solution.vercel.app>, not linked from the
@@ -93,7 +93,7 @@ node tools/e2e/paste-test.js                  # pastes EVERY gallery block, shel
 ```
 
 - Status (19 Oct 2026, after the pivot): lint ✅, build ✅, `npm test` ✅ (10 tests), 17/17 story
-  checks ✅, check-pages ✅ (12 routes), check-workspace ✅, playground-test ✅ (9 examples),
+  checks ✅, check-pages ✅ (11 routes), check-workspace ✅, playground-test ✅ (9 examples),
   paste-test ✅ (68 jobs). The static build was also checked on a plain `python3 -m http.server`.
 - The remaining console noise is from the framework itself and harmless (`check-pages.js` filters it out):
   - "page stack is empty" while the router loads the first view.
@@ -112,7 +112,7 @@ node tools/e2e/paste-test.js                  # pastes EVERY gallery block, shel
 | `webapp/util/formatter.js` | formatters used by the snippets (`compactNumber`, `currency`, `target`, `date`, `delta`, `priority`, `valueState`, `valueColor` …) |
 | `webapp/controller/BaseController.js` | shared handlers that snippets reference (`onKpiPress`, `onItemPress`, `onChartSelect`, `onActionPress`, `onStatusFilter`, `onNavSelect`, `onToggleSideNav`, `onShowDetail`, `onCloseDetail`), `copyText()`, `styleCharts()`. **Kit and workspace controllers both extend it.** Handlers find controls by walking up the tree, not by id, so they also work in gallery previews. |
 | `webapp/view/App.view.xml` | kit shell: header, side navigation. "Open my app" is a `href` item to `workspace/index.html`. |
-| `webapp/view/Home` / `Gallery` / `ApiExplorer` / `Playground` | the 4 kit pages (routes: `""`, `gallery/:category:`, `api`, `playground`). Home = the case (story, 3 suspects, must-include, tools, 2 hints, plan + rubric in a collapsed panel). `ApiExplorer` is titled **Data Explorer**: tables, columns, first 5 rows, plus the gallery sample data. Playground = table/column browser (click to insert, autocomplete via `CodeEditor.addCustomCompleter`), SQL → result → "use it" (1 row → `sql.one`). |
+| `webapp/view/Home` / `Gallery` / `Playground` | the 3 kit pages (routes: `""`, `gallery/:category:`, `playground`). Home = the case (story, 3 suspects, must-include, tools, 2 hints, plan + rubric in a collapsed panel); its table tags open the Playground with `SELECT * FROM <table>`. Gallery has a *Show the sample data* dialog. Playground = the data as an ERD (Oct 2026: the team merged the old Data Explorer page into it; HTML/SVG built in `_erdHtml`, lines redrawn by a ResizeObserver; click a column to insert it, a table name to query it, hover for its meaning), SQL with autocomplete (`CodeEditor.addCustomCompleter`) → result → "use it" (1 row → `sql.one`). |
 | `webapp/workspace/` | **the students' app**, its own component `workshop.dashboard.workspace` (loads the kit modules via the `workshop.dashboard` resource root `../`). `data.js` (their queries, loaded separately so a typo shows a dialog instead of a blank page; each query runs on its own so one broken query doesn't stop the rest), `view/App.view.xml` (shell between 🧩 SHELL markers; nav keys `page1/2/3` = route names; must keep `App id="app"`), `view/Page1.view.xml` (finding/evidence/action slots), `Page2/3` (optional), `controller/Page.controller.js`. The default model = sample data + `/case` + every `data.js` query. |
 | `webapp/gallery/samples.json` | gallery catalog: categories → samples `{id, title, description, data, controls[], template?, shell?, target?}` |
 | `webapp/gallery/samples/*.fragment.xml` | 29 blocks. **The same file is the live preview AND the copied code.** |

@@ -90,11 +90,6 @@
           "target": "gallery"
         },
         {
-          "name": "api",
-          "pattern": "api",
-          "target": "api"
-        },
-        {
           "name": "playground",
           "pattern": "playground",
           "target": "playground"
@@ -109,11 +104,6 @@
         "gallery": {
           "id": "gallery",
           "name": "Gallery",
-          "level": 2
-        },
-        "api": {
-          "id": "api",
-          "name": "ApiExplorer",
           "level": 2
         },
         "playground": {

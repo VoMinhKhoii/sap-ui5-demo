@@ -5,44 +5,28 @@
   xmlns:core="sap.ui.core"
   xmlns:f="sap.f"
   xmlns:card="sap.f.cards"
-  xmlns:layout="sap.ui.layout"
   xmlns:mvc="sap.ui.core.mvc"
 >
   <Page showHeader="false" class="wsPage">
     <VBox class="wsPageIntro">
       <Title text="Query Playground" level="H1" titleStyle="H2" />
-      <Text text="Ask the data a question in SQL, see the answer as a chart, then copy the query and the chart into your app." class="sapUiTinyMarginTop" />
+      <Text text="Your data is at the top: point at a column to see what it means. Ask it a question in SQL, see the answer as a chart, then copy the query and the chart into your app." class="sapUiTinyMarginTop" />
     </VBox>
-    <layout:Grid defaultSpan="XL3 L4 M12 S12" hSpacing="1" vSpacing="1" containerQuery="false" class="sapUiSmallMarginBeginEnd">
+    <VBox class="sapUiSmallMarginBeginEnd">
+      <!-- Your data: the tables and how they link. Click a column to insert it, a table name to query it. -->
+      <Panel expandable="true" expanded="true" width="auto" class="wsErdPanel">
+        <headerToolbar>
+          <OverflowToolbar style="Clear">
+            <Title text="Your data: 4 tables" level="H2" />
+            <ToolbarSpacer />
+            <Text text="Click a column to insert it · click a table name to see its rows" />
+          </OverflowToolbar>
+        </headerToolbar>
+        <core:HTML id="erd" content="&lt;div&gt;&lt;/div&gt;" afterRendering=".onErdRendered" />
+      </Panel>
 
-      <!-- Left: your tables and their fields -->
-      <f:Card width="100%">
-        <f:header><card:Header title="Your data" subtitle="Click a column to insert it" /></f:header>
-        <f:content>
-          <VBox width="100%">
-            <VBox class="sapUiSmallMarginBeginEnd">
-              <Label text="Table" labelFor="tablePicker" />
-              <Select id="tablePicker" items="{pg>/tables}" selectedKey="{pg>/table}" change=".onTableSelect" width="100%">
-                <core:Item key="{pg>name}" text="{pg>name}" additionalText="{pg>title}" />
-              </Select>
-              <HBox alignItems="Center" justifyContent="SpaceBetween">
-                <Text text="{pg>/tableInfo}" />
-                <Button text="Query it" icon="sap-icon://media-play" type="Transparent" press=".onInsertTable" />
-              </HBox>
-            </VBox>
-            <ScrollContainer height="30rem" vertical="true" class="wsFieldScroll">
-              <List items="{pg>/fields}" showSeparators="Inner">
-                <StandardListItem title="{pg>name}" description="{pg>description}" info="{pg>type}" type="Active" press=".onFieldPress" wrapping="true" />
-              </List>
-            </ScrollContainer>
-          </VBox>
-        </f:content>
-      </f:Card>
-
-      <!-- Right: query, result, use it -->
-      <VBox width="100%">
-        <layoutData><layout:GridData span="XL9 L8 M12 S12" /></layoutData>
-        <f:Card width="100%">
+      <!-- Query, result, use it -->
+        <f:Card width="100%" class="sapUiSmallMarginTop">
           <f:header><card:Header title="1. Query (SQL)" subtitle="Start typing for suggestions. Cmd/Ctrl + Enter runs it." /></f:header>
           <f:content>
             <VBox class="sapUiSmallMargin" width="100%">
@@ -94,7 +78,6 @@
             </VBox>
           </f:content>
         </f:Card>
-      </VBox>
-    </layout:Grid>
+    </VBox>
   </Page>
 </mvc:View>

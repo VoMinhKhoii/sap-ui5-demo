@@ -6,7 +6,7 @@ const fs = require("fs");
 const path = require("path");
 
 const BASE = process.env.BASE_URL || "http://localhost:8080";
-const routes = (process.argv[2] || "home,gallery/layout,gallery/shells,gallery/kpis,gallery/charts,gallery/micro,gallery/tables,gallery/status,gallery/filters,gallery/templates,api,playground").split(",");
+const routes = (process.argv[2] || "home,gallery/layout,gallery/shells,gallery/kpis,gallery/charts,gallery/micro,gallery/tables,gallery/status,gallery/filters,gallery/templates,playground").split(",");
 const out = path.join(__dirname, "screenshots");
 // Known framework-internal noise that is not caused by our code.
 const IGNORE = /page stack is empty|Cannot navigate to page|Parameters\.get|favicon|selectedItem association should be a valid NavigationListItem|JQMIGRATE/;

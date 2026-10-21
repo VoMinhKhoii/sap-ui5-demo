@@ -14,7 +14,7 @@ sap.ui.define([
   const VIEW_TEXT = { line: "Line", column: "Column", bar: "Bar", donut: "Donut", table: "Table", number: "Big numbers", record: "Record" };
   const HELP = [
     ["SELECT club_id, AVG(avg_rating) AS rating", "the columns you want; AS gives a result its name"],
-    ["FROM events", "the table (list on the left)"],
+    ["FROM events", "the table (see Your data at the top)"],
     ["WHERE topic = 'Talk'", "keep some rows; text in single quotes"],
     ["  AND week >= 5", "more conditions: AND, OR, <>, >=, IN ('Talk', 'Social')"],
     ["GROUP BY club_id", "one row per value, for COUNT(*), SUM(), AVG()"],
@@ -32,7 +32,7 @@ sap.ui.define([
       this._renderToken = 0;
       this._model = new JSONModel({
         examples: examples, exampleId: "", code: "", name: "", nameValid: true, showCode: false,
-        tables: [], table: "", tableInfo: "", fields: [],
+        table: "",
         error: "", warning: "", status: "Loading the data…", summary: "Run a query to see the result", one: false, views: [], view: "", dataJs: "", xml: ""
       });
       this.getView().setModel(this._model, "pg");
@@ -41,8 +41,8 @@ sap.ui.define([
 
       this._ready = this.getOwnerComponent().dataReady.then(function (data) {
         this._schema = data.schema;
-        this._model.setProperty("/tables", data.schema.tables.map(function (t) { return { name: t.name, title: t.title }; }));
-        this._selectTable(data.schema.tables[0].name);
+        this.byId("erd").setContent(this._erdHtml());
+        this.onErdRendered(); // if the page is already on screen, setContent swaps the DOM without a new afterRendering
         if (!this._model.getProperty("/code")) {
           this._useExample(examples[0]);
         }
@@ -98,34 +98,127 @@ sap.ui.define([
       callback(null, items);
     },
 
-    // ---- Left panel: tables and their columns
+    // ---- Your data: the tables as a diagram (ERD). Click a column to insert it, a table name to query it.
 
-    onTableSelect: function (event) {
-      this._selectTable(event.getParameter("selectedItem").getKey());
+    _erdHtml: function () {
+      const esc = function (text) {
+        return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      };
+      const keys = {};
+      this._schema.relations.forEach(function (r) {
+        if (!r.note) {
+          keys[r.from + "." + r.field] = "FK";
+        }
+      });
+      const card = function (t) {
+        const fields = t.fields.map(function (f) {
+          const badge = f.name === t.key ? "PK" : keys[t.name + "." + f.name] || "";
+          const tip = f.description + (f.example !== null && f.example !== "" ? " (e.g. " + f.example + ")" : "");
+          return "<div class=\"wsErdField\" data-table=\"" + t.name + "\" data-field=\"" + f.name + "\" title=\"" + esc(tip) + "\">" +
+            "<span>" + (badge ? "<b class=\"wsErdKey wsErd" + badge + "\">" + badge + "</b>" : "") +
+            "<span class=\"" + (/_pct$/.test(f.name) ? "wsErdCalc" : "") + "\">" + f.name + "</span></span><i>" + f.type + "</i></div>";
+        }).join("");
+        return "<div class=\"wsErdTable\" data-table=\"" + t.name + "\">" +
+          "<div class=\"wsErdHead\" data-query=\"" + t.name + "\" title=\"" + esc(t.description) + " Click to see the rows.\">" +
+          "<b>" + t.name + "</b><span>" + t.count + " rows</span></div>" + fields + "</div>";
+      };
+      const table = function (name) {
+        return card(this._schema.tables.find(function (t) { return t.name === name; }));
+      }.bind(this);
+      return "<div class=\"wsErd\">" +
+        "<div class=\"wsErdGrid\">" +
+        "<div class=\"wsErdCol\">" + table("clubs") + "</div>" +
+        "<div class=\"wsErdCol\">" + table("events") + "</div>" +
+        "<div class=\"wsErdCol\">" + table("promotion_posts") + table("room_bookings") + "</div>" +
+        "<svg class=\"wsErdLines\"></svg></div>" +
+        "<div class=\"wsErdInfo\">Point at a column to see what it means. " +
+        "<span class=\"wsErdLegend\">PK = key · FK = links to another table (solid line, use it in a JOIN) · dashed = same room code · " +
+        "<span class=\"wsErdCalc\">_pct</span> = already worked out for you</span></div></div>";
     },
 
-    _selectTable: function (name) {
-      const table = this._schema.tables.find(function (t) { return t.name === name; });
-      if (!table) {
+    onErdRendered: function () {
+      const root = this.byId("erd").getDomRef();
+      if (!root || !root.classList.contains("wsErd") || root.dataset.wired) {
         return;
       }
+      root.dataset.wired = "true";
+      const info = root.querySelector(".wsErdInfo");
+      const infoText = info.innerHTML;
+      root.addEventListener("click", function (event) {
+        const field = event.target.closest(".wsErdField");
+        const head = event.target.closest(".wsErdHead");
+        if (field) {
+          const ace = this.byId("editor").getAceEditor();
+          const cursor = ace.getCursorPosition();
+          if (cursor.row === 0 && cursor.column === 0) {
+            ace.navigateFileEnd(); // nobody has clicked into the query yet: add to the end, not before SELECT
+          }
+          const before = ace.session.getLine(ace.getCursorPosition().row).slice(0, ace.getCursorPosition().column);
+          ace.insert((/[\w)]$/.test(before) ? " " : "") + field.dataset.field);
+          ace.focus();
+        } else if (head) {
+          this._queryTable(head.dataset.query);
+        }
+      }.bind(this));
+      root.addEventListener("mouseover", function (event) {
+        const field = event.target.closest(".wsErdField");
+        if (field) {
+          info.textContent = field.dataset.table + "." + field.dataset.field + ": " + field.title;
+        } else {
+          info.innerHTML = infoText;
+        }
+      });
+      // Redraw the lines whenever the diagram changes size (window resize, panel opened again).
+      new ResizeObserver(this._drawErdLines.bind(this, root)).observe(root);
+      this._highlightTable(this._model.getProperty("/table"));
+    },
+
+    _drawErdLines: function (root) {
+      const svg = root.querySelector(".wsErdLines");
+      const box = svg.parentNode.getBoundingClientRect();
+      const ns = "http://www.w3.org/2000/svg";
+      svg.innerHTML = "";
+      const row = function (table, field) {
+        return root.querySelector(".wsErdField[data-table='" + table + "'][data-field='" + field + "']");
+      };
+      this._schema.relations.forEach(function (r) {
+        const from = row(r.from, r.field), to = row(r.to, r.key);
+        if (!from || !to) {
+          return;
+        }
+        const a = from.getBoundingClientRect(), b = to.getBoundingClientRect();
+        if (!a.width || !b.width || Math.abs(a.left - b.left) < 10) {
+          return; // hidden, or stacked in one column on a narrow screen
+        }
+        const right = a.left > b.left; // the "many" side is to the right of the "one" side
+        const x1 = (right ? a.left : a.right) - box.left, y1 = a.top + a.height / 2 - box.top;
+        const x2 = (right ? b.right : b.left) - box.left, y2 = b.top + b.height / 2 - box.top;
+        const mid = (x1 + x2) / 2, d = right ? -1 : 1;
+        const path = document.createElementNS(ns, "path");
+        path.setAttribute("d", "M" + x1 + "," + y1 + " C" + mid + "," + y1 + " " + mid + "," + y2 + " " + x2 + "," + y2 +
+          (r.note ? "" : " M" + (x1 + d * 10) + "," + y1 + " L" + x1 + "," + (y1 - 5) + " M" + (x1 + d * 10) + "," + y1 + " L" + x1 + "," + (y1 + 5) +
+            " M" + (x2 - d * 6) + "," + (y2 - 5) + " L" + (x2 - d * 6) + "," + (y2 + 5)));
+        path.setAttribute("class", r.note ? "wsErdLink wsErdLinkSoft" : "wsErdLink");
+        svg.appendChild(path);
+      });
+    },
+
+    /** Marks the table the query reads FROM. */
+    _highlightTable: function (name) {
       this._model.setProperty("/table", name);
-      this._model.setProperty("/tableInfo", table.title + " · " + table.count + " rows");
-      this._model.setProperty("/fields", table.fields.map(function (f) {
-        return { name: f.name, type: f.type, description: f.description + (f.example !== null && f.example !== "" ? " (e.g. " + f.example + ")" : "") };
-      }));
+      const root = this.byId("erd").getDomRef();
+      if (root) {
+        root.querySelectorAll(".wsErdTable").forEach(function (el) {
+          el.classList.toggle("wsErdActive", el.dataset.table === name);
+        });
+      }
     },
 
-    onFieldPress: function (event) {
-      const ace = this.byId("editor").getAceEditor();
-      ace.insert(event.getSource().getTitle());
-      ace.focus();
-    },
-
-    onInsertTable: function () {
-      this._setCode("SELECT *\nFROM " + this._model.getProperty("/table") + "\nLIMIT 20");
+    _queryTable: function (name) {
+      this._setCode("SELECT *\nFROM " + name + "\nLIMIT 20");
       this._model.setProperty("/exampleId", "");
       this._model.setProperty("/name", "myQuery");
+      this._model.setProperty("/nameValid", true);
       this.onRun();
     },
 
@@ -185,7 +278,7 @@ sap.ui.define([
       const code = this._code();
       const used = code.match(/\bFROM\s+(\w+)/i);
       if (used) {
-        this._selectTable(used[1]);
+        this._highlightTable(used[1]);
       }
       const started = Date.now();
       let rows;
