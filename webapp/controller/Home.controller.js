@@ -19,11 +19,6 @@ sap.ui.define([
       this.styleCharts(this.getView());
     },
 
-    onRevealHint: function (event) {
-      const context = event.getSource().getBindingContext("app");
-      context.getModel().setProperty(context.getPath() + "/shown", true);
-    },
-
     onGoPlayground: function () { this.navTo("playground"); }
   });
 });

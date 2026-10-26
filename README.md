@@ -34,7 +34,7 @@ The kit's tabs are the suggested path: **The case → Query Playground → Compo
 
 | Kit page | What it's for |
 | --- | --- |
-| **The case** | The story, the three suspects, what page 1 of your app must show, two hints |
+| **The case** | The story, the three suspects, what page 1 of your app must show, how you are marked |
 | **Query Playground** | The 4 tables as a diagram (point at a column to see what it means), then ask the data a question in SQL, see the answer as a chart and copy it into your app |
 | **Component Gallery** | 29 live building blocks, 3 app shells and layouts, 3 page templates. Pick one, see it live, **Copy XML**. It tells you which slot of your page it goes into |
 

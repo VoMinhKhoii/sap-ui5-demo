@@ -26,8 +26,8 @@ numbers below.
 | --- | --- | --- |
 | 0–5 | Teams read **The case** and open **My app** in a 2nd tab | Demo: Playground → *Copy for data.js* → *Copy XML* → F5 (60 seconds) |
 | 5–20 | Investigate in the **Query Playground** | Walk around. Ask "which suspect does the data support, and how do you know?" |
-| 10 | | Announce: "Hint 1 is open now" |
-| 20 | | Announce: "Hint 2 is open now" |
+| 10 | | Say hint 1 out loud (see *Hints* below) |
+| 20 | | Say hint 2 out loud |
 | 20–25 | Decide the story: finding, key number, chart, next move | Push teams that are still exploring to start building |
 | 25–40 | Build page 1 (more pages and a custom shell are stretch goals) | Help with XML errors (F12 → Console) |
 | 40–45 | Test, refine, freeze code | |

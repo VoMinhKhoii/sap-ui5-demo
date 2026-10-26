@@ -24,10 +24,10 @@
 }
 
 
-/* One centred content column on wide screens (16" and up): the banner's content and the sections share its edges. */
+/* The case page is one centred column, like a newspaper: the masthead's title and the sections share its edges. */
 .wsSection {
   box-sizing: border-box;
-  max-width: 80rem;
+  max-width: 64rem;
   margin: 0 auto;
   padding: 2.5rem 2rem 0;
 }
@@ -93,21 +93,11 @@
 
 /* The case at a glance, in SAP blue. */
 .wsHero {
-  gap: 2rem 3rem;
-  padding: 2.5rem max(2rem, calc((100% - 76rem) / 2)) 3rem;
+  padding: 2.5rem max(2rem, calc((100% - 60rem) / 2)) 2.5rem;
   background: #0057d2;
 }
 
-.wsHeroText {
-  flex: 1 1 22rem;
-  min-width: 0;
-  max-width: 40rem;
-}
 
-.wsHeroChart {
-  flex: 1 1 24rem;
-  min-width: min(24rem, 100%);
-}
 
 .wsHero .wsHeroEyebrow.sapMText {
   color: #bfe0ff;
@@ -125,26 +115,10 @@
   line-height: 1.1;
 }
 
-.wsHero .wsHeroQuestion.sapMText {
-  color: #fff;
-  font-size: 1.375rem;
-  line-height: 1.4;
-}
 
-.wsHero .wsHeroMeta.sapMText {
-  margin-top: 1rem;
-  color: #d8ecff;
-  font-size: 0.9375rem;
-}
 
 /* Text content of a kit card, aligned with its header. */
-.wsCardBody {
-  padding: 0 1rem 1rem;
-}
 
-.wsCardBody > .sapMBtn {
-  align-self: flex-start;
-}
 
 .wsMustItem + .wsMustItem {
   margin-top: 1rem;

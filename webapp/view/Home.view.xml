@@ -10,20 +10,20 @@
 >
   <Page showHeader="false" class="wsPage">
 
-    <!-- The case at a glance: the question to answer, who asks, and the symptom (sample data, not the answer). -->
-    <HBox class="wsHero" wrap="Wrap" alignItems="Center" renderType="Bare">
-      <VBox class="wsHeroText" renderType="Bare">
-        <Text text="Case 01 · Coding Club" class="wsHeroEyebrow" />
-        <Title text="{app>/case/title}" level="H1" wrapping="true" class="wsHeroTitle" />
-        <Text text="{app>/case/question}" class="wsHeroQuestion" />
-        <Text text="Asked by the {app>/case/client} · {app>/case/deadline}" class="wsHeroMeta" />
-      </VBox>
-      <f:Card class="wsHeroChart">
+    <!-- A newspaper page: one column, read top to bottom. The masthead is just the title. -->
+    <VBox class="wsHero" renderType="Bare">
+      <Text text="Case 01 · Coding Club" class="wsHeroEyebrow" />
+      <Title text="{app>/case/title}" level="H1" wrapping="true" class="wsHeroTitle" />
+    </VBox>
+
+    <!-- The symptom (sample data, not the answer) -->
+    <VBox class="wsSection" renderType="Bare">
+      <f:Card width="100%">
         <f:header>
           <card:Header title="{/meta/trend/title}" subtitle="{/meta/trend/subtitle}" />
         </f:header>
         <f:content>
-          <viz:VizFrame vizType="line" width="100%" height="15rem" uiConfig="{applicationSet:'fiori'}">
+          <viz:VizFrame vizType="line" width="100%" height="16rem" uiConfig="{applicationSet:'fiori'}">
             <viz:dataset>
               <viz.data:FlattenedDataset data="{/trend}">
                 <viz.data:dimensions>
@@ -42,38 +42,15 @@
           </viz:VizFrame>
         </f:content>
       </f:Card>
-    </HBox>
+    </VBox>
 
-    <!-- The story, and what the answer has to contain -->
+    <!-- The story -->
     <VBox class="wsSection" renderType="Bare">
-      <HBox class="wsRow wsRowTight" renderType="Bare">
-        <f:Card class="wsWide">
-          <f:header>
-            <card:Header title="The story" iconSrc="sap-icon://course-book" />
-          </f:header>
-          <f:content>
-            <VBox class="wsCardBody" renderType="Bare">
-              <VBox items="{app>/case/story}" renderType="Bare">
-                <Text text="{app>}" class="sapUiSmallMarginBottom" />
-              </VBox>
-              <MessageStrip text="The president thinks: {app>/case/assumption} Opinions aren't evidence. What does the data say?" type="Information" showIcon="true" />
-            </VBox>
-          </f:content>
-        </f:Card>
-        <f:Card>
-          <f:header>
-            <card:Header title="Page 1 of your app must show" iconSrc="sap-icon://checklist-item" />
-          </f:header>
-          <f:content>
-            <VBox items="{app>/case/mustInclude}" class="wsCardBody" renderType="Bare">
-              <VBox class="wsMustItem" renderType="Bare">
-                <Label text="{app>title}" design="Bold" wrapping="true" />
-                <Text text="{app>text}" />
-              </VBox>
-            </VBox>
-          </f:content>
-        </f:Card>
-      </HBox>
+      <Title text="The story" level="H2" titleStyle="H3" class="wsSectionHead" />
+      <VBox items="{app>/case/story}" renderType="Bare">
+        <Text text="{app>}" class="sapUiSmallMarginBottom" />
+      </VBox>
+      <MessageStrip text="The president thinks: {app>/case/assumption} Opinions aren't evidence. What does the data say?" type="Information" showIcon="true" class="sapUiTinyMarginTop" />
     </VBox>
 
     <!-- Three suspects: one action for the whole section, next to its title. -->
@@ -94,22 +71,15 @@
       </HBox>
     </VBox>
 
-    <!-- Hints: one card each -->
+    <!-- What the answer has to contain -->
     <VBox class="wsSection" renderType="Bare">
-      <Title text="Stuck? Two hints" level="H2" titleStyle="H3" class="wsSectionHead" />
-      <HBox class="wsRow wsRowTight" renderType="Bare" items="{app>/case/hints}">
-        <f:Card>
-          <f:header>
-            <card:Header title="Hint for minute {app>minute}" iconSrc="sap-icon://lightbulb" />
-          </f:header>
-          <f:content>
-            <VBox class="wsCardBody" renderType="Bare">
-              <Button text="Show the hint" press=".onRevealHint" visible="{= !${app>shown} }" />
-              <Text text="{app>text}" visible="{= !!${app>shown} }" />
-            </VBox>
-          </f:content>
-        </f:Card>
-      </HBox>
+      <Title text="Page 1 of your app must show" level="H2" titleStyle="H3" class="wsSectionHead" />
+      <VBox items="{app>/case/mustInclude}" renderType="Bare">
+        <VBox class="wsMustItem" renderType="Bare">
+          <Label text="{app>title}" design="Bold" wrapping="true" />
+          <Text text="{app>text}" />
+        </VBox>
+      </VBox>
     </VBox>
 
     <!-- Marking -->
