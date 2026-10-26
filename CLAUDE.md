@@ -212,7 +212,9 @@ update the numbers in `FACILITATOR.md`. Every SQL block there can be pasted into
   the paste test's dialog check couldn't fail.)
 - **sql.js must not be minified or bundled** by `ui5 build`: `ui5.yaml` excludes
   `workshop/dashboard/thirdparty/**` (that exact pattern; `/resources/…` didn't work), and
-  `ui5lint.config.mjs` ignores it. `db.js` loads it with a script tag and `window.initSqlJs`.
+  `ui5lint.config.mjs` ignores it. `db.js` fetches it and runs it inside `(function (define) { … })()`, so it
+  only sets `window.initSqlJs`: sap.viz brings RequireJS, and with a global `define` sql.js registered as an anonymous
+  AMD module ("Mismatched anonymous define()", seen on the static build once the case page got a chart).
 - **Query results need simple column names** to bind: `ROUND(AVG(x))` without `AS` can't be bound.
   The Playground warns, and the workspace lists it in the data.js dialog.
 - **`sap.f.ShellBar` `additionalContent` only takes `sap.f.IShellBar` controls**: use `OverflowToolbarButton`
