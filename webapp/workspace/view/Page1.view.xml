@@ -28,7 +28,7 @@
   height="100%"
 >
 <!-- 🧩 PAGE START (a page layout from Gallery → App shells replaces everything down to PAGE END) -->
-<f:DynamicPage id="page1Content" headerExpanded="true" showFooter="true">
+<f:DynamicPage id="page1Content" headerExpanded="true" showFooter="false">
 
   <f:title>
     <f:DynamicPageTitle>
@@ -154,15 +154,6 @@
 
     </VBox>
   </f:content>
-
-  <!-- The president's decision. Fiori puts the buttons that finish a page in its footer. -->
-  <f:footer>
-    <OverflowToolbar>
-      <ToolbarSpacer />
-      <Button text="Approve" type="Emphasized" press=".onActionPress" />
-      <Button text="Ask for details" press=".onActionPress" />
-    </OverflowToolbar>
-  </f:footer>
 </f:DynamicPage>
 <!-- 🧩 PAGE END -->
 </mvc:View>

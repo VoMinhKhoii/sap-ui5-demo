@@ -37,28 +37,31 @@
 
     <f:content>
       <VBox renderType="Bare">
-        <f:Card width="100%">
-          <f:header><card:Header title="Query" subtitle="Start typing for suggestions. Cmd/Ctrl + Enter runs it." /></f:header>
-          <f:content>
-            <VBox class="sapUiSmallMargin" width="100%">
-              <code:CodeEditor id="editor" type="sql" value="{pg>/code}" height="9rem" width="100%" syntaxHints="false" />
-              <MessageStrip text="{pg>/error}" type="Error" showIcon="true" visible="{= !!${pg>/error} }" class="sapUiSmallMarginTop" />
-              <MessageStrip text="{pg>/warning}" type="Warning" showIcon="true" visible="{= !!${pg>/warning} &amp;&amp; !${pg>/error} }" class="sapUiSmallMarginTop" />
-            </VBox>
-          </f:content>
-        </f:Card>
+        <!-- Query and result side by side, so the answer stays in view while you edit. They stack on a narrow screen. -->
+        <HBox class="wsRow wsRowTight" renderType="Bare">
+          <f:Card>
+            <f:header><card:Header title="Query" subtitle="Start typing for suggestions. Cmd/Ctrl + Enter runs it." /></f:header>
+            <f:content>
+              <VBox class="sapUiSmallMargin" width="100%">
+                <code:CodeEditor id="editor" type="sql" value="{pg>/code}" height="20rem" width="100%" syntaxHints="false" />
+                <MessageStrip text="{pg>/error}" type="Error" showIcon="true" visible="{= !!${pg>/error} }" class="sapUiSmallMarginTop" />
+                <MessageStrip text="{pg>/warning}" type="Warning" showIcon="true" visible="{= !!${pg>/warning} &amp;&amp; !${pg>/error} }" class="sapUiSmallMarginTop" />
+              </VBox>
+            </f:content>
+          </f:Card>
 
-        <f:Card width="100%" class="sapUiSmallMarginTop">
-          <f:header><card:Header title="Result" subtitle="{pg>/summary}" /></f:header>
-          <f:content>
-            <VBox class="sapUiSmallMargin" width="100%">
-              <SegmentedButton items="{pg>/views}" selectedKey="{pg>/view}" selectionChange=".onViewChange" visible="{= ${pg>/views}.length > 1 }">
-                <items><SegmentedButtonItem key="{pg>key}" text="{pg>text}" /></items>
-              </SegmentedButton>
-              <VBox id="preview" width="100%" class="sapUiSmallMarginTop wsPlaygroundPreview" />
-            </VBox>
-          </f:content>
-        </f:Card>
+          <f:Card>
+            <f:header><card:Header title="Result" subtitle="{pg>/summary}" /></f:header>
+            <f:content>
+              <VBox class="sapUiSmallMargin" width="100%">
+                <SegmentedButton items="{pg>/views}" selectedKey="{pg>/view}" selectionChange=".onViewChange" visible="{= ${pg>/views}.length > 1 }">
+                  <items><SegmentedButtonItem key="{pg>key}" text="{pg>text}" /></items>
+                </SegmentedButton>
+                <VBox id="preview" width="100%" class="sapUiSmallMarginTop wsPlaygroundPreview" />
+              </VBox>
+            </f:content>
+          </f:Card>
+        </HBox>
 
         <f:Card width="100%" class="sapUiSmallMarginTop" visible="{pg>/showCode}">
           <f:header><card:Header title="What gets copied" subtitle="The query goes into webapp/workspace/data.js, the XML into a slot of a page" /></f:header>

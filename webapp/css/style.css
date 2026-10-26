@@ -130,45 +130,12 @@
   line-height: 1.1;
 }
 
-.wsHero .wsHeroLead.sapMText {
-  color: #e6f2ff;
-  font-size: 1.125rem;
-  line-height: 1.5;
-}
 
-.wsHeroButton {
-  align-self: flex-start;
-  margin-top: 1.5rem;
-}
 
-.wsHeroButton .sapMBtnInner,
-.wsHeroButton .sapMBtnInner:hover {
-  height: 2.75rem;
-  padding: 0 1.25rem;
-  border-color: #fff;
-  background: #fff;
-  color: #0057d2;
-}
 
-.wsHeroButton .sapMBtnInner:hover {
-  background: #ebf8ff;
-}
 
-.wsHeroStats {
-  gap: 2.5rem;
-  margin-top: 2rem;
-}
 
-.wsHero .wsHeroStatValue.sapMText {
-  color: #fff;
-  font-size: 1.75rem;
-  line-height: 1.2;
-}
 
-.wsHero .wsHeroStatLabel.sapMText {
-  color: #d8ecff;
-  font-size: 0.8125rem;
-}
 
 .wsQuestionCard.sapFCard {
   background: #ebf8ff;

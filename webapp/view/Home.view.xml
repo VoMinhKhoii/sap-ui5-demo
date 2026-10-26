@@ -15,22 +15,6 @@
       <VBox class="wsHeroText" renderType="Bare">
         <Text text="Case 01 · Coding Club" class="wsHeroEyebrow" />
         <Title text="{app>/case/title}" level="H1" wrapping="true" class="wsHeroTitle" />
-        <Text text="{app>/case/brief}" class="wsHeroLead" />
-        <Button text="Start investigating" press=".onGoPlayground" class="wsHeroButton" />
-        <HBox class="wsHeroStats" wrap="Wrap" renderType="Bare">
-          <VBox renderType="Bare">
-            <Text text="4 days" class="wsHeroStatValue" />
-            <Text text="until the sponsor meeting" class="wsHeroStatLabel" />
-          </VBox>
-          <VBox renderType="Bare">
-            <Text text="3" class="wsHeroStatValue" />
-            <Text text="suspects, one answer" class="wsHeroStatLabel" />
-          </VBox>
-          <VBox renderType="Bare">
-            <Text text="45 min" class="wsHeroStatValue" />
-            <Text text="to crack it and build the app" class="wsHeroStatLabel" />
-          </VBox>
-        </HBox>
       </VBox>
       <f:Card class="wsHeroChart">
         <f:header>
