@@ -24,9 +24,12 @@
 }
 
 
+/* One centred content column on wide screens (16" and up): the banner's content and the sections share its edges. */
 .wsSection {
-  padding: 2.5rem 2rem 0;
+  box-sizing: border-box;
   max-width: 80rem;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 0;
 }
 
 .wsSectionHead {
@@ -96,7 +99,7 @@
 /* The case at a glance, in SAP blue. */
 .wsHero {
   gap: 2rem 3rem;
-  padding: 2.5rem 2rem 3rem;
+  padding: 2.5rem max(2rem, calc((100% - 76rem) / 2)) 3rem;
   background: #0057d2;
 }
 
@@ -234,6 +237,7 @@
 /* Query Playground: "Your data" diagram (ERD), built in Playground.controller.js */
 
 .wsErdGrid {
+  max-width: 76rem;
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1.7fr 1fr;
