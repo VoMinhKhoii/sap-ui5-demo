@@ -2,40 +2,42 @@
   controllerName="workshop.dashboard.controller.App"
   xmlns="sap.m"
   xmlns:mvc="sap.ui.core.mvc"
+  xmlns:f="sap.f"
   xmlns:tnt="sap.tnt"
   displayBlock="true"
   height="100%"
 >
-  <tnt:ToolPage id="toolPage" sideExpanded="true">
+  <tnt:ToolPage id="toolPage">
     <tnt:header>
-      <tnt:ToolHeader>
-        <Button icon="sap-icon://menu2" type="Transparent" press=".onToggleSideNav" tooltip="Toggle navigation">
-          <layoutData><OverflowToolbarLayoutData priority="NeverOverflow" /></layoutData>
-        </Button>
-        <Avatar initials="CC" displaySize="XS" backgroundColor="Accent6" />
-        <Title text="The Friday Problem" level="H1" wrapping="false">
-          <layoutData><OverflowToolbarLayoutData priority="Disappear" /></layoutData>
-        </Title>
-        <Text text="UI5 Dashboard Workshop · fictional data" wrapping="false">
-          <layoutData><OverflowToolbarLayoutData priority="Disappear" /></layoutData>
-        </Text>
-        <ToolbarSpacer />
-        <Button text="Figma UI Kit" icon="sap-icon://palette" type="Transparent" press=".onOpenFigma" tooltip="SAP S/4HANA Web UI Kit (Figma community)" />
-        <Button text="UI5 Docs" icon="sap-icon://learning-assistant" type="Transparent" press=".onOpenDocs" />
-      </tnt:ToolHeader>
+      <f:ShellBar
+        id="shellBar"
+        homeIcon="{app>/logo}"
+        homeIconTooltip="The case"
+        homeIconPressed=".onHome"
+        title="UI5 Workshop"
+        secondTitle="The Friday Problem">
+        <f:additionalContent>
+          <OverflowToolbarButton icon="sap-icon://palette" text="Figma UI Kit" tooltip="SAP S/4HANA Web UI Kit (Figma community)" type="Transparent" press=".onOpenFigma" />
+          <OverflowToolbarButton icon="sap-icon://learning-assistant" text="UI5 Docs" tooltip="SAPUI5 documentation" type="Transparent" press=".onOpenDocs" />
+        </f:additionalContent>
+      </f:ShellBar>
     </tnt:header>
-    <tnt:sideContent>
-      <tnt:SideNavigation id="sideNav" selectedKey="home" itemSelect=".onNavSelect">
-        <tnt:NavigationList>
-          <tnt:NavigationListItem key="home" text="Start here" icon="sap-icon://home" />
-          <tnt:NavigationListItem key="gallery" text="Component Gallery" icon="sap-icon://grid" />
-          <tnt:NavigationListItem key="playground" text="Query Playground" icon="sap-icon://simulate" />
-          <tnt:NavigationListItem key="workspace" text="Open my app" icon="sap-icon://action" selectable="false" href="workspace/index.html" target="_blank" />
-        </tnt:NavigationList>
-      </tnt:SideNavigation>
-    </tnt:sideContent>
+    <tnt:subHeader>
+      <!-- The suggested path: four steps, each one a tool. "My app" opens the students' app in a new tab. -->
+      <IconTabHeader id="path" selectedKey="home" select=".onPathSelect" backgroundDesign="Solid" class="wsPath">
+        <items>
+          <IconTabFilter key="home" text="The case" count="0-5 min" />
+          <IconTabSeparator icon="sap-icon://process" />
+          <IconTabFilter key="playground" text="Query Playground" count="5-25 min" />
+          <IconTabSeparator icon="sap-icon://process" />
+          <IconTabFilter key="gallery" text="Component Gallery" count="25-40 min" />
+          <IconTabSeparator icon="sap-icon://process" />
+          <IconTabFilter key="app" text="My app" count="40-45 min" />
+        </items>
+      </IconTabHeader>
+    </tnt:subHeader>
     <tnt:mainContents>
-      <App id="app" busy="{app>/busy}" busyIndicatorDelay="300" />
+      <App id="app" busy="{app>/busy}" busyIndicatorDelay="300" autoFocus="false" />
     </tnt:mainContents>
   </tnt:ToolPage>
 </mvc:View>

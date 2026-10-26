@@ -28,15 +28,7 @@
 <!-- 🧩 SHELL START (Gallery → App shells) -->
 <tnt:ToolPage id="toolPage">
   <tnt:header>
-    <tnt:ToolHeader>
-      <Button icon="sap-icon://menu2" type="Transparent" press=".onToggleSideNav" tooltip="Toggle navigation">
-        <layoutData><OverflowToolbarLayoutData priority="NeverOverflow" /></layoutData>
-      </Button>
-      <Avatar initials="CC" displaySize="XS" backgroundColor="Accent6" />
-      <Title text="My app: rename me" level="H1" wrapping="false" />
-      <ToolbarSpacer />
-      <Text text="{/case/client}" wrapping="false" />
-    </tnt:ToolHeader>
+    <f:ShellBar title="My app: rename me" secondTitle="For: {/case/client}" showMenuButton="true" menuButtonPressed=".onToggleSideNav" />
   </tnt:header>
   <tnt:sideContent>
     <tnt:SideNavigation id="nav" selectedKey="page1" itemSelect=".onNavSelect">

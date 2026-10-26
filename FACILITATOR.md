@@ -24,7 +24,7 @@ numbers below.
 
 | Time | What happens | You do |
 | --- | --- | --- |
-| 0–5 | Teams read the case on **Start here** and open **Open my app** in a 2nd tab | Demo: Playground → *Copy for data.js* → *Copy XML* → F5 (60 seconds) |
+| 0–5 | Teams read **The case** and open **My app** in a 2nd tab | Demo: Playground → *Copy for data.js* → *Copy XML* → F5 (60 seconds) |
 | 5–20 | Investigate in the **Query Playground** | Walk around. Ask "which suspect does the data support, and how do you know?" |
 | 10 | | Announce: "Hint 1 is open now" |
 | 20 | | Announce: "Hint 2 is open now" |

@@ -120,7 +120,7 @@ sap.ui.define([
         }).join("");
         return "<div class=\"wsErdTable\" data-table=\"" + t.name + "\">" +
           "<div class=\"wsErdHead\" data-query=\"" + t.name + "\" title=\"" + esc(t.description) + " Click to see the rows.\">" +
-          "<b>" + t.name + "</b><span>" + t.count + " rows</span></div>" + fields + "</div>";
+          "<b>" + t.name + "</b><span>" + t.count + " rows</span></div><div class=\"wsErdFields\">" + fields + "</div></div>";
       };
       const table = function (name) {
         return card(this._schema.tables.find(function (t) { return t.name === name; }));

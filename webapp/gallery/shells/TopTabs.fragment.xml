@@ -4,12 +4,7 @@
 <!-- App shell: header bar + tabs across the top, full width for your pages. Each tab's key opens a page (page1, page2, page3). Keep App id="app". -->
 <tnt:ToolPage id="toolPage">
   <tnt:header>
-    <tnt:ToolHeader>
-      <Avatar initials="NM" displaySize="XS" backgroundColor="Accent6" />
-      <Title text="My app: rename me" level="H1" wrapping="false" />
-      <ToolbarSpacer />
-      <Text text="{/case/client}" wrapping="false" />
-    </tnt:ToolHeader>
+    <f:ShellBar title="My app: rename me" secondTitle="For: {/case/client}" />
   </tnt:header>
   <tnt:subHeader>
     <tnt:ToolHeader>

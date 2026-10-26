@@ -23,22 +23,16 @@
   padding-bottom: 2rem;
 }
 
-.wsPageIntro {
-  padding: 2rem 1.5rem 1rem;
-  max-width: 52rem;
-}
 
 .wsSection {
-  padding: 1.5rem 1.5rem 0;
+  padding: 2.5rem 2rem 0;
+  max-width: 80rem;
 }
 
-.wsSection > .sapMTitle {
-  margin-bottom: 0.75rem;
+.wsSectionHead {
+  margin-bottom: 1rem;
 }
 
-.wsCaseCard .sapFCardContent {
-  padding: 0 1.25rem 1.25rem;
-}
 
 .wsLevel {
   margin-bottom: 0.5rem;
@@ -58,32 +52,28 @@
   padding: 0 1rem;
 }
 
-.wsCategoryTabs {
-  padding: 0 0.5rem;
-}
 
-.wsSamples {
-  padding: 1rem;
-}
 
-.wsSampleCard {
-  margin-bottom: 1rem;
-}
 
 .wsPreview {
   display: block;
-  margin: 0 1rem;
-  padding: 1rem;
+  margin-top: 1.5rem;
+  padding: 2rem;
   border: 1px dashed var(--sapGroup_ContentBorderColor);
   border-radius: 0.75rem;
   background: var(--sapBackgroundColor);
   overflow: hidden;
+  position: relative; /* clips the ToolPage's absolutely positioned side navigation in the shell previews */
 }
 
 /* !important: the surrounding VBox sets an inline height: 100% because the ToolPage inside is 100% high. */
 .wsPreviewShell {
   height: 26rem !important;
   padding: 0;
+}
+
+.wsPreviewShell > .sapTntToolPage {
+  height: 100% !important;
 }
 
 .wsPlaygroundPreview {
@@ -98,17 +88,120 @@
   font-family: var(--sapFontMonospaceFamily, monospace);
 }
 
-.wsAssumption {
-  font-style: italic;
+
+
+
+/* ---- Kit header and case page -------------------------------------------- */
+
+/* The case at a glance, in SAP blue. */
+.wsHero {
+  gap: 2rem 3rem;
+  padding: 2.5rem 2rem 3rem;
+  background: #0057d2;
 }
 
-.wsCode {
-  display: block;
-  margin: 0 1rem;
+.wsHeroText {
+  flex: 1 1 22rem;
+  min-width: 0;
+  max-width: 40rem;
 }
 
-.wsDocs {
-  padding: 0.5rem 1rem 1rem;
+.wsHeroChart {
+  flex: 1 1 24rem;
+  min-width: min(24rem, 100%);
+}
+
+.wsHero .wsHeroEyebrow.sapMText {
+  color: #bfe0ff;
+  font-size: 0.8125rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wsHero .wsHeroTitle.sapMTitle {
+  margin: 0.5rem 0 0.75rem;
+  color: #fff;
+  font-family: var(--sapFontBlackFamily, var(--sapFontBoldFamily));
+  font-size: 2.75rem;
+  line-height: 1.1;
+}
+
+.wsHero .wsHeroLead.sapMText {
+  color: #e6f2ff;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.wsHeroButton {
+  align-self: flex-start;
+  margin-top: 1.5rem;
+}
+
+.wsHeroButton .sapMBtnInner,
+.wsHeroButton .sapMBtnInner:hover {
+  height: 2.75rem;
+  padding: 0 1.25rem;
+  border-color: #fff;
+  background: #fff;
+  color: #0057d2;
+}
+
+.wsHeroButton .sapMBtnInner:hover {
+  background: #ebf8ff;
+}
+
+.wsHeroStats {
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.wsHero .wsHeroStatValue.sapMText {
+  color: #fff;
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+
+.wsHero .wsHeroStatLabel.sapMText {
+  color: #d8ecff;
+  font-size: 0.8125rem;
+}
+
+.wsQuestionCard.sapFCard {
+  background: #ebf8ff;
+  box-shadow: none;
+}
+
+.wsQuestionLabel.sapMLabel {
+  color: #0057d2;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---- Component Gallery: list -> detail ------------------------------------- */
+
+.wsGalleryIntro {
+  padding: 2rem 1.5rem 1rem;
+}
+
+.wsGalleryIntro > .sapMLnk {
+  align-self: flex-start;
+}
+
+.wsGalleryDetail {
+  padding: 2rem 2.5rem 3rem;
+  max-width: 72rem;
+}
+
+.wsGalleryHeadText {
+  flex: 1 1 20rem;
+  min-width: 0;
+  margin-right: 1rem;
+}
+
+.wsGalleryCode {
+  padding-top: 1.5rem;
 }
 
 /* Rows of cards (workspace pages and the "Row of cards" block): <HBox class="wsRow" renderType="Bare">.
@@ -139,14 +232,11 @@
 }
 
 /* Query Playground: "Your data" diagram (ERD), built in Playground.controller.js */
-.wsErdPanel .sapMPanelContent {
-  padding: 0.5rem 1rem 1rem;
-}
 
 .wsErdGrid {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1.15fr 1fr;
+  grid-template-columns: 1fr 1.7fr 1fr;
   gap: 3.5rem;
   align-items: start;
 }
@@ -164,6 +254,13 @@
   border-radius: var(--sapElement_BorderCornerRadius, 0.5rem);
   background: var(--sapTile_Background);
   overflow: hidden;
+}
+
+/* events has 16 columns: two columns of fields keep the diagram short enough to see the query below it. */
+.wsErdTable[data-table="events"] .wsErdFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
 }
 
 .wsErdTable.wsErdActive {

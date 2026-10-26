@@ -1,38 +1,33 @@
 sap.ui.define([
   "./BaseController",
-  "sap/m/library",
-  "sap/ui/Device"
-], function (BaseController, mobileLibrary, Device) {
+  "sap/m/library"
+], function (BaseController, mobileLibrary) {
   "use strict";
 
   const FIGMA_URL = "https://www.figma.com/design/yHeQmZKANdrcu7jOWv17FN/SAP-S-4HANA-Web-UI-Kit--Community-";
 
   return BaseController.extend("workshop.dashboard.controller.App", {
     onInit: function () {
-      if (Device.system.phone) {
-        this.byId("toolPage").setSideExpanded(false);
-      }
+      // The path follows the page that is open: each step is a route, except "My app" (a new tab).
       this.getRouter().attachRouteMatched(function (event) {
-        const sideNav = this.byId("sideNav");
-        const items = sideNav.getItem().getItems();
-        const current = items.find(function (item) { return item.getKey() === event.getParameter("name"); });
-        if (current) {
-          sideNav.setSelectedItem(current);
-        }
+        this.byId("path").setSelectedKey(event.getParameter("name"));
       }, this);
     },
 
-    onNavSelect: function (event) {
-      const key = event.getParameter("item").getKey();
-      // "Open my app" is a plain link to workspace/index.html (new tab), not a route.
-      if (this.getRouter().getRoute(key)) {
-        this.navTo(key);
+    onPathSelect: function (event) {
+      const key = event.getParameter("key");
+      if (key === "app") {
+        mobileLibrary.URLHelper.redirect("workspace/index.html", true);
+        // Opening the app doesn't leave the kit: keep the current step selected.
+        const current = this.getRouter().getHashChanger().getHash().split("/")[0] || "home";
+        this.byId("path").setSelectedKey(current);
+        return;
       }
+      this.navTo(key);
     },
 
-    onToggleSideNav: function () {
-      const toolPage = this.byId("toolPage");
-      toolPage.setSideExpanded(!toolPage.getSideExpanded());
+    onHome: function () {
+      this.navTo("home");
     },
 
     onOpenFigma: function () {
