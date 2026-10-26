@@ -16,7 +16,7 @@
           <SearchField id="search" liveChange=".onSearch" placeholder="Search blocks" width="100%" class="sapUiSmallMarginTop" />
           <Link text="Show the sample data" press=".onShowSampleData" class="sapUiSmallMarginTop" />
         </VBox>
-        <List id="blockList" mode="SingleSelectMaster" selectionChange=".onBlockSelect" showSeparators="Inner" noDataText="No block matches your search." />
+        <List id="blockList" mode="SingleSelectMaster" selectionChange=".onBlockSelect" showSeparators="Inner" class="wsBlockList" noDataText="No block matches your search." />
       </Page>
     </f:beginColumnPages>
 
