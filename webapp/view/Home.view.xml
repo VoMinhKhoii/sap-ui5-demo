@@ -10,11 +10,13 @@
 >
   <Page showHeader="false" class="wsPage">
 
-    <!-- The case at a glance: what happened, who asks, and the symptom (sample data, not the answer). -->
+    <!-- The case at a glance: the question to answer, who asks, and the symptom (sample data, not the answer). -->
     <HBox class="wsHero" wrap="Wrap" alignItems="Center" renderType="Bare">
       <VBox class="wsHeroText" renderType="Bare">
         <Text text="Case 01 · Coding Club" class="wsHeroEyebrow" />
         <Title text="{app>/case/title}" level="H1" wrapping="true" class="wsHeroTitle" />
+        <Text text="{app>/case/question}" class="wsHeroQuestion" />
+        <Text text="Asked by the {app>/case/client} · {app>/case/deadline}" class="wsHeroMeta" />
       </VBox>
       <f:Card class="wsHeroChart">
         <f:header>
@@ -42,26 +44,35 @@
       </f:Card>
     </HBox>
 
-    <!-- The story -->
+    <!-- The story, and what the answer has to contain -->
     <VBox class="wsSection" renderType="Bare">
-      <Title text="The story" level="H2" titleStyle="H3" class="wsSectionHead" />
       <HBox class="wsRow wsRowTight" renderType="Bare">
-        <VBox class="wsWide" renderType="Bare">
-          <VBox items="{app>/case/story}" renderType="Bare">
-            <Text text="{app>}" class="sapUiSmallMarginBottom" />
-          </VBox>
-        </VBox>
-        <VBox renderType="Bare">
-          <f:Card class="wsQuestionCard">
-            <f:content>
-              <VBox class="sapUiSmallMargin" renderType="Bare">
-                <Label text="Your question" class="wsQuestionLabel" />
-                <Text text="{app>/case/question}" class="wsQuestion" />
+        <f:Card class="wsWide">
+          <f:header>
+            <card:Header title="The story" iconSrc="sap-icon://course-book" />
+          </f:header>
+          <f:content>
+            <VBox class="wsCardBody" renderType="Bare">
+              <VBox items="{app>/case/story}" renderType="Bare">
+                <Text text="{app>}" class="sapUiSmallMarginBottom" />
               </VBox>
-            </f:content>
-          </f:Card>
-          <MessageStrip text="The president thinks: {app>/case/assumption} Opinions aren't evidence. What does the data say?" type="Information" showIcon="true" class="sapUiSmallMarginTop" />
-        </VBox>
+              <MessageStrip text="The president thinks: {app>/case/assumption} Opinions aren't evidence. What does the data say?" type="Information" showIcon="true" />
+            </VBox>
+          </f:content>
+        </f:Card>
+        <f:Card>
+          <f:header>
+            <card:Header title="Page 1 of your app must show" iconSrc="sap-icon://checklist-item" />
+          </f:header>
+          <f:content>
+            <VBox items="{app>/case/mustInclude}" class="wsCardBody" renderType="Bare">
+              <VBox class="wsMustItem" renderType="Bare">
+                <Label text="{app>title}" design="Bold" wrapping="true" />
+                <Text text="{app>text}" />
+              </VBox>
+            </VBox>
+          </f:content>
+        </f:Card>
       </HBox>
     </VBox>
 
@@ -83,27 +94,22 @@
       </HBox>
     </VBox>
 
-    <!-- What the answer has to contain -->
-    <VBox class="wsSection" renderType="Bare">
-      <Title text="Page 1 of your app must show" level="H2" titleStyle="H3" class="wsSectionHead" />
-      <f:Card width="100%">
-        <f:content>
-          <List items="{app>/case/mustInclude}" showSeparators="Inner" width="100%">
-            <StandardListItem title="{app>title}" description="{app>text}" wrapping="true" />
-          </List>
-        </f:content>
-      </f:Card>
-    </VBox>
-
-    <!-- Hints -->
+    <!-- Hints: one card each -->
     <VBox class="wsSection" renderType="Bare">
       <Title text="Stuck? Two hints" level="H2" titleStyle="H3" class="wsSectionHead" />
-      <VBox items="{app>/case/hints}" renderType="Bare">
-        <HBox alignItems="Center" class="sapUiTinyMarginBottom">
-          <Button text="Show the hint for minute {app>minute}" icon="sap-icon://lightbulb" press=".onRevealHint" visible="{= !${app>shown} }" />
-          <MessageStrip text="Minute {app>minute}: {app>text}" type="Information" customIcon="sap-icon://lightbulb" showIcon="true" visible="{= !!${app>shown} }" />
-        </HBox>
-      </VBox>
+      <HBox class="wsRow wsRowTight" renderType="Bare" items="{app>/case/hints}">
+        <f:Card>
+          <f:header>
+            <card:Header title="Hint for minute {app>minute}" iconSrc="sap-icon://lightbulb" />
+          </f:header>
+          <f:content>
+            <VBox class="wsCardBody" renderType="Bare">
+              <Button text="Show the hint" press=".onRevealHint" visible="{= !${app>shown} }" />
+              <Text text="{app>text}" visible="{= !!${app>shown} }" />
+            </VBox>
+          </f:content>
+        </f:Card>
+      </HBox>
     </VBox>
 
     <!-- Marking -->

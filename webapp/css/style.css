@@ -41,11 +41,6 @@
   margin-bottom: 0.5rem;
 }
 
-.wsQuestion {
-  font-size: 1.25rem !important;
-  line-height: 1.4 !important;
-  font-weight: 600;
-}
 
 .wsSectionTitle {
   padding: 0 1.5rem;
@@ -130,24 +125,39 @@
   line-height: 1.1;
 }
 
-
-
-
-
-
-
-
-.wsQuestionCard.sapFCard {
-  background: #ebf8ff;
-  box-shadow: none;
+.wsHero .wsHeroQuestion.sapMText {
+  color: #fff;
+  font-size: 1.375rem;
+  line-height: 1.4;
 }
 
-.wsQuestionLabel.sapMLabel {
-  color: #0057d2;
-  font-weight: bold;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.wsHero .wsHeroMeta.sapMText {
+  margin-top: 1rem;
+  color: #d8ecff;
+  font-size: 0.9375rem;
 }
+
+/* Text content of a kit card, aligned with its header. */
+.wsCardBody {
+  padding: 0 1rem 1rem;
+}
+
+.wsCardBody > .sapMBtn {
+  align-self: flex-start;
+}
+
+.wsMustItem + .wsMustItem {
+  margin-top: 1rem;
+}
+
+
+
+
+
+
+
+
+
 
 /* ---- Component Gallery: list -> detail ------------------------------------- */
 
