@@ -31,7 +31,8 @@ sap.ui.define([
       const dataModel = new JSONModel(db.emptySample());
       dataModel.setSizeLimit(5000); // lists show up to 100 rows by default
       this.setModel(dataModel);
-      this.setModel(new JSONModel({ errors: [] }), "app");
+      // "app" model: data.js problems, and the SAP logo for the ShellBar (homeIcon="{app>/logo}").
+      this.setModel(new JSONModel({ errors: [], logo: sap.ui.require.toUrl("sap/ui/core/mimes/logo/sap_50x26.png") }), "app");
       this.dataReady = Promise.all([db.load(), loadDataJs()]).then(this._load.bind(this));
       this.getRouter().initialize();
     },

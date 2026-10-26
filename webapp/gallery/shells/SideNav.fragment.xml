@@ -4,7 +4,7 @@
 <!-- App shell: header bar + collapsible side navigation. Each item's key opens a page (page1, page2, page3). Keep App id="app": your pages appear there. -->
 <tnt:ToolPage id="toolPage">
   <tnt:header>
-    <f:ShellBar title="My app: rename me" secondTitle="For: {/case/client}" showMenuButton="true" menuButtonPressed=".onToggleSideNav" />
+    <f:ShellBar homeIcon="{app>/logo}" title="My app: rename me" secondTitle="For: {/case/client}" showMenuButton="true" menuButtonPressed=".onToggleSideNav" />
   </tnt:header>
   <tnt:sideContent>
     <tnt:SideNavigation id="nav" selectedKey="page1" itemSelect=".onNavSelect">
@@ -16,7 +16,7 @@
     </tnt:SideNavigation>
   </tnt:sideContent>
   <tnt:mainContents>
-    <App id="app" />
+    <App id="app" autoFocus="false" />
   </tnt:mainContents>
 </tnt:ToolPage>
 </core:FragmentDefinition>

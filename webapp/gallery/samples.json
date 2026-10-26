@@ -15,8 +15,8 @@
       "key": "shells", "title": "App shells", "icon": "sap-icon://header",
       "intro": "The frame around your pages. A shell goes into workspace/view/App.view.xml (replace everything between the 🧩 SHELL markers). The List → detail layout replaces a whole page.",
       "samples": [
-        { "id": "SideNav", "shell": true, "title": "Side navigation", "description": "Header bar and a collapsible sidebar. This is what your app starts with.", "data": "/case", "controls": ["sap.tnt.ToolPage", "sap.tnt.SideNavigation"], "target": "Paste it into workspace/view/App.view.xml, replacing everything between the 🧩 SHELL markers." },
-        { "id": "TopTabs", "shell": true, "title": "Tabs on top", "description": "Header bar with tabs underneath. Full width for your charts.", "data": "/case", "controls": ["sap.tnt.ToolPage", "sap.m.IconTabHeader"], "target": "Paste it into workspace/view/App.view.xml, replacing everything between the 🧩 SHELL markers." },
+        { "id": "SideNav", "shell": true, "title": "Side navigation", "description": "Header bar and a collapsible sidebar. Room for more pages.", "data": "/case", "controls": ["sap.tnt.ToolPage", "sap.tnt.SideNavigation"], "target": "Paste it into workspace/view/App.view.xml, replacing everything between the 🧩 SHELL markers." },
+        { "id": "TopTabs", "shell": true, "title": "Tabs on top", "description": "Header bar with tabs underneath, like the kit. Full width for your charts. This is what your app starts with.", "data": "/case", "controls": ["sap.tnt.ToolPage", "sap.m.IconTabHeader"], "target": "Paste it into workspace/view/App.view.xml, replacing everything between the 🧩 SHELL markers." },
         { "id": "ListDetail", "shell": true, "title": "Page layout: List → detail", "description": "Pick a club on the left, see its events on the right. Uses the sample data {/clubList}.", "data": "/clubList", "controls": ["sap.f.FlexibleColumnLayout", "sap.m.ObjectListItem", "sap.m.IconTabBar"], "target": "Paste it into a page (e.g. workspace/view/Page2.view.xml), replacing everything between the 🧩 PAGE markers." }
       ]
     },
