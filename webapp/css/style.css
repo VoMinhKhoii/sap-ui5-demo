@@ -27,7 +27,7 @@
 /* The case page is one centred column, like a newspaper: the masthead's title and the sections share its edges. */
 .wsSection {
   box-sizing: border-box;
-  max-width: 64rem;
+  max-width: 84rem;
   margin: 0 auto;
   padding: 2.5rem 2rem 0;
 }
@@ -93,7 +93,7 @@
 
 /* The case at a glance, in SAP blue. */
 .wsHero {
-  padding: 2.5rem max(2rem, calc((100% - 60rem) / 2)) 2.5rem;
+  padding: 2.5rem max(2rem, calc((100% - 80rem) / 2)) 2.5rem;
   background: #0057d2;
 }
 
