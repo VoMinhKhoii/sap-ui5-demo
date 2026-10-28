@@ -78,6 +78,19 @@
   min-height: 20rem;
 }
 
+/* Wide query results stay as rows and scroll sideways instead of turning
+   every extra column into a tall responsive-table pop-in. */
+.wsResultTableScroll .sapMListTbl {
+  width: max-content;
+  min-width: 100%;
+  table-layout: auto;
+}
+
+.wsResultTableScroll .sapMListTblCell,
+.wsResultTableScroll .sapMListTblHeaderCell {
+  white-space: nowrap;
+}
+
 .wsFieldScroll {
   border-top: 1px solid var(--sapList_BorderColor);
 }
