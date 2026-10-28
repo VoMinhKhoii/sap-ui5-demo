@@ -14,7 +14,7 @@
           <Title text="Query Playground" level="H1" />
         </f:heading>
         <f:expandedContent>
-          <Text text="Test each suspect against the data. Point at a column to see what it means, click it to insert it." />
+          <Text text="Test each suspect against the data. Point at a column in the diagram to see what it means." />
         </f:expandedContent>
         <f:snappedContent>
           <Text text="Your data: events · clubs · promotion_posts · room_bookings" />
@@ -28,7 +28,7 @@
       </f:DynamicPageTitle>
     </f:title>
 
-    <!-- Your data: the tables and how they link. Click a column to insert it, a table name to query it. -->
+    <!-- Your data: the tables and how they link. View only: point at a column to see what it means. -->
     <f:header>
       <f:DynamicPageHeader pinnable="true">
         <core:HTML id="erd" content="&lt;div&gt;&lt;/div&gt;" afterRendering=".onErdRendered" />

@@ -237,12 +237,11 @@
   padding: 0.5rem 0.75rem;
   background: var(--sapList_HeaderBackground);
   border-bottom: 1px solid var(--sapList_BorderColor);
-  cursor: pointer;
 }
 
 .wsErdHead b {
   font-family: var(--sapFontMonospaceFamily, monospace);
-  color: var(--sapLinkColor);
+  color: var(--sapTitleColor);
 }
 
 .wsErdHead span,
@@ -259,7 +258,7 @@
   padding: 0.2rem 0.75rem;
   font-family: var(--sapFontMonospaceFamily, monospace);
   font-size: 0.8125rem;
-  cursor: pointer;
+  cursor: help;
 }
 
 .wsErdField:hover {
