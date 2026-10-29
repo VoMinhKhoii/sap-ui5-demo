@@ -117,15 +117,10 @@ All clubs, people and companies are invented.
   `viz:`, `tnt:` …) is already declared at the top of your page files. Don't delete those lines.
 * **Tag not closed?** Each `<Tag ...>` needs `</Tag>`, or it must self-close as `<Tag ... />`.
 * **Start over?** `git checkout webapp/workspace` puts your app back to the start.
-* Read [`CHEATSHEET.md`](./CHEATSHEET.md) for XML, binding and SQL on one page.
 * Use the official control docs and samples at <https://ui5.sap.com/#/controls>.
 * For design reference, see the [SAP S/4HANA Web UI Kit (Figma community)](https://www.figma.com/design/yHeQmZKANdrcu7jOWv17FN/SAP-S-4HANA-Web-UI-Kit--Community-).
 
-## For facilitators
-
-Read [`FACILITATOR.md`](./FACILITATOR.md) first. It has the run of show, the answer with the queries
-that prove it, and the marking rubric. A finished answer page lives in a separate, private repo
-([ui5-workshop-solution](https://github.com/VoMinhKhoii/ui5-workshop-solution)), so teams can't open it from the kit.
+## Project structure
 
 ```
 sap-ui5-demo/
@@ -146,7 +141,7 @@ sap-ui5-demo/
 ```
 
 * **Change the data or the case:** edit `tools/data/*.js` and run `npm run generate-data`. It fails
-  loudly if the story no longer holds. Then run `npm test` and update the numbers in `FACILITATOR.md`.
+  loudly if the story no longer holds. Then run `npm test`.
 * **Add a gallery block:** create `webapp/gallery/samples/MyBlock.fragment.xml` (copy an existing
   one to get the namespace header), then add an entry in `gallery/samples.json`.
 * **Check everything:** `npm run verify` (`ui5lint` + `ui5 build`) and `npm test`.

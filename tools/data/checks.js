@@ -1,5 +1,3 @@
-// Story checks for "The Friday Problem". The generator fails if one of them breaks.
-// Part 1: the story holds. Part 2: every other explanation fails in the data, so the case has ONE answer.
 function checks(t) {
   const list = [];
   const check = (ok, text) => list.push({ ok: !!ok, text });
@@ -16,7 +14,6 @@ function checks(t) {
   const topic = (es, tp) => es.filter((e) => e.topic === tp);
   const rating = (tp) => sum(topic(cc, tp), (e) => e.avg_rating) / topic(cc, tp).length;
 
-  // ---- 1. The story
   const naive = { Workshop: fill(topic(recent, "Workshop")), Talk: fill(topic(recent, "Talk")), Social: fill(topic(recent, "Social")) };
   check(naive.Workshop < naive.Talk - 15 && naive.Workshop < naive.Social,
     `trap: since October workshops look worst (${r(naive.Workshop)}% of seats vs. talks ${r(naive.Talk)}%, socials ${r(naive.Social)}%)`);
@@ -36,7 +33,6 @@ function checks(t) {
   const lab = t.room_bookings.filter((b) => b.room === "M105").map((b) => b.weekday);
   check(lab.indexOf("Tue") < 0 && lab.indexOf("Fri") < 0, `next semester the lab M105 is free on Tuesday (booked: ${lab.join(", ")})`);
 
-  // ---- 2. Only one answer: every other explanation is ruled out
   const no = (es, min, text) => check(show(es) >= min, `not ${text} (${r(show(es))}% show-up)`);
   const yes = (es, max, text) => check(show(es) <= max, `Friday drop holds ${text} (${r(show(es))}% show-up)`);
   no(cc.filter((e) => e.organiser === "Jonas Becker" && !fri(e)), 75, "the organiser: Jonas runs every Friday event, his weekday events are fine");

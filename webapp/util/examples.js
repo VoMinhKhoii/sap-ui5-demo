@@ -1,8 +1,6 @@
 sap.ui.define([], function () {
   "use strict";
 
-  // Starter queries for the Query Playground. They show SQL techniques on the case data, NOT the answer to the case
-  // (tools/test.js checks that none of them groups the Coding Club by weekday).
   return [
     { id: "codingClubEvents", title: "All Coding Club events (table)",
       code: "SELECT date, title, topic, registered, checked_in, capacity\nFROM events\nWHERE club_id = 'C01'\nORDER BY date" },

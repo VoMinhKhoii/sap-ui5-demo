@@ -1,10 +1,3 @@
-// The student clubs of a fictional university, autumn semester 2026 (weeks 1-10, 7 Sep - 13 Nov).
-// Seeded random data with one planted story ("The Friday Problem"), checked in checks.js.
-//
-// The story: in week 5 the computer lab's Thursday evening goes to an exam course, so the Coding Club's lab
-// events move to Friday 18:30. People still sign up for them, but fewer than half turn up. Most of those
-// Friday events are workshops, so workshops LOOK unpopular. Every other club sees the same Friday drop.
-//
 // The random generator is shared: don't reorder the calls below, or every number changes.
 let seed = 42;
 const rnd = () => (seed = (seed * 1664525 + 1013904223) % 4294967296) / 4294967296;
@@ -48,21 +41,17 @@ function build() {
   function addEvent(club_id, week, day, start_time, topic, room_id, title, organiser) {
     const event_id = "E" + String(++n).padStart(3, "0"), cap = room(room_id).capacity;
     events.push({ event_id, club_id, title, topic, date: dateOf(week, day), weekday: day, start_time, room_id, capacity: cap, organiser });
-    // People sign up equally well for every slot. On Friday evenings far fewer turn up.
     const regRate = 0.84 + rnd() * 0.14;
     const wanted = Math.round(cap * regRate) + (rnd() < 0.4 ? ri(1, 9) : 0);
     const registered = Math.min(cap, wanted); // confirmed seats; the rest go on the waitlist
     const showRate = day === "Fri" && start_time >= "17:00" ? 0.38 + rnd() * 0.1 : 0.78 + rnd() * 0.12;
     const checked_in = Math.round(registered * showRate);
     attendance.push({ event_id, registered, waitlisted: Math.max(0, wanted - cap), checked_in });
-    // Workshops get the best ratings: the topic is not the problem.
     const base = { Workshop: 4.5, Talk: 4.1, Social: 4.0, Competition: 4.2, Screening: 4.1, Trip: 4.4, Class: 4.3, Meetup: 3.9 }[topic] || 4;
     feedback.push({ event_id, responses: Math.max(3, Math.round(checked_in * (0.3 + rnd() * 0.2))), avg_rating: +(base + (rnd() - 0.5) * 0.3).toFixed(1) });
   }
 
-  // Coding Club: a Wednesday event in M201 every week, plus a lab event in M105.
-  // Weeks 1-4 the lab event is on Thursday. From week 5 the lab's Thursday goes to an exam course: Friday 18:30.
-  const wed = ["Talk", "Social", "Talk", "Social", /* week 5 */ "Talk", "Workshop", "Workshop", "Talk", "Social", "Talk"];
+  const wed = ["Talk", "Social", "Talk", "Social", "Talk", "Workshop", "Workshop", "Talk", "Social", "Talk"];
   const late = { 5: "Workshop", 6: "Workshop", 7: "Social", 8: "Workshop", 9: "Workshop", 10: "Workshop" };
   const used = { Workshop: 0, Talk: 0, Social: 0 };
   const nextTitle = (tp) => titles[tp][used[tp]++ % titles[tp].length];
@@ -71,7 +60,6 @@ function build() {
     if (w <= 4) addEvent("C01", w, "Thu", "18:00", "Workshop", "R-M105", nextTitle("Workshop"), "Jonas Becker");
     else addEvent("C01", w, "Fri", "18:30", late[w], "R-M105", nextTitle(late[w]), "Jonas Becker");
   }
-  // The other clubs: one event a week, on rotating days (some on Friday evening).
   const other = {
     C02: ["Screening", "R-A120", ["Mon", "Thu", "Fri"]], C03: ["Trip", "R-L002", ["Tue", "Fri"]], C04: ["Competition", "R-M310", ["Mon", "Wed"]],
     C05: ["Workshop", "R-M310", ["Tue", "Fri"]], C06: ["Workshop", "R-L002", ["Wed", "Thu", "Fri"]], C07: ["Class", "R-G001", ["Mon", "Tue", "Thu", "Fri"]], C08: ["Talk", "R-S110", ["Tue", "Thu", "Fri"]]
@@ -84,7 +72,6 @@ function build() {
   }
   events.sort((a, b) => (a.date + a.start_time).localeCompare(b.date + b.start_time));
 
-  // Promotion: 2-4 posts per event. The Coding Club stops posting on Instagram from week 7 (reach drops, sign-ups don't).
   const promotion_posts = [];
   let p = 0;
   for (const e of events) {
@@ -98,15 +85,12 @@ function build() {
       promotion_posts.push({ post_id: "P" + String(++p).padStart(4, "0"), event_id: e.event_id, channel: c, posted_at: d.toISOString().slice(0, 10), reach, clicks: Math.round(reach * (0.06 + rnd() * 0.06)) });
     }
   }
-  // Next semester's room bookings (for the recommendation: the lab is free on Tuesday).
   const room_bookings = [
     ["B01", "R-M105", "Mon", "17:00", "19:00", "Exam prep: Statistics"], ["B02", "R-M105", "Wed", "17:00", "20:00", "Exam prep: Programming"],
     ["B03", "R-M105", "Thu", "17:00", "20:00", "Exam prep: Databases"], ["B04", "R-M310", "Tue", "18:00", "20:00", "Robotics Team"],
     ["B05", "R-M201", "Wed", "18:00", "20:00", "Coding Club"], ["B06", "R-L002", "Tue", "18:00", "20:00", "Hiking Club"]
   ].map(([booking_id, room_id, weekday, start_time, end_time, booked_by]) => ({ booking_id, room_id, weekday, start_time, end_time, booked_by }));
 
-  // ---- The tables teams get: one events table with sign-ups, check-ins and the rating precomputed,
-  // so the core of the case needs no JOIN and no SUM()/SUM().
   const A = Object.fromEntries(attendance.map((a) => [a.event_id, a]));
   const F = Object.fromEntries(feedback.map((f) => [f.event_id, f]));
   const short = (roomId) => room(roomId).name.split(" ")[0];

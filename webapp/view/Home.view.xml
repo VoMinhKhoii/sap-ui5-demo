@@ -10,13 +10,11 @@
 >
   <Page showHeader="false" class="wsPage">
 
-    <!-- A newspaper page: one column, read top to bottom. The masthead is just the title. -->
     <VBox class="wsHero" renderType="Bare">
       <Text text="Case 01 · Coding Club" class="wsHeroEyebrow" />
       <Title text="{app>/case/title}" level="H1" wrapping="true" class="wsHeroTitle" />
     </VBox>
 
-    <!-- The symptom (sample data, not the answer) -->
     <VBox class="wsSection" renderType="Bare">
       <f:Card width="100%">
         <f:header>
@@ -44,7 +42,6 @@
       </f:Card>
     </VBox>
 
-    <!-- The story -->
     <VBox class="wsSection" renderType="Bare">
       <Title text="The story" level="H2" titleStyle="H3" class="wsSectionHead" />
       <VBox items="{app>/case/story}" renderType="Bare">
@@ -53,7 +50,6 @@
       <MessageStrip text="The president thinks: {app>/case/assumption} Opinions aren't evidence. What does the data say?" type="Information" showIcon="true" class="sapUiTinyMarginTop" />
     </VBox>
 
-    <!-- Three suspects: one action for the whole section, next to its title. -->
     <VBox class="wsSection" renderType="Bare">
       <HBox justifyContent="SpaceBetween" alignItems="Center" wrap="Wrap" class="wsSectionHead" renderType="Bare">
         <Title text="Three suspects, one answer" level="H2" titleStyle="H3" />
@@ -71,7 +67,6 @@
       </HBox>
     </VBox>
 
-    <!-- What the answer has to contain -->
     <VBox class="wsSection" renderType="Bare">
       <Title text="Page 1 of your app must show" level="H2" titleStyle="H3" class="wsSectionHead" />
       <VBox items="{app>/case/mustInclude}" renderType="Bare">
@@ -82,7 +77,6 @@
       </VBox>
     </VBox>
 
-    <!-- Marking -->
     <VBox class="wsSection sapUiMediumMarginBottom" renderType="Bare">
       <Panel headerText="How you are marked (100 points)" expandable="true" expanded="false" width="auto">
         <List items="{home>/rubric}" showSeparators="Inner">

@@ -1,6 +1,3 @@
-// Tests the SQL layer, the Playground examples and the starter data.js against the generated database.
-// Run: npm test   (after npm run generate-data)
-// The answer queries and their numbers are tested in the separate reference-solution repo (ui5-workshop-solution).
 const fs = require("fs");
 const path = require("path");
 const assert = require("assert");
@@ -26,7 +23,6 @@ initSqlJs().then((SQL) => {
   const db = new SQL.Database(fs.readFileSync(path.join(webapp, "data/clubs.sqlite")));
   const sql = SqlHelper.create(db, schema);
 
-  // ---- The query function
   test("sql() returns rows as objects, sql.one() one object", () => {
     const rows = sql("SELECT club_id, name FROM clubs ORDER BY club_id");
     assert.strictEqual(rows.length, 8);
@@ -55,7 +51,6 @@ initSqlJs().then((SQL) => {
     });
   });
 
-  // ---- Playground examples and the snippet builder
   test("every Playground example runs and gives bindable columns", () => {
     examples.forEach((ex) => {
       const rows = sql(ex.code);
@@ -92,7 +87,6 @@ initSqlJs().then((SQL) => {
     assert.ok(!xml.includes("autoPopinMode"));
   });
 
-  // ---- The starter data.js
   test("the starter data.js runs", () => {
     const defs = dataJs((q) => ({ query: q }));
     Object.keys(defs).forEach((name) => assert.ok(sql(defs[name].query).length, name));

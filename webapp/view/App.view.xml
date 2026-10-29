@@ -23,16 +23,15 @@
       </f:ShellBar>
     </tnt:header>
     <tnt:subHeader>
-      <!-- The suggested path: four steps, each one a tool. "My app" opens the students' app in a new tab. -->
       <IconTabHeader id="path" selectedKey="home" select=".onPathSelect" backgroundDesign="Solid" class="wsPath">
         <items>
-          <IconTabFilter key="home" text="The case" count="0-5 min" />
+          <IconTabFilter key="home" text="The case" />
           <IconTabSeparator icon="sap-icon://process" />
-          <IconTabFilter key="playground" text="Query Playground" count="5-25 min" />
+          <IconTabFilter key="playground" text="Query Playground" />
           <IconTabSeparator icon="sap-icon://process" />
-          <IconTabFilter key="gallery" text="Component Gallery" count="25-40 min" />
+          <IconTabFilter key="gallery" text="Component Gallery" />
           <IconTabSeparator icon="sap-icon://process" />
-          <IconTabFilter key="app" text="My app" count="40-45 min" />
+          <IconTabFilter key="app" text="My app" />
         </items>
       </IconTabHeader>
     </tnt:subHeader>

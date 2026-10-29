@@ -28,7 +28,6 @@
       </f:DynamicPageTitle>
     </f:title>
 
-    <!-- Your data: the tables and how they link. View only: point at a column to see what it means. -->
     <f:header>
       <f:DynamicPageHeader pinnable="true">
         <core:HTML id="erd" content="&lt;div&gt;&lt;/div&gt;" afterRendering=".onErdRendered" />
@@ -37,7 +36,6 @@
 
     <f:content>
       <VBox renderType="Bare">
-        <!-- Query and result side by side, so the answer stays in view while you edit. They stack on a narrow screen. -->
         <HBox class="wsRow wsRowTight" renderType="Bare">
           <f:Card>
             <f:header><card:Header title="Query" subtitle="Start typing for suggestions. Cmd/Ctrl + Enter runs it." /></f:header>

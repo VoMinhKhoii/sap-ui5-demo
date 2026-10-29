@@ -1,6 +1,3 @@
-// Everything around the tables: field docs (API Explorer, Playground), the case, and the gallery sample data.
-
-// ---- Field docs. Order = column order in the database.
 const TABLES = {
   events: {
     title: "Club events", description: "Every event of the 8 clubs in the autumn semester 2026 (weeks 1-10). One row per event, with sign-ups, check-ins and the rating already worked out.",
@@ -62,7 +59,6 @@ const RELATIONS = [
   { from: "room_bookings", field: "room", to: "events", key: "room", note: "same room code, not a key" }
 ];
 
-// ---- The case. The brief follows the revised student version on GitHub issue #2.
 const CASE = {
   id: "friday-problem",
   title: "The Friday Problem",
@@ -95,8 +91,6 @@ const CASE = {
   deliverable: "Page 1 of your app: the finding, a key number, a chart that proves it, and the next move."
 };
 
-// ---- Gallery sample data: the same shape for every gallery block ({/meta} {/kpis} {/trend} {/breakdown} {/items} {/alerts}),
-// computed from the tables, plus {/clubList} for the List → detail layout. It shows the club in general, not the answer.
 function sample(t) {
   const sum = (es, f) => es.reduce((s, e) => s + f(e), 0);
   const pct = (a, b) => Math.round(a / b * 1000) / 10;
