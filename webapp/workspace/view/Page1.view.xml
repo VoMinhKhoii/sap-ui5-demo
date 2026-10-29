@@ -137,10 +137,6 @@
 
 
               <MessageStrip text="Write your recommendation here, with the number it is based on." type="Information" showIcon="true" />
-              <HBox class="sapUiSmallMarginTop">
-                <Button text="Approve" type="Emphasized" press=".onActionPress" class="sapUiTinyMarginEnd" />
-                <Button text="Ask for details" press=".onActionPress" />
-              </HBox>
 
 
 

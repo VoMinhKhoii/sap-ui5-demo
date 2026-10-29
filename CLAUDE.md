@@ -92,7 +92,8 @@ node tools/e2e/paste-test.js                  # pastes EVERY gallery block, shel
                                               # (data.js + XML) into the workspace and renders it
 ```
 
-- Status (19 Oct 2026, after the pivot): lint ✅, build ✅, `npm test` ✅ (10 tests), 17/17 story
+- Status (26 Oct 2026, after the B+ redesign: ShellBar + path tabs, case banner, Gallery as list → detail, Playground as DynamicPage): lint ✅, build ✅, `npm test` ✅ (10 tests), check-pages ✅ (11 routes), check-workspace ✅, playground-test ✅ (9 examples), paste-test ✅ (68 jobs, now really pasting into the slots).
+- Earlier status (19 Oct 2026, after the pivot): lint ✅, build ✅, `npm test` ✅ (10 tests), 17/17 story
   checks ✅, check-pages ✅ (11 routes), check-workspace ✅, playground-test ✅ (9 examples),
   paste-test ✅ (68 jobs). The static build was also checked on a plain `python3 -m http.server`.
 - The remaining console noise is from the framework itself and harmless (`check-pages.js` filters it out):
@@ -104,16 +105,16 @@ node tools/e2e/paste-test.js                  # pastes EVERY gallery block, shel
 
 | Path | What |
 | --- | --- |
-| `webapp/Component.js` | Kit component + router. `dataReady` opens the database; then `this.sql` / `this.schema` exist. The **default model** holds the gallery sample data + `/case`. The `app` model holds `{case, busy}` (hints get a `shown` flag there). |
+| `webapp/Component.js` | Kit component + router. `dataReady` opens the database; then `this.sql` / `this.schema` exist. The **default model** holds the gallery sample data + `/case`. The `app` model holds `{case, busy, logo}`. The case page doesn't show the hints; the facilitator says them out loud (FACILITATOR.md). |
 | `webapp/util/db.js` | loads sql.js (script tag), `clubs.sqlite`, `schema.json`, `sample.json`, `case.json` → `{ sql, schema, sample, case }`. Cached. |
 | `webapp/util/sql.js` | **the query function**: `sql()` / `sql.one()`, SELECT only, plain-English errors with "did you mean", `badColumns()` (columns without `AS`). Node-testable. |
 | `webapp/util/snippet.js` | result → paste-ready XML bound to `{/name}`, and the "Copy for data.js" text. Rows: first column = label, a 2nd text column = colour, number columns = measures (VizFrame column/bar/line/donut, Table). One row: big numbers (`NumericContent`) or a record. The Playground preview renders exactly this XML. |
 | `webapp/util/examples.js` | Playground starter queries (SQL). They show techniques, **not the answer**. |
 | `webapp/util/formatter.js` | formatters used by the snippets (`compactNumber`, `currency`, `target`, `date`, `delta`, `priority`, `valueState`, `valueColor` …) |
 | `webapp/controller/BaseController.js` | shared handlers that snippets reference (`onKpiPress`, `onItemPress`, `onChartSelect`, `onActionPress`, `onStatusFilter`, `onNavSelect`, `onToggleSideNav`, `onShowDetail`, `onCloseDetail`), `copyText()`, `styleCharts()`. **Kit and workspace controllers both extend it.** Handlers find controls by walking up the tree, not by id, so they also work in gallery previews. |
-| `webapp/view/App.view.xml` | kit shell: header, side navigation. "Open my app" is a `href` item to `workspace/index.html`. |
-| `webapp/view/Home` / `Gallery` / `Playground` | the 3 kit pages (routes: `""`, `gallery/:category:`, `playground`). Home = the case (story, 3 suspects, must-include, tools, 2 hints, plan + rubric in a collapsed panel); its table tags open the Playground with `SELECT * FROM <table>`. Gallery has a *Show the sample data* dialog. Playground = the data as an ERD (Oct 2026: the team merged the old Data Explorer page into it; HTML/SVG built in `_erdHtml`, lines redrawn by a ResizeObserver; click a column to insert it, a table name to query it, hover for its meaning), SQL with autocomplete (`CodeEditor.addCustomCompleter`) → result → "use it" (1 row → `sql.one`). |
-| `webapp/workspace/` | **the students' app**, its own component `workshop.dashboard.workspace` (loads the kit modules via the `workshop.dashboard` resource root `../`). `data.js` (their queries, loaded separately so a typo shows a dialog instead of a blank page; each query runs on its own so one broken query doesn't stop the rest), `view/App.view.xml` (shell between 🧩 SHELL markers; nav keys `page1/2/3` = route names; must keep `App id="app"`), `view/Page1.view.xml` (finding/evidence/action slots), `Page2/3` (optional), `controller/Page.controller.js`. The default model = sample data + `/case` + every `data.js` query. |
+| `webapp/view/App.view.xml` | kit shell: `sap.f.ShellBar` with the SAP logo (`sap/ui/core/mimes/logo/sap_50x26.png` from the UI5 libs, via `app>/logo`) in a ToolPage. The ToolPage `subHeader` is the suggested path: an `IconTabHeader` with process separators (The case → Query Playground → Component Gallery → My app), keys = route names, "My app" opens `workspace/index.html` in a new tab. No side navigation. `App autoFocus="false"`, or every page opens with a focus ring on its first control. |
+| `webapp/view/Home` / `Gallery` / `Playground` | the 3 kit pages (routes: `""`, `gallery/:category:`, `playground`). Home = the case as a newspaper page, one centred column read top to bottom: a masthead in SAP blue (`#0057D2`, from the SAP design-system site) with only the title, the sample-data trend chart, the story, the 3 suspects (one "Test them in the Playground" button on the section title, nothing per card), what Page 1 must show, the rubric in a collapsed panel. No hints (the organizer removed them). Gallery = `FlexibleColumnLayout`: grouped list of blocks (search) → detail with the live block, its code and one sentence naming the Page 1 slot it goes into; `gallery/<category or block id>` selects a block; *Show the sample data* dialog. Playground = a DynamicPage (title with the example Select, header = the data as an ERD (Oct 2026: the team merged the old Data Explorer page into it; HTML/SVG built in `_erdHtml`, lines redrawn by a ResizeObserver; view only: point at or click a column to see its meaning; it never types into the query, which caused conflicts), SQL with autocomplete (`CodeEditor.addCustomCompleter`) → result; Run, Name and the Copy buttons sit in the footer toolbar (1 row → `sql.one`). |
+| `webapp/workspace/` | **the students' app**, its own component `workshop.dashboard.workspace` (loads the kit modules via the `workshop.dashboard` resource root `../`). `data.js` (their queries, loaded separately so a typo shows a dialog instead of a blank page; each query runs on its own so one broken query doesn't stop the rest), `view/App.view.xml` (shell between 🧩 SHELL markers; starts as the gallery's *Tabs on top* shell, ShellBar with the SAP logo via `app>/logo` like the kit; nav keys `page1/2/3` = route names; must keep `App id="app"`), `view/Page1.view.xml` (finding/evidence/action slots), `Page2/3` (optional), `controller/Page.controller.js`. The default model = sample data + `/case` + every `data.js` query. |
 | `webapp/gallery/samples.json` | gallery catalog: categories → samples `{id, title, description, data, controls[], template?, shell?, target?}` |
 | `webapp/gallery/samples/*.fragment.xml` | 29 blocks. **The same file is the live preview AND the copied code.** |
 | `webapp/gallery/shells/*.fragment.xml` | `SideNav`, `TopTabs` (paste into the workspace App.view.xml) and `ListDetail` (FlexibleColumnLayout, replaces a page; binds `{/clubList}` with `eventList`) |
@@ -211,9 +212,20 @@ update the numbers in `FACILITATOR.md`. Every SQL block there can be pasted into
   the paste test's dialog check couldn't fail.)
 - **sql.js must not be minified or bundled** by `ui5 build`: `ui5.yaml` excludes
   `workshop/dashboard/thirdparty/**` (that exact pattern; `/resources/…` didn't work), and
-  `ui5lint.config.mjs` ignores it. `db.js` loads it with a script tag and `window.initSqlJs`.
+  `ui5lint.config.mjs` ignores it. `db.js` fetches it and runs it inside `(function (define) { … })()`, so it
+  only sets `window.initSqlJs`: sap.viz brings RequireJS, and with a global `define` sql.js registered as an anonymous
+  AMD module ("Mismatched anonymous define()", seen on the static build once the case page got a chart).
 - **Query results need simple column names** to bind: `ROUND(AVG(x))` without `AS` can't be bound.
   The Playground warns, and the workspace lists it in the data.js dialog.
+- **`sap.f.ShellBar` `additionalContent` only takes `sap.f.IShellBar` controls**: use `OverflowToolbarButton`
+  (icon + tooltip), not `Button`. ShellBar fits in `tnt:ToolPage` `header`; `subHeader` takes any control.
+- **A ToolPage's side navigation is absolutely positioned**, so it escapes `overflow: hidden` of a non-positioned
+  parent. The gallery preview (`.wsPreview`) is `position: relative` for that reason.
+- **The paste test pastes right after a slot's START marker.** Until Oct 2026 it replaced a placeholder that sat
+  inside an XML comment, so every block landed inside the comment and the test could not fail.
+- **Keep the student-facing UI vanilla.** One suggested path, one primary action per section (on its title
+  line), standard Fiori controls. The organizer turned down per-card buttons, verdict toggles, timers and
+  coaching lines as "much less professional".
 - **Student-facing examples must not give the answer away.** Don't use "show-up by weekday" or
   "topic × weekday" in the README, cheat sheet, Playground help, examples or error messages.
 

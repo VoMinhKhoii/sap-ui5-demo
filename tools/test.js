@@ -84,6 +84,13 @@ initSqlJs().then((SQL) => {
     assert.deepStrictEqual(snippet.shape(sql("SELECT * FROM events")).views, ["table"]);
     assert.ok(/\{\/k\/n\}/.test(snippet.build("k", { n: 1 }, "number")));
   });
+  test("wide result tables scroll horizontally without responsive pop-ins", () => {
+    const xml = snippet.build("events", sql("SELECT * FROM events LIMIT 2"), "table");
+    assert.match(xml, /<ScrollContainer horizontal="true" vertical="false"/);
+    assert.match(xml, /<Table[^>]*fixedLayout="false"/);
+    assert.match(xml, /wrapping="false"/);
+    assert.ok(!xml.includes("autoPopinMode"));
+  });
 
   // ---- The starter data.js
   test("the starter data.js runs", () => {

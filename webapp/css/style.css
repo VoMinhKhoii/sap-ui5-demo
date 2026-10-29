@@ -23,32 +23,24 @@
   padding-bottom: 2rem;
 }
 
-.wsPageIntro {
-  padding: 2rem 1.5rem 1rem;
-  max-width: 52rem;
-}
 
+/* The case page is one centred column, like a newspaper: the masthead's title and the sections share its edges. */
 .wsSection {
-  padding: 1.5rem 1.5rem 0;
+  box-sizing: border-box;
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 0;
 }
 
-.wsSection > .sapMTitle {
-  margin-bottom: 0.75rem;
+.wsSectionHead {
+  margin-bottom: 1rem;
 }
 
-.wsCaseCard .sapFCardContent {
-  padding: 0 1.25rem 1.25rem;
-}
 
 .wsLevel {
   margin-bottom: 0.5rem;
 }
 
-.wsQuestion {
-  font-size: 1.25rem !important;
-  line-height: 1.4 !important;
-  font-weight: 600;
-}
 
 .wsSectionTitle {
   padding: 0 1.5rem;
@@ -58,26 +50,18 @@
   padding: 0 1rem;
 }
 
-.wsCategoryTabs {
-  padding: 0 0.5rem;
-}
 
-.wsSamples {
-  padding: 1rem;
-}
 
-.wsSampleCard {
-  margin-bottom: 1rem;
-}
 
 .wsPreview {
   display: block;
-  margin: 0 1rem;
-  padding: 1rem;
+  margin-top: 1.5rem;
+  padding: 2rem;
   border: 1px dashed var(--sapGroup_ContentBorderColor);
   border-radius: 0.75rem;
   background: var(--sapBackgroundColor);
   overflow: hidden;
+  position: relative; /* clips the ToolPage's absolutely positioned side navigation in the shell previews */
 }
 
 /* !important: the surrounding VBox sets an inline height: 100% because the ToolPage inside is 100% high. */
@@ -86,8 +70,25 @@
   padding: 0;
 }
 
+.wsPreviewShell > .sapTntToolPage {
+  height: 100% !important;
+}
+
 .wsPlaygroundPreview {
   min-height: 20rem;
+}
+
+/* Wide query results stay as rows and scroll sideways instead of turning
+   every extra column into a tall responsive-table pop-in. */
+.wsResultTableScroll .sapMListTbl {
+  width: max-content;
+  min-width: 100%;
+  table-layout: auto;
+}
+
+.wsResultTableScroll .sapMListTblCell,
+.wsResultTableScroll .sapMListTblHeaderCell {
+  white-space: nowrap;
 }
 
 .wsFieldScroll {
@@ -98,17 +99,82 @@
   font-family: var(--sapFontMonospaceFamily, monospace);
 }
 
-.wsAssumption {
-  font-style: italic;
+
+
+
+/* ---- Kit header and case page -------------------------------------------- */
+
+/* The case at a glance, in SAP blue. */
+.wsHero {
+  padding: 2.5rem max(2rem, calc((100% - 80rem) / 2)) 2.5rem;
+  background: #0057d2;
 }
 
-.wsCode {
-  display: block;
-  margin: 0 1rem;
+
+
+.wsHero .wsHeroEyebrow.sapMText {
+  color: #bfe0ff;
+  font-size: 0.8125rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.wsDocs {
-  padding: 0.5rem 1rem 1rem;
+.wsHero .wsHeroTitle.sapMTitle {
+  margin: 0.5rem 0 0.75rem;
+  color: #fff;
+  font-family: var(--sapFontBlackFamily, var(--sapFontBoldFamily));
+  font-size: 2.75rem;
+  line-height: 1.1;
+}
+
+
+
+/* Text content of a kit card, aligned with its header. */
+
+
+.wsMustItem + .wsMustItem {
+  margin-top: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+/* ---- Component Gallery: list -> detail ------------------------------------- */
+
+.wsGalleryIntro {
+  padding: 2rem 1.5rem 1rem;
+}
+
+.wsGalleryIntro > .sapMLnk {
+  align-self: flex-start;
+}
+
+/* List rows start where the title and search field above them start. */
+.wsBlockList .sapMLIB {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.wsGalleryDetail {
+  padding: 2rem 2.5rem 3rem;
+  max-width: 72rem;
+}
+
+.wsGalleryHeadText {
+  flex: 1 1 20rem;
+  min-width: 0;
+  margin-right: 1rem;
+}
+
+.wsGalleryCode {
+  padding-top: 1.5rem;
 }
 
 /* Rows of cards (workspace pages and the "Row of cards" block): <HBox class="wsRow" renderType="Bare">.
@@ -139,14 +205,13 @@
 }
 
 /* Query Playground: "Your data" diagram (ERD), built in Playground.controller.js */
-.wsErdPanel .sapMPanelContent {
-  padding: 0.5rem 1rem 1rem;
-}
 
 .wsErdGrid {
+  max-width: 76rem;
+  margin: 0 auto;
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1.15fr 1fr;
+  grid-template-columns: 1fr 1.7fr 1fr;
   gap: 3.5rem;
   align-items: start;
 }
@@ -166,6 +231,13 @@
   overflow: hidden;
 }
 
+/* events has 16 columns: two columns of fields keep the diagram short enough to see the query below it. */
+.wsErdTable[data-table="events"] .wsErdFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
+}
+
 .wsErdTable.wsErdActive {
   border-color: var(--sapSelectedColor);
   box-shadow: 0 0 0 1px var(--sapSelectedColor);
@@ -178,12 +250,11 @@
   padding: 0.5rem 0.75rem;
   background: var(--sapList_HeaderBackground);
   border-bottom: 1px solid var(--sapList_BorderColor);
-  cursor: pointer;
 }
 
 .wsErdHead b {
   font-family: var(--sapFontMonospaceFamily, monospace);
-  color: var(--sapLinkColor);
+  color: var(--sapTitleColor);
 }
 
 .wsErdHead span,
@@ -200,7 +271,7 @@
   padding: 0.2rem 0.75rem;
   font-family: var(--sapFontMonospaceFamily, monospace);
   font-size: 0.8125rem;
-  cursor: pointer;
+  cursor: help;
 }
 
 .wsErdField:hover {
@@ -250,6 +321,9 @@
 }
 
 .wsErdInfo {
+  max-width: 76rem;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 1rem;
   min-height: 2.5rem;
   color: var(--sapTextColor);

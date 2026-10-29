@@ -98,7 +98,7 @@ sap.ui.define([
       callback(null, items);
     },
 
-    // ---- Your data: the tables as a diagram (ERD). Click a column to insert it, a table name to query it.
+    // ---- Your data: the tables as a diagram (ERD). View only: point at a column to see what it means.
 
     _erdHtml: function () {
       const esc = function (text) {
@@ -119,8 +119,8 @@ sap.ui.define([
             "<span class=\"" + (/_pct$/.test(f.name) ? "wsErdCalc" : "") + "\">" + f.name + "</span></span><i>" + f.type + "</i></div>";
         }).join("");
         return "<div class=\"wsErdTable\" data-table=\"" + t.name + "\">" +
-          "<div class=\"wsErdHead\" data-query=\"" + t.name + "\" title=\"" + esc(t.description) + " Click to see the rows.\">" +
-          "<b>" + t.name + "</b><span>" + t.count + " rows</span></div>" + fields + "</div>";
+          "<div class=\"wsErdHead\" data-query=\"" + t.name + "\" title=\"" + esc(t.description) + "\">" +
+          "<b>" + t.name + "</b><span>" + t.count + " rows</span></div><div class=\"wsErdFields\">" + fields + "</div></div>";
       };
       const table = function (name) {
         return card(this._schema.tables.find(function (t) { return t.name === name; }));
@@ -144,30 +144,17 @@ sap.ui.define([
       root.dataset.wired = "true";
       const info = root.querySelector(".wsErdInfo");
       const infoText = info.innerHTML;
-      root.addEventListener("click", function (event) {
-        const field = event.target.closest(".wsErdField");
-        const head = event.target.closest(".wsErdHead");
-        if (field) {
-          const ace = this.byId("editor").getAceEditor();
-          const cursor = ace.getCursorPosition();
-          if (cursor.row === 0 && cursor.column === 0) {
-            ace.navigateFileEnd(); // nobody has clicked into the query yet: add to the end, not before SELECT
-          }
-          const before = ace.session.getLine(ace.getCursorPosition().row).slice(0, ace.getCursorPosition().column);
-          ace.insert((/[\w)]$/.test(before) ? " " : "") + field.dataset.field);
-          ace.focus();
-        } else if (head) {
-          this._queryTable(head.dataset.query);
-        }
-      }.bind(this));
-      root.addEventListener("mouseover", function (event) {
+      // View only: pointing at (or tapping) a column shows what it means. Nothing is typed into the query.
+      const explain = function (event) {
         const field = event.target.closest(".wsErdField");
         if (field) {
           info.textContent = field.dataset.table + "." + field.dataset.field + ": " + field.title;
         } else {
           info.innerHTML = infoText;
         }
-      });
+      };
+      root.addEventListener("mouseover", explain);
+      root.addEventListener("click", explain);
       // Redraw the lines whenever the diagram changes size (window resize, panel opened again).
       new ResizeObserver(this._drawErdLines.bind(this, root)).observe(root);
       this._highlightTable(this._model.getProperty("/table"));
@@ -212,14 +199,6 @@ sap.ui.define([
           el.classList.toggle("wsErdActive", el.dataset.table === name);
         });
       }
-    },
-
-    _queryTable: function (name) {
-      this._setCode("SELECT *\nFROM " + name + "\nLIMIT 20");
-      this._model.setProperty("/exampleId", "");
-      this._model.setProperty("/name", "myQuery");
-      this._model.setProperty("/nameValid", true);
-      this.onRun();
     },
 
     onShowHelp: function (event) {

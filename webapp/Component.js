@@ -14,8 +14,9 @@ sap.ui.define([
     init: function () {
       UIComponent.prototype.init.apply(this, arguments);
 
-      // "app" model: the case (brief, hypotheses, hints) and the busy flag.
-      this.setModel(new JSONModel({ case: null, busy: true }), "app");
+      // "app" model: the case (brief, hypotheses, hints), the busy flag and the SAP logo for the ShellBar.
+      const logo = sap.ui.require.toUrl("sap/ui/core/mimes/logo/sap_50x26.png");
+      this.setModel(new JSONModel({ case: null, busy: true, logo: logo }), "app");
 
       // Default (unnamed) model: the gallery sample data { meta, kpis, trend, breakdown, items, alerts, clubList }
       // -> bind with {/kpis}, {/trend}, ... It's the same data the gallery blocks show in the students' app.
@@ -28,7 +29,7 @@ sap.ui.define([
         this.sql = data.sql;
         this.schema = data.schema;
         dataModel.setData(Object.assign({}, data.sample, { case: data.case }));
-        this.getModel("app").setData({ case: JSON.parse(JSON.stringify(data.case)), busy: false });
+        this.getModel("app").setData({ case: JSON.parse(JSON.stringify(data.case)), busy: false, logo: logo });
         return data;
       }.bind(this));
 

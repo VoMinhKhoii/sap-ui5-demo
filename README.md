@@ -28,19 +28,21 @@ start is fast. Nothing else to install: the data is already in the repo.
 | Tab | URL | What it's for |
 | --- | --- | --- |
 | **1. The kit** | <http://localhost:8080> | The case, the Component Gallery and the Query Playground |
-| **2. Your app** | <http://localhost:8080/workspace/> | *Your* Fiori app. Open it with **Open my app** in the kit |
+| **2. Your app** | <http://localhost:8080/workspace/> | *Your* Fiori app. Open it with **My app** in the kit |
+
+The kit's tabs are the suggested path: **The case → Query Playground → Component Gallery → My app**.
 
 | Kit page | What it's for |
 | --- | --- |
-| **Start here** | The case: the story, the three suspects, what your dashboard must include, two hints |
-| **Component Gallery** | 29 live building blocks, 3 app shells and layouts, 3 page templates. Each has a **Copy XML** button |
+| **The case** | The story, the three suspects, what page 1 of your app must show, how you are marked |
 | **Query Playground** | The 4 tables as a diagram (point at a column to see what it means), then ask the data a question in SQL, see the answer as a chart and copy it into your app |
+| **Component Gallery** | 29 live building blocks, 3 app shells and layouts, 3 page templates. Pick one, see it live, **Copy XML**. It tells you which slot of your page it goes into |
 
 ## The challenge (45 min)
 
 | Time | Your move |
 | --- | --- |
-| 0–5 min | Read the case on **Start here**. Open your app in a second tab. |
+| 0–5 min | Read **The case**. Open your app in a second tab (**My app**). |
 | 5–20 min | Investigate in the **Query Playground**. Which of the three suspects does the data support? |
 | 20–25 min | Decide what your dashboard must say: the finding, the key number, the chart, the next move. |
 | 25–40 min | Build page 1 of your app with your queries and blocks from the Gallery. |
@@ -48,7 +50,7 @@ start is fast. Nothing else to install: the data is already in the repo.
 | Pitch | 2 minutes: what did you discover, what proves it, what should the club do next semester? |
 
 **How you are marked (100 points):** Insight 30 · Evidence 25 · Clarity 20 · Fiori craft 15 ·
-Ambition 10. Details are on *Start here*.
+Ambition 10. Details are on *The case*.
 
 ## Your app: the files you edit
 

@@ -91,20 +91,22 @@ sap.ui.define([], function () {
   function table(name, rows) {
     const fields = rows.length ? Object.keys(rows[0]) : ["name"];
     return [
-      "<Table items=\"{/" + name + "}\" growing=\"true\" growingThreshold=\"10\" autoPopinMode=\"true\">",
+      "<ScrollContainer horizontal=\"true\" vertical=\"false\" width=\"100%\" class=\"wsResultTableScroll\">",
+      "<Table items=\"{/" + name + "}\" growing=\"true\" growingThreshold=\"10\" fixedLayout=\"false\">",
       "  <columns>",
-      fields.map(function (f) { return "    <Column" + (rows.length && isNumber(rows, f) ? " hAlign=\"End\"" : "") + "><Text text=\"" + escape(title(f)) + "\" /></Column>"; }).join("\n"),
+      fields.map(function (f) { return "    <Column" + (rows.length && isNumber(rows, f) ? " hAlign=\"End\"" : "") + "><Text text=\"" + escape(title(f)) + "\" wrapping=\"false\" /></Column>"; }).join("\n"),
       "  </columns>",
       "  <items>",
       "    <ColumnListItem>",
       "      <cells>",
       fields.map(function (f) {
-        return "        " + (rows.length && isNumber(rows, f) ? "<ObjectNumber number=\"{" + f + "}\" />" : "<Text text=\"{" + f + "}\" />");
+        return "        " + (rows.length && isNumber(rows, f) ? "<ObjectNumber number=\"{" + f + "}\" />" : "<Text text=\"{" + f + "}\" wrapping=\"false\" />");
       }).join("\n"),
       "      </cells>",
       "    </ColumnListItem>",
       "  </items>",
-      "</Table>"
+      "</Table>",
+      "</ScrollContainer>"
     ].join("\n");
   }
 

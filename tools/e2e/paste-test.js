@@ -29,7 +29,9 @@ const between = (text, start, end, snippet) => {
   if (a < 0 || b < 0) throw new Error("Paste markers missing: " + start);
   return text.slice(0, a + start.length) + "\n" + snippet + "\n" + text.slice(b);
 };
-const CHART_SLOT = '<Text text="Paste a chart here" />';
+// Paste right after the slot's START marker. (The old placeholder text sits inside an XML comment, so pasting
+// over it put the block inside the comment and the test could not fail.)
+const EVIDENCE_A = "<!-- 🧩 EVIDENCE A START (Query Playground → Copy XML, or Gallery → Charts) -->";
 const MORE_SLOT = "<!-- 🧩 MORE START (more cards, or Gallery → Page templates) -->";
 
 // Load the kit's examples + snippet builder + sql() in node, exactly as the Playground uses them.
@@ -49,7 +51,7 @@ for (const cat of catalog.categories) for (const s of cat.samples) {
   } else if (s.shell) {
     jobs.push({ id: s.id, label: "shells/" + s.id, route: "", edit: { shell: (t) => between(t, "<!-- 🧩 SHELL START (Gallery → App shells) -->", "<!-- 🧩 SHELL END -->", code) } });
   } else {
-    jobs.push({ id: s.id, label: cat.key + "/" + s.id, route: "", edit: { page1: (t) => s.template ? t.replace(MORE_SLOT, MORE_SLOT + "\n" + code) : t.replace(CHART_SLOT, code) } });
+    jobs.push({ id: s.id, label: cat.key + "/" + s.id, route: "", edit: { page1: (t) => s.template ? t.replace(MORE_SLOT, MORE_SLOT + "\n" + code) : t.replace(EVIDENCE_A, EVIDENCE_A + "\n" + code) } });
   }
 }
 function addExampleJobs(sql) {
@@ -63,7 +65,7 @@ function addExampleJobs(sql) {
         id: ex.id, label: "playground/" + ex.id + " (" + view + ")", route: "",
         edit: {
           data: (t) => t.replace("// 🧩 YOUR QUERIES START", "// 🧩 YOUR QUERIES START\n" + dataJs),
-          page1: (t) => t.replace(CHART_SLOT, xml.split("{/" + ex.id).join("{/" + ex.id + "Pasted"))
+          page1: (t) => t.replace(EVIDENCE_A, EVIDENCE_A + "\n" + xml.split("{/" + ex.id).join("{/" + ex.id + "Pasted"))
         }
       });
     }

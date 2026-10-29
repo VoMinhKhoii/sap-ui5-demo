@@ -7,77 +7,86 @@
   xmlns:card="sap.f.cards"
   xmlns:mvc="sap.ui.core.mvc"
 >
-  <Page showHeader="false" class="wsPage">
-    <VBox class="wsPageIntro">
-      <Title text="Query Playground" level="H1" titleStyle="H2" />
-      <Text text="Your data is at the top: point at a column to see what it means. Ask it a question in SQL, see the answer as a chart, then copy the query and the chart into your app." class="sapUiTinyMarginTop" />
-    </VBox>
-    <VBox class="sapUiSmallMarginBeginEnd">
-      <!-- Your data: the tables and how they link. Click a column to insert it, a table name to query it. -->
-      <Panel expandable="true" expanded="true" width="auto" class="wsErdPanel">
-        <headerToolbar>
-          <OverflowToolbar style="Clear">
-            <Title text="Your data: 4 tables" level="H2" />
-            <ToolbarSpacer />
-            <Text text="Click a column to insert it · click a table name to see its rows" />
-          </OverflowToolbar>
-        </headerToolbar>
+  <f:DynamicPage id="playgroundPage" class="wsPage" showFooter="true" headerExpanded="true">
+    <f:title>
+      <f:DynamicPageTitle>
+        <f:heading>
+          <Title text="Query Playground" level="H1" />
+        </f:heading>
+        <f:expandedContent>
+          <Text text="Test each suspect against the data. Point at a column in the diagram to see what it means." />
+        </f:expandedContent>
+        <f:snappedContent>
+          <Text text="Your data: events · clubs · promotion_posts · room_bookings" />
+        </f:snappedContent>
+        <f:actions>
+          <Select id="exampleSelect" width="22rem" items="{pg>/examples}" selectedKey="{pg>/exampleId}" change=".onExampleSelect" forceSelection="false">
+            <core:Item key="{pg>id}" text="Example: {pg>title}" />
+          </Select>
+          <Button text="SQL help" icon="sap-icon://hint" type="Transparent" press=".onShowHelp" />
+        </f:actions>
+      </f:DynamicPageTitle>
+    </f:title>
+
+    <!-- Your data: the tables and how they link. View only: point at a column to see what it means. -->
+    <f:header>
+      <f:DynamicPageHeader pinnable="true">
         <core:HTML id="erd" content="&lt;div&gt;&lt;/div&gt;" afterRendering=".onErdRendered" />
-      </Panel>
+      </f:DynamicPageHeader>
+    </f:header>
 
-      <!-- Query, result, use it -->
-        <f:Card width="100%" class="sapUiSmallMarginTop">
-          <f:header><card:Header title="1. Query (SQL)" subtitle="Start typing for suggestions. Cmd/Ctrl + Enter runs it." /></f:header>
-          <f:content>
-            <VBox class="sapUiSmallMargin" width="100%">
-              <HBox alignItems="Center" wrap="Wrap">
-                <Select id="exampleSelect" width="22rem" items="{pg>/examples}" selectedKey="{pg>/exampleId}" change=".onExampleSelect" forceSelection="false" class="sapUiTinyMarginEnd">
-                  <core:Item key="{pg>id}" text="Example: {pg>title}" />
-                </Select>
-                <Button text="SQL help" icon="sap-icon://hint" type="Transparent" press=".onShowHelp" />
-              </HBox>
-              <code:CodeEditor id="editor" type="sql" value="{pg>/code}" height="9rem" width="100%" syntaxHints="false" class="sapUiTinyMarginTop" />
-              <HBox class="sapUiSmallMarginTop" alignItems="Center">
-                <Button text="Run" icon="sap-icon://media-play" type="Emphasized" press=".onRun" class="sapUiSmallMarginEnd" />
-                <Text text="{pg>/status}" />
-              </HBox>
-              <MessageStrip text="{pg>/error}" type="Error" showIcon="true" visible="{= !!${pg>/error} }" class="sapUiSmallMarginTop" />
-              <MessageStrip text="{pg>/warning}" type="Warning" showIcon="true" visible="{= !!${pg>/warning} &amp;&amp; !${pg>/error} }" class="sapUiSmallMarginTop" />
-            </VBox>
-          </f:content>
-        </f:Card>
-
-        <f:Card width="100%" class="sapUiSmallMarginTop">
-          <f:header><card:Header title="2. Result" subtitle="{pg>/summary}" /></f:header>
-          <f:content>
-            <VBox class="sapUiSmallMargin" width="100%">
-              <SegmentedButton items="{pg>/views}" selectedKey="{pg>/view}" selectionChange=".onViewChange" visible="{= ${pg>/views}.length > 1 }">
-                <items><SegmentedButtonItem key="{pg>key}" text="{pg>text}" /></items>
-              </SegmentedButton>
-              <VBox id="preview" width="100%" class="sapUiSmallMarginTop wsPlaygroundPreview" />
-            </VBox>
-          </f:content>
-        </f:Card>
-
-        <f:Card width="100%" class="sapUiSmallMarginTop">
-          <f:header><card:Header title="3. Use it in your app" subtitle="Query into data.js, XML into a 🧩 slot of a page. Save, then F5 in your app." /></f:header>
-          <f:content>
-            <VBox class="sapUiSmallMargin" width="100%">
-              <HBox alignItems="Center" wrap="Wrap">
-                <Label text="Name" labelFor="nameInput" class="sapUiTinyMarginEnd" />
-                <Input id="nameInput" value="{pg>/name}" liveChange=".onNameChange" width="14rem" valueState="{= ${pg>/nameValid} ? 'None' : 'Error' }"
-                  valueStateText="Letters and digits only, starting with a letter, e.g. showupByDay" class="sapUiSmallMarginEnd" />
-                <Button text="Copy for data.js" icon="sap-icon://copy" press=".onCopyDataJs" class="sapUiTinyMarginEnd" enabled="{pg>/nameValid}" />
-                <Button text="Copy XML" icon="sap-icon://copy" type="Emphasized" press=".onCopyXml" enabled="{pg>/nameValid}" class="sapUiTinyMarginEnd" />
-                <Button text="Show code" type="Transparent" press=".onToggleCode" />
-              </HBox>
-              <VBox visible="{pg>/showCode}" class="sapUiSmallMarginTop">
-                <code:CodeEditor type="javascript" value="{pg>/dataJs}" editable="false" height="8rem" width="100%" lineNumbers="false" />
-                <code:CodeEditor type="xml" value="{pg>/xml}" editable="false" height="14rem" width="100%" lineNumbers="false" class="sapUiTinyMarginTop" />
+    <f:content>
+      <VBox renderType="Bare">
+        <!-- Query and result side by side, so the answer stays in view while you edit. They stack on a narrow screen. -->
+        <HBox class="wsRow wsRowTight" renderType="Bare">
+          <f:Card>
+            <f:header><card:Header title="Query" subtitle="Start typing for suggestions. Cmd/Ctrl + Enter runs it." /></f:header>
+            <f:content>
+              <VBox class="sapUiSmallMargin" width="100%">
+                <code:CodeEditor id="editor" type="sql" value="{pg>/code}" height="20rem" width="100%" syntaxHints="false" />
+                <MessageStrip text="{pg>/error}" type="Error" showIcon="true" visible="{= !!${pg>/error} }" class="sapUiSmallMarginTop" />
+                <MessageStrip text="{pg>/warning}" type="Warning" showIcon="true" visible="{= !!${pg>/warning} &amp;&amp; !${pg>/error} }" class="sapUiSmallMarginTop" />
               </VBox>
+            </f:content>
+          </f:Card>
+
+          <f:Card>
+            <f:header><card:Header title="Result" subtitle="{pg>/summary}" /></f:header>
+            <f:content>
+              <VBox class="sapUiSmallMargin" width="100%">
+                <SegmentedButton items="{pg>/views}" selectedKey="{pg>/view}" selectionChange=".onViewChange" visible="{= ${pg>/views}.length > 1 }">
+                  <items><SegmentedButtonItem key="{pg>key}" text="{pg>text}" /></items>
+                </SegmentedButton>
+                <VBox id="preview" width="100%" class="sapUiSmallMarginTop wsPlaygroundPreview" />
+              </VBox>
+            </f:content>
+          </f:Card>
+        </HBox>
+
+        <f:Card width="100%" class="sapUiSmallMarginTop" visible="{pg>/showCode}">
+          <f:header><card:Header title="What gets copied" subtitle="The query goes into webapp/workspace/data.js, the XML into a slot of a page" /></f:header>
+          <f:content>
+            <VBox class="sapUiSmallMargin" width="100%">
+              <code:CodeEditor type="javascript" value="{pg>/dataJs}" editable="false" height="8rem" width="100%" lineNumbers="false" />
+              <code:CodeEditor type="xml" value="{pg>/xml}" editable="false" height="14rem" width="100%" lineNumbers="false" class="sapUiTinyMarginTop" />
             </VBox>
           </f:content>
         </f:Card>
-    </VBox>
-  </Page>
+      </VBox>
+    </f:content>
+
+    <f:footer>
+      <OverflowToolbar>
+        <Text text="{pg>/status}" />
+        <ToolbarSpacer />
+        <Label text="Name" labelFor="nameInput" />
+        <Input id="nameInput" value="{pg>/name}" liveChange=".onNameChange" width="12rem" valueState="{= ${pg>/nameValid} ? 'None' : 'Error' }"
+          valueStateText="Letters and digits only, starting with a letter, e.g. membersByClub" />
+        <Button text="{= ${pg>/showCode} ? 'Hide code' : 'Show code' }" type="Transparent" press=".onToggleCode" />
+        <Button text="Copy for data.js" icon="sap-icon://copy" press=".onCopyDataJs" enabled="{pg>/nameValid}" />
+        <Button text="Copy XML" icon="sap-icon://copy" press=".onCopyXml" enabled="{pg>/nameValid}" />
+        <Button text="Run" icon="sap-icon://media-play" type="Emphasized" press=".onRun" />
+      </OverflowToolbar>
+    </f:footer>
+  </f:DynamicPage>
 </mvc:View>

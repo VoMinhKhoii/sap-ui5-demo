@@ -17,17 +17,25 @@ sap.ui.define([
     });
   }
 
+  // sap.viz brings RequireJS, which puts a global define() on the page. sql.js would then register itself as an
+  // anonymous AMD module ("Mismatched anonymous define()") instead of only setting window.initSqlJs. So its code
+  // runs inside a function where define is undefined.
   function loadScript(url) {
-    return new Promise(function (resolve, reject) {
-      if (window.initSqlJs) {
-        resolve();
-        return;
+    if (window.initSqlJs) {
+      return Promise.resolve();
+    }
+    return fetch(url).then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not load " + url + ": " + response.status);
       }
+      return response.text();
+    }).then(function (code) {
       const script = document.createElement("script");
-      script.src = url;
-      script.onload = resolve;
-      script.onerror = function () { reject(new Error("Could not load " + url)); };
+      script.text = "(function (define) {\n" + code + "\nwindow.initSqlJs = initSqlJs;\n})();";
       document.head.appendChild(script);
+      if (!window.initSqlJs) {
+        throw new Error("Could not start " + url);
+      }
     });
   }
 

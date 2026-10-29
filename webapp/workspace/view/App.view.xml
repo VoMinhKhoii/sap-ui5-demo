@@ -2,7 +2,7 @@
   ╔══════════════════════════════════════════════════════════════════════╗
   ║  YOUR APP SHELL: the frame around your pages (header + navigation).  ║
   ║                                                                      ║
-  ║  Want tabs on top instead of a sidebar? Gallery → App shells →       ║
+  ║  Want a sidebar instead of tabs? Gallery → App shells →              ║
   ║  "Copy XML", then replace everything between the 🧩 SHELL markers.   ║
   ║                                                                      ║
   ║  Rules: keep <App id="app" /> (your pages appear there), and keep    ║
@@ -28,27 +28,19 @@
 <!-- 🧩 SHELL START (Gallery → App shells) -->
 <tnt:ToolPage id="toolPage">
   <tnt:header>
-    <tnt:ToolHeader>
-      <Button icon="sap-icon://menu2" type="Transparent" press=".onToggleSideNav" tooltip="Toggle navigation">
-        <layoutData><OverflowToolbarLayoutData priority="NeverOverflow" /></layoutData>
-      </Button>
-      <Avatar initials="CC" displaySize="XS" backgroundColor="Accent6" />
-      <Title text="My app: rename me" level="H1" wrapping="false" />
-      <ToolbarSpacer />
-      <Text text="{/case/client}" wrapping="false" />
-    </tnt:ToolHeader>
+    <f:ShellBar homeIcon="{app>/logo}" title="My app: rename me" secondTitle="For: {/case/client}" />
   </tnt:header>
-  <tnt:sideContent>
-    <tnt:SideNavigation id="nav" selectedKey="page1" itemSelect=".onNavSelect">
-      <tnt:NavigationList>
-        <tnt:NavigationListItem key="page1" text="The answer" icon="sap-icon://business-objects-experience" />
-        <tnt:NavigationListItem key="page2" text="Page 2" icon="sap-icon://table-view" />
-        <tnt:NavigationListItem key="page3" text="Page 3" icon="sap-icon://line-chart" />
-      </tnt:NavigationList>
-    </tnt:SideNavigation>
-  </tnt:sideContent>
+  <tnt:subHeader>
+    <IconTabHeader id="nav" selectedKey="page1" select=".onNavSelect" backgroundDesign="Solid">
+      <items>
+        <IconTabFilter key="page1" text="The answer" />
+        <IconTabFilter key="page2" text="Page 2" />
+        <IconTabFilter key="page3" text="Page 3" />
+      </items>
+    </IconTabHeader>
+  </tnt:subHeader>
   <tnt:mainContents>
-    <App id="app" />
+    <App id="app" autoFocus="false" />
   </tnt:mainContents>
 </tnt:ToolPage>
 <!-- 🧩 SHELL END -->
